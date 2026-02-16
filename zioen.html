@@ -10,9 +10,69 @@
 
 <section class="section">
   <h2>劉子恩</h2>
-  <p>這裡之後會放劉子恩的故事。</p>
+  <p>30歲|180公分|寵物旅館員工</p>
   <p><a class="btn ghost" href="index.html">← 回到汐島</a></p>
 </section>
+  
+<hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+
+<button class="memory-btn" type="button" onclick="alert('再點一次'); openMemory();">
+  查看▗▟蓋▞憶
+</button>
+
+<!-- 遺失的碎片：Modal -->
+<div class="modal-bg" id="modalBg" style="display:none; z-index:9999;">
+  <div class="modal">
+    <div id="modalContent">
+      <h3>他說</h3>
+      <input type="text" id="codeInput" placeholder="輸入密語">
+      <button type="button" onclick="checkCode()">確認</button>
+    </div>
+    <div class="close" onclick="closeModal()">關閉</div>
+  </div>
+</div>
+
+<script>
+  function openMemory(){
+    const bg = document.getElementById("modalBg");
+    if(!bg){
+      alert("找不到 modalBg，請確認已貼上 Modal 區塊");
+      return;
+    }
+    bg.style.display = "flex";
+  }
+
+  function closeModal(){
+    const bg = document.getElementById("modalBg");
+    if(bg) bg.style.display = "none";
+  }
+
+  function checkCode(){
+    const input = document.getElementById("codeInput");
+    const content = document.getElementById("modalContent");
+    if(!input || !content){
+      alert("找不到輸入框或內容區塊，請確認 id 是否正確");
+      return;
+    }
+
+    const code = input.value.trim();
+
+    // 做錯的選擇
+    if(code === "選擇"){
+      content.innerHTML = `
+        <h3>覆蓋層裂開</h3>
+        <p>他其實一直記得那一天。</p>
+        <p>只是把名字藏在沉默裡。</p>
+      `;
+    }else{
+      content.innerHTML = `
+        <h3>……</h3>
+        <p>我沒說過這句。</p>
+      `;
+    }
+  }
+</script>
+
 
 </body>
 </html>
