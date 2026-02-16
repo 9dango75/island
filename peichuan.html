@@ -16,47 +16,63 @@
   
 <hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
 
-<button class="memory-btn" onclick="openMemory()">
-  遺失的碎片
+<button class="memory-btn" type="button" onclick="openMemory()">
+  查看▗▟蓋▞憶
 </button>
 
-<div class="modal-bg" id="modalBg">
+<!-- 遺失的碎片：Modal -->
+<div class="modal-bg" id="modalBg" style="display:none;">
   <div class="modal">
     <div id="modalContent">
-      <h3>查看▗▟蓋▞憶</h3>
+      <h3>他說</h3>
       <input type="text" id="codeInput" placeholder="輸入密語">
-      <button onclick="checkCode()">確認</button>
+      <button type="button" onclick="checkCode()">確認</button>
     </div>
     <div class="close" onclick="closeModal()">關閉</div>
   </div>
 </div>
-  <script>
-function openMemory(){
-  document.getElementById("modalBg").style.display = "flex";
-}
 
-function closeModal(){
-  document.getElementById("modalBg").style.display = "none";
-}
-
-function checkCode(){
-  const code = document.getElementById("codeInput").value.trim();
-  const content = document.getElementById("modalContent");
-
-  if(code === "那不是命令是我自己的選擇"){
-    content.innerHTML = `
-      <h3>記憶覆蓋層鬆動</h3>
-      <p>他其實一直記得那一天。</p>
-      <p>只是把名字藏在沉默裡。</p>
-    `;
-  } else {
-    content.innerHTML = `
-      <h3>……</h3>
-      <p>他看著你，什麼也沒有說。</p>
-    `;
+<script>
+  function openMemory(){
+    const bg = document.getElementById("modalBg");
+    if(!bg){
+      alert("找不到 modalBg，請確認已貼上 Modal 區塊");
+      return;
+    }
+    bg.style.display = "flex";
   }
-}
+
+  function closeModal(){
+    const bg = document.getElementById("modalBg");
+    if(bg) bg.style.display = "none";
+  }
+
+  function checkCode(){
+    const input = document.getElementById("codeInput");
+    const content = document.getElementById("modalContent");
+    if(!input || !content){
+      alert("找不到輸入框或內容區塊，請確認 id 是否正確");
+      return;
+    }
+
+    const code = input.value.trim();
+
+    // 做錯的選擇
+    if(code === "那不是命令是我自己的選擇"){
+      content.innerHTML = `
+        <h3>覆蓋層裂開</h3>
+        <p>他其實一直記得那一天。</p>
+        <p>只是把名字藏在沉默裡。</p>
+      `;
+    }else{
+      content.innerHTML = `
+        <h3>……</h3>
+        <p>什麼也沒有發生。</p>
+      `;
+    }
+  }
 </script>
+
 
 </body>
 </html>
