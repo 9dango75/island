@@ -4,11 +4,183 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>汐島｜資料庫</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg:#081317;
+      --panel:#0b1b21;
+      --text:#e8f6f9;
+      --muted:#9fb7c2;
+      --line:rgba(255,255,255,.08);
+      --accent:#9ed8f0;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 800px at 70% 10%, rgba(30,110,140,.18), transparent 60%),
+                  radial-gradient(1000px 700px at 20% 30%, rgba(0,90,120,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      font-family:"Noto Sans TC", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      line-height:1.8;
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 22px;
+      background: rgba(8,19,23,.85);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .brand{font-weight:700; letter-spacing:.08em}
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-left:14px;
+      font-size:14px;
+    }
+    .nav a:hover{color:var(--accent)}
+
+    .hero{
+      min-height:56vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:60px 18px 30px;
+    }
+    .hero h1{font-size:46px; margin:0 0 10px}
+    .hero p{color:var(--muted); margin:0 0 20px}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
+
+    .btn{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:12px;
+      background: rgba(158,216,240,.14);
+      border:1px solid rgba(158,216,240,.25);
+      color:var(--text);
+      text-decoration:none;
+    }
+    .btn.ghost{
+      background: transparent;
+      border:1px solid var(--line);
+      color:var(--muted);
+    }
+    .btn:hover{transform:translateY(-1px)}
+
+    .section{
+      max-width:980px;
+      margin:0 auto;
+      padding:52px 18px;
+    }
+    .section h2{font-size:26px; margin:0 0 10px}
+    .lead{color:var(--muted); margin:0 0 22px}
+
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:14px;
+    }
+    @media (max-width:780px){ .grid-2{grid-template-columns:1fr} }
+
+    .card{
+      background: rgba(11,27,33,.75);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      text-decoration:none;
+      color:inherit;
+    }
+    .card.clickable{cursor:pointer; text-align:left}
+    .card:hover{border-color: rgba(158,216,240,.28)}
+
+    .callout{
+      background: rgba(13,34,42,.55);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      color:var(--muted);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:14px;
+    }
+    @media (max-width:780px){ .cards{grid-template-columns:1fr} }
+
+    .character{
+      display:flex;
+      gap:14px;
+      align-items:stretch;
+    }
+    .thumb{
+      width:120px; min-width:120px;
+      border-radius:12px;
+      overflow:hidden;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+
+    .meta .name{font-size:20px; font-weight:700; margin-bottom:6px}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px}
+    .tags span{
+      font-size:12px;
+      padding:3px 8px;
+      border-radius:999px;
+      background: rgba(158,216,240,.12);
+      border:1px solid rgba(158,216,240,.18);
+      color:var(--muted);
+    }
+    .desc{margin:0; color:var(--muted)}
+
+    .footer{
+      padding:26px 18px 40px;
+      text-align:center;
+      color:rgba(232,246,249,.55);
+      border-top:1px solid var(--line);
+    }
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center; justify-content:center;
+      padding:18px;
+    }
+    .modal-backdrop.show{display:flex}
+    .modal{
+      width:min(760px, 100%);
+      background: rgba(11,27,33,.95);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      overflow:hidden;
+    }
+    .modal-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+    }
+    .modal-title{font-weight:700}
+    .modal-body{padding:16px; color:var(--muted)}
+    .x{
+      background:transparent;
+      border:1px solid var(--line);
+      color:var(--text);
+      border-radius:10px;
+      padding:6px 10px;
+      cursor:pointer;
+    }
+    .x:hover{border-color: rgba(158,216,240,.28)}
+  </style>
 </head>
 
 <body>
-  <!-- Top Nav -->
   <header class="topbar">
     <div class="brand">汐島</div>
     <nav class="nav">
@@ -18,7 +190,6 @@
     </nav>
   </header>
 
-  <!-- Hero -->
   <section class="hero">
     <h1>汐島</h1>
     <p>選擇你想閱讀的角色，或先從世界觀開始。</p>
@@ -28,7 +199,6 @@
     </div>
   </section>
 
-  <!-- 世界觀 -->
   <section id="world" class="section">
     <h2>世界觀</h2>
     <p class="lead">
@@ -48,19 +218,16 @@
     </div>
   </section>
 
-  <!-- 島嶼 -->
   <section id="island" class="section">
     <h2>島嶼</h2>
     <p class="lead">
       四面環海，山林延伸到海岸線。港口、街道、酒吧、診所與樹林構成日常——一切都看似正常。
     </p>
-
     <div class="callout">
       你可以把「地點介紹」或「小短篇」放在這裡，像資料庫一樣慢慢補齊。
     </div>
   </section>
 
-  <!-- 角色 -->
   <section id="characters" class="section">
     <h2>角色</h2>
     <p class="lead">角色以島民身分生活在島上。請透過對話與細節自行辨識。</p>
@@ -113,9 +280,7 @@
     </div>
   </section>
 
-  <footer class="footer">
-    © 2026 汐島
-  </footer>
+  <footer class="footer">© 2026 汐島</footer>
 
   <!-- Modal -->
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
@@ -147,6 +312,45 @@
     </ul>
   </template>
 
-  <script src="script.js"></script>
+  <script>
+    const backdrop = document.getElementById("modalBackdrop");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalBody = document.getElementById("modalBody");
+    const closeBtn = document.getElementById("modalClose");
+
+    function openModal(templateId) {
+      const tpl = document.getElementById(templateId);
+      if (!tpl) return;
+
+      const tmp = tpl.content.cloneNode(true);
+      const h = tmp.querySelector("h3,h4");
+      modalTitle.textContent = h ? h.textContent : "內容";
+
+      modalBody.innerHTML = "";
+      modalBody.appendChild(tmp);
+
+      backdrop.classList.add("show");
+      backdrop.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      backdrop.classList.remove("show");
+      backdrop.setAttribute("aria-hidden", "true");
+    }
+
+    document.querySelectorAll("[data-modal]").forEach((btn) => {
+      btn.addEventListener("click", () => openModal(btn.dataset.modal));
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+
+    backdrop.addEventListener("click", (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  </script>
 </body>
 </html>
