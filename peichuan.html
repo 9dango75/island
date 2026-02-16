@@ -10,9 +10,26 @@
 
 <section class="section">
   <h2>裴川</h2>
-  <p>這裡之後會放裴川的故事。</p>
+  <p>35歲|180公分|伐木廠主管</p>
   <p><a class="btn ghost" href="index.html">← 回到汐島</a></p>
 </section>
+  
+<hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
 
+<button class="memory-btn" onclick="openMemory()">
+  遺失的碎片
+</button>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div id="modalContent">
+      <h3>查看▗▟蓋▞憶</h3>
+      <input type="text" id="codeInput" placeholder="輸入密語">
+      <button onclick="checkCode()">確認</button>
+    </div>
+    <div class="close" onclick="closeModal()">關閉</div>
+  </div>
+</div>
+  
 </body>
 </html>
