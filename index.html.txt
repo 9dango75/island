@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>汐島</title>
+
+<style>
+body {
+    background-color: #0d1b21;
+    color: #e8f6f9;
+    font-family: "Noto Sans TC", sans-serif;
+    text-align: center;
+    padding: 60px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.character {
+    margin: 15px;
+}
+
+a {
+    color: #9ed8f0;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<h1>汐島</h1>
+<p>選擇你想閱讀的角色。</p>
+
+<div class="character">
+<a href="peichuan.html">裴川</a>
+</div>
+
+<div class="character">
+<a href="lilin.html">李璘</a>
+</div>
+
+<div class="character">
+<a href="lanyu.html">藍昱</a>
+</div>
+
+<div class="character">
+<a href="zioen.html">劉子恩</a>
+</div>
+
+<div class="character">
+<a href="yufeng.html">於楓</a>
+</div>
+
+</body>
+</html>
