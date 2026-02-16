@@ -30,6 +30,33 @@
     <div class="close" onclick="closeModal()">關閉</div>
   </div>
 </div>
-  
+  <script>
+function openMemory(){
+  document.getElementById("modalBg").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("modalBg").style.display = "none";
+}
+
+function checkCode(){
+  const code = document.getElementById("codeInput").value.trim();
+  const content = document.getElementById("modalContent");
+
+  if(code === "那不是命令是我自己的選擇"){
+    content.innerHTML = `
+      <h3>記憶覆蓋層鬆動</h3>
+      <p>他其實一直記得那一天。</p>
+      <p>只是把名字藏在沉默裡。</p>
+    `;
+  } else {
+    content.innerHTML = `
+      <h3>……</h3>
+      <p>他看著你，什麼也沒有說。</p>
+    `;
+  }
+}
+</script>
+
 </body>
 </html>
