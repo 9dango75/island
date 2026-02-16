@@ -191,20 +191,19 @@ body{
 }
 
 .modal-bg{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
+  position:fixed !important;
+  inset:0 !important;
+  background:rgba(0,0,0,.6) !important;
   display:none;
   justify-content:center;
   align-items:center;
+  z-index:9999 !important;
 }
-
 .modal{
   background:#0b1b21;
   padding:30px;
   border-radius:16px;
-  width:400px;
-  text-align:center;
+  width:min(420px, 92vw);
   border:1px solid rgba(255,255,255,.1);
 }
 
