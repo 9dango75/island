@@ -224,26 +224,19 @@
       cursor:pointer;
     }
     .x:hover{border-color: rgba(158,216,240,.28)}
-<style>
-/* === HERO 背景圖版：文字必定壓在圖上 === */
-.hero.hero-cinematic{
-  position: relative !important;
-  height: 420px !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  text-align:center !important;
+<head>
+  <style>
+   
+    /* === HERO 背景圖版：文字必定壓在圖上 === */
+    .hero.hero-cinematic{ ... }
+    .hero.hero-cinematic::after{ ... }
+    .hero.hero-cinematic::before{ ... }
+    .hero.hero-cinematic .hero-foreground{ ... }
+    @media (...) { ... }
 
-  background-image: url("images/allmember.jpg");
-  background-size: cover;
-  background-position: center 70%;
-}
-
-</style>
-
+  </style>
 </head>
+
 <body>
   <header class="topbar">
     <div class="brand">汐島</div>
@@ -265,9 +258,6 @@
     </div>
   </div>
 </section>
-
-
-
 
   <section id="world" class="section">
     <h2>世界觀</h2>
