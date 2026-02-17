@@ -370,3 +370,46 @@ body{
   position: relative;
   z-index: 2;
 }
+/* ===== 密語視窗：內容可滾動版本 ===== */
+
+/* 背景遮罩：維持置中 */
+.modal-bg{
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,.6) !important;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999 !important;
+  padding: 16px;                /* 小螢幕留邊 */
+}
+
+/* 視窗本體：限制高度，避免超出螢幕 */
+.modal-bg .modal{
+  width: min(680px, 92vw);
+  max-height: 85vh;             /* ✅ 重點：限制高度 */
+  background: #0b1b21;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  overflow: hidden;             /* 讓內部自己滾 */
+  display: flex;                /* ✅ 讓關閉鈕固定在下方 */
+  flex-direction: column;
+  padding: 0;                   /* 內距交給內容區 */
+}
+
+/* 內容區：可以上下滾動 */
+#modalContent{
+  padding: 22px;
+  overflow-y: auto;             /* ✅ 重點：允許滾動 */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 關閉鈕：固定在底部，不會被故事推走 */
+.modal-bg .close{
+  padding: 14px 22px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: #9ed8f0;
+  cursor: pointer;
+  background: rgba(8,19,23,.85);
+}
+
