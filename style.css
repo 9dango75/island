@@ -1,3 +1,11 @@
+@font-face{
+  font-family: "FengYaSong";
+  src: url("fengyasong.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root{
   --bg:#081317;
   --panel:#0b1b21;
@@ -48,7 +56,44 @@ body{
   text-align:center;
   padding:60px 18px 30px;
 }
-.hero h1{font-size:46px; margin:0 0 10px}
+<h1 class="game-title">汐島</h1>
+/* 首頁遊戲標題：風雅宋 + 藍綠霧感流動 */
+.game-title{
+  font-family:"FengYaSong", "Noto Sans TC", serif;
+  font-size: clamp(48px, 7vw, 92px);
+  margin: 0 0 10px;
+  letter-spacing: .16em;
+  font-weight: 700;
+
+  /* 藍綠霧感漸層 */
+  background: linear-gradient(
+    120deg,
+    rgba(140, 244, 232, .95),
+    rgba(90, 200, 210, .95),
+    rgba(70, 160, 185, .95),
+    rgba(140, 244, 232, .95)
+  );
+  background-size: 260% 260%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  animation: mistFlow 6.5s ease-in-out infinite;
+
+  /* 霧感光暈 */
+  filter:
+    drop-shadow(0 0 8px rgba(140,244,232,.25))
+    drop-shadow(0 0 18px rgba(90,200,210,.20))
+    drop-shadow(0 0 34px rgba(70,160,185,.16));
+}
+
+@keyframes mistFlow{
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .hero p{color:var(--muted); margin:0 0 20px}
 .hero-actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
 
