@@ -4,7 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>汐島｜資料庫</title>
+
   <style>
+    /* ✅ 字體：根目錄 fengyasong.woff2 */
+    @font-face{
+      font-family: "FengYaSong";
+      src: url("fengyasong.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root{
       --bg:#081317;
       --panel:#0b1b21;
@@ -51,7 +61,42 @@
       text-align:center;
       padding:60px 18px 30px;
     }
-    .hero h1{font-size:46px; margin:0 0 10px}
+
+    /* ✅ 標題：風雅宋 + 藍綠霧感流動 */
+    .game-title{
+      font-family:"FengYaSong", "Noto Sans TC", serif;
+      font-size: clamp(48px, 7vw, 92px);
+      margin: 0 0 10px;
+      letter-spacing: .16em;
+      font-weight: 700;
+
+      background: linear-gradient(
+        120deg,
+        rgba(140, 244, 232, .95),
+        rgba(90, 200, 210, .95),
+        rgba(70, 160, 185, .95),
+        rgba(140, 244, 232, .95)
+      );
+      background-size: 260% 260%;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      animation: mistFlow 6.5s ease-in-out infinite;
+
+      filter:
+        drop-shadow(0 0 8px rgba(140,244,232,.25))
+        drop-shadow(0 0 18px rgba(90,200,210,.20))
+        drop-shadow(0 0 34px rgba(70,160,185,.16));
+    }
+
+    @keyframes mistFlow{
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .hero p{color:var(--muted); margin:0 0 20px}
     .hero-actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
 
@@ -201,21 +246,14 @@
 
   <section id="world" class="section">
     <h2>世界觀</h2>
-    <p class="lead">
-    <p>汐島位於外海，與本島交通往返穩定。四面環海，地勢由山林延伸至港口與市街。</p>
+    <p class="lead">汐島位於外海，與本島交通往返穩定。四面環海，地勢由山林延伸至港口與市街。</p>
 
     <p>島上人口不多，但生活機能完善。港口、酒吧、診所、伐木廠與小型商業區構成日常秩序。</p>
-
     <p>多數島民在此長期居住，彼此熟識，節奏緩慢而平靜。</p>
-
     <p>這裡沒有過度的觀光開發，也沒有過多外來干擾。</p>
-
     <p>如果你願意留下，島嶼會給你一個新的生活方式。</p>
-
     <p>有些人來此療傷、有些人來此逃避，有些人只是偶然停泊。</p>
-
     <p>你呢？你為何選擇來到汐島？</p>
-    </p>
 
     <div class="grid-2">
       <button class="card clickable" data-modal="m1">
@@ -236,9 +274,8 @@
       汐島位於外海沿線，是一座以自然景觀聞名的小型海島。四面環海，地勢由中央山林緩緩延伸至海岸線，形成層次分明的地貌景觀。
     </p>
     <div class="callout">
-    <p>島上最具特色的是清晰可見的潮汐變化。每日海水隨著時序起伏，退潮時露出平整礁岩與細緻沙灘，漲潮時海面映照天光，波紋隨風推移。晨昏時分，海岸線在光影交錯下呈現不同色澤，是許多旅人特地前來駐足的時刻。</p>
-
-    <p>島嶼中央保留大片原生林木，沿步道可俯瞰海岸與港區景色。氣候溫和，海風穩定，全年皆適合短期停留與慢步探索。</p>
+      <p>島上最具特色的是清晰可見的潮汐變化。每日海水隨著時序起伏，退潮時露出平整礁岩與細緻沙灘，漲潮時海面映照天光，波紋隨風推移。晨昏時分，海岸線在光影交錯下呈現不同色澤，是許多旅人特地前來駐足的時刻。</p>
+      <p>島嶼中央保留大片原生林木，沿步道可俯瞰海岸與港區景色。氣候溫和，海風穩定，全年皆適合短期停留與慢步探索。</p>
     </div>
   </section>
 
