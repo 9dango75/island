@@ -226,6 +226,53 @@
     .x:hover{border-color: rgba(158,216,240,.28)}
   </style>
 </head>
+/* === FORCE HERO OVERLAY PATCH === */
+.hero{ position: relative; }
+
+.hero.hero-cinematic{
+  position: relative !important;
+  height: 420px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.hero.hero-cinematic > img,
+.hero.hero-cinematic .hero-bg{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 70% !important;
+  opacity: .22 !important;
+  filter: blur(12px) saturate(.9) contrast(1.05) brightness(.85) !important;
+  transform: scale(1.12) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.hero.hero-cinematic::before{
+  content:"" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(900px 420px at 50% 28%, rgba(30,110,140,.22), transparent 60%),
+    linear-gradient(to bottom, rgba(8,19,23,.60), rgba(8,19,23,.88)) !important;
+  z-index: 1 !important;
+}
+
+.hero.hero-cinematic .hero-foreground{
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(980px, 92%) !important;
+  padding: 46px 18px 40px !important;
+}
+/* === END PATCH === */
 
 <body>
   <header class="topbar">
