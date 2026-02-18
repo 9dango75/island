@@ -74,7 +74,7 @@
       background-position:center 70%;
     }
 
-    /* ✅ 讓背景圖變暗 + 更融入背景（不影響文字） */
+    /* 讓背景圖變暗 + 更融入背景（不影響文字） */
     .hero.hero-cinematic::before{
       content:"";
       position:absolute; inset:0;
@@ -84,7 +84,7 @@
       z-index:1;
     }
 
-    /* ✅ 模糊/透明效果：用 after 套一層「同一張背景」再模糊 */
+    /* 模糊/透明效果：用 after 套一層「同一張背景」再模糊 */
     .hero.hero-cinematic::after{
       content:"";
       position:absolute; inset:0;
@@ -102,7 +102,7 @@
       padding:46px 18px 40px;
     }
 
-    /* ✅ 標題：風雅宋 + 藍綠霧感流動 */
+    /* 標題：風雅宋 + 藍綠霧感流動 */
     .game-title{
       font-family:"FengYaSong","Noto Sans TC", serif;
       font-size: clamp(48px, 7vw, 92px);
@@ -307,7 +307,7 @@
     </nav>
   </header>
 
-  <!-- ✅ HERO：文字壓在背景圖上 -->
+  <!-- HERO：文字壓在背景圖上 -->
   <section class="hero hero-cinematic">
     <div class="hero-foreground">
       <h1 class="game-title">汐島</h1>
@@ -350,8 +350,10 @@
       汐島位於外海沿線，是一座以自然景觀聞名的小型海島。四面環海，地勢由中央山林緩緩延伸至海岸線，形成層次分明的地貌景觀。
     </p>
     <div class="callout">
-      <p>島上最具特色的是清晰可見的潮汐變化。每日海水隨著時序起伏，退潮時露出平整礁岩與細緻沙灘，漲潮時海面映照天光，波紋隨風推移。晨昏時分，海岸線在光影交錯下呈現不同色澤，是許多旅人特地前來駐足的時刻。</p>
-      <p>島嶼中央保留大片原生林木，沿步道可俯瞰海岸與港區景色。氣候溫和，海風穩定，全年皆適合短期停留與慢步探索。</p>
+      <p>▸ 島上最具特色的是清晰可見的潮汐變化。
+      <p>▸ 每日海水隨著時序起伏，退潮時露出平整礁岩與細緻沙灘，漲潮時海面映照天光，波紋隨風推移。
+      <p>▸ 晨昏時分，海岸線在光影交錯下呈現不同色澤，是許多旅人特地前來駐足的時刻。</p>
+      <p>▸ 島嶼中央保留大片原生林木，沿步道可俯瞰海岸與港區景色。氣候溫和，海風穩定，全年皆適合短期停留與慢步探索。</p>
     </div>
   </section>
 
@@ -407,7 +409,7 @@
     </div>
   </section>
 
-  <footer class="footer">© 2026 by 9dando_75. powered and secured by Lovey-Dovey:汐島.</footer>
+  <footer class="footer">© 2026 by 9dando_75 powered and secured by Lovey-Dovey:汐島</footer>
 
   <!-- Modal -->
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
@@ -448,7 +450,7 @@
 
       const tmp = tpl.content.cloneNode(true);
       const h = tmp.querySelector("h3,h4");
-      modalTitle.textContent = h ? h.textContent : "內容";
+      modalTitle.textContent = h ? h.textContent : "介紹";
 
       modalBody.innerHTML = "";
       modalBody.appendChild(tmp);
