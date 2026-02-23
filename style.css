@@ -105,18 +105,6 @@ body{
   padding: 46px 18px 40px;
 }
 
-/* 標題字樣（你可以保留原本 game-title 的霧光設定） */
-.game-title{
-  font-size: clamp(56px, 8vw, 110px);
-  margin: 0 0 10px;
-  letter-spacing: .18em;
-  font-weight: 800;
-  color: rgba(158,216,240,.95);
-  text-shadow:
-    0 0 10px rgba(158,216,240,.30),
-    0 0 22px rgba(158,216,240,.18);
-}
-
 .hero-sub{
   margin: 0 0 18px;
   color: var(--muted);
@@ -347,31 +335,7 @@ body{
   cursor:pointer;
   color:#9ed8f0;
 }
-.hero.hero-cinematic{
-  position: relative !important;
-  height: 420px !important;
-  overflow: hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
 
-.hero.hero-cinematic .hero-bg{
-  position: absolute !important;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: .25;
-  filter: blur(10px);
-  z-index: 0;
-}
-
-.hero.hero-cinematic .hero-foreground{
-  position: relative;
-  z-index: 2;
-}
 /* ===== 密語視窗：內容可滾動版本 ===== */
 
 /* 背景遮罩：維持置中 */
@@ -483,7 +447,7 @@ body{
 }
 
 /* ✅ 確保你的內容永遠在霧上面 */
-body > *{
+header, section, footer{
   position: relative;
   z-index: 2;
 }
