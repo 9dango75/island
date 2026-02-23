@@ -298,6 +298,10 @@
 </head>
 
 <body>
+  <!-- ✅ 背景霧氣（在最底層） -->
+  <div class="bg-fog" aria-hidden="true"></div>
+  <!-- ✅ 很淡的噪點（可留可刪） -->
+  <div class="bg-noise" aria-hidden="true"></div>
   <header class="topbar">
     <div class="brand">汐島</div>
     <nav class="nav">
@@ -478,7 +482,6 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
-    <div class="bg-noise"></div>
 
   </script>
 </body>
