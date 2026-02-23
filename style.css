@@ -433,31 +433,92 @@ header, section, footer{
   max-width:760px;
   margin: 16px auto 0;
 }
-/* ===== 陰冷森林氛圍（穩定版） ===== */
+/* =========================
+   Ribbon Fog（流線絲帶霧）
+   - 不用 repeat
+   - 不整片平移
+   - alternate 避免重播頓點
+========================= */
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:5;
+.fog-wrap{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;                 /* 在背景之上 */
+  opacity: .85;               /* 整體強度 */
+  overflow: hidden;
+}
 
-  background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(120,200,210,.15), transparent 60%),
-    radial-gradient(900px 500px at 50% 120%, rgba(80,160,180,.12), transparent 60%),
-    linear-gradient(to bottom,
-      rgba(0,20,25,.55) 0%,
-      rgba(0,35,45,.40) 40%,
-      rgba(0,25,35,.55) 100%);
+/* 每條絲帶 */
+.fog-ribbon{
+  position: absolute;
+  left: -22vw;
+  width: 140vw;
+  height: 22vh;
+  border-radius: 999px;
 
+  /* 薄紗霧：中間亮、邊緣透明 */
+  background: radial-gradient(closest-side,
+    rgba(215,255,245,.12) 0%,
+    rgba(160,235,225,.10) 35%,
+    rgba(120,200,210,.06) 55%,
+    rgba(0,0,0,0) 70%);
+
+  filter: blur(18px) saturate(1.05);
   mix-blend-mode: screen;
+  transform-origin: 50% 50%;
 }
 
-body{
-  background-color:#041b22;
+/* 不同位置 + 不同節奏（關鍵：每條都不同，才像自然流） */
+.fog-ribbon.r1{ top: 10vh; height: 16vh; opacity: .85; animation: drift1 14s ease-in-out infinite alternate; }
+.fog-ribbon.r2{ top: 26vh; height: 20vh; opacity: .70; animation: drift2 19s ease-in-out infinite alternate; }
+.fog-ribbon.r3{ top: 44vh; height: 18vh; opacity: .65; animation: drift3 23s ease-in-out infinite alternate; }
+.fog-ribbon.r4{ top: 62vh; height: 22vh; opacity: .60; animation: drift4 27s ease-in-out infinite alternate; }
+.fog-ribbon.r5{ top: 78vh; height: 16vh; opacity: .55; animation: drift5 31s ease-in-out infinite alternate; }
+
+/* ✅ 漂移：是「流線」不是整片滑動（位移幅度小 + 旋轉小） */
+@keyframes drift1{
+  from{ transform: translate3d(0,0,0) rotate(-1.2deg) scale(1.02); }
+  to  { transform: translate3d(6vw, -1.2vh, 0) rotate(1.0deg) scale(1.06); }
+}
+@keyframes drift2{
+  from{ transform: translate3d(2vw,0,0) rotate(1.4deg) scale(1.02); }
+  to  { transform: translate3d(-6vw, 1.4vh, 0) rotate(-1.0deg) scale(1.05); }
+}
+@keyframes drift3{
+  from{ transform: translate3d(0,0,0) rotate(-1.0deg) scale(1.01); }
+  to  { transform: translate3d(5vw, 1.0vh, 0) rotate(1.2deg) scale(1.05); }
+}
+@keyframes drift4{
+  from{ transform: translate3d(1vw,0,0) rotate(1.0deg) scale(1.02); }
+  to  { transform: translate3d(-5vw, -1.0vh, 0) rotate(-1.2deg) scale(1.06); }
+}
+@keyframes drift5{
+  from{ transform: translate3d(0,0,0) rotate(-1.4deg) scale(1.02); }
+  to  { transform: translate3d(4vw, 1.2vh, 0) rotate(1.1deg) scale(1.06); }
 }
 
-/* 微冷色調 */
-.section{
-  backdrop-filter: blur(1.5px);
+/* 顆粒（可留可刪）：森林濕冷感，不會像螢幕壞掉 */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .018;
+  mix-blend-mode: overlay;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 7px);
+}
+
+/* 內容永遠在霧上面 */
+header, section, footer{
+  position: relative;
+  z-index: 10;
+}
+
+/* 使用者開啟減少動態 → 停霧動畫 */
+@media (prefers-reduced-motion: reduce){
+  .fog-ribbon{ animation: none !important; }
 }
