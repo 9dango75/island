@@ -5,341 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>汐島</title>
 
-  <style>
-    /* ✅ 字體：同 repo 根目錄 fengyasong.woff2 */
-    @font-face{
-      font-family:"fengyasong";
-      src:
-        url("fengyasong.woff2") format("woff2");
-      font-weight:normal;
-      font-style:normal;
-      font-display:swap;
-    }
-
-    :root{
-      --bg:#081317;
-      --panel:#0b1b21;
-      --text:#e8f6f9;
-      --muted:#9fb7c2;
-      --line:rgba(255,255,255,.08);
-      --accent:#9ed8f0;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      background:
-        radial-gradient(1200px 800px at 70% 10%, rgba(30,110,140,.18), transparent 60%),
-        radial-gradient(1000px 700px at 20% 30%, rgba(0,90,120,.10), transparent 55%),
-        var(--bg);
-      color:var(--text);
-      font-family:"Noto Sans TC", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-      line-height:1.8;
-    }
-
-    /* Topbar */
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 22px;
-      background: rgba(8,19,23,.85);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .brand{font-weight:700; letter-spacing:.08em}
-    .nav a{
-      color:var(--muted);
-      text-decoration:none;
-      margin-left:14px;
-      font-size:14px;
-    }
-    .nav a:hover{color:var(--accent)}
-
-    /* ✅ HERO：背景圖 + 文字壓在圖上 */
-    .hero.hero-cinematic{
-      position:relative;
-      height:420px;
-      padding:0;
-      overflow:hidden;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-
-      /* 背景大圖（你 repo 的 images/background.jpg） */
-      background-image:url("images/background.jpg");
-      background-size:cover;
-      background-position:center 70%;
-    }
-
-    /* 讓背景圖變暗 + 更融入背景（不影響文字） */
-    .hero.hero-cinematic::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(900px 420px at 50% 30%, rgba(30,110,140,.22), transparent 60%),
-        linear-gradient(to bottom, rgba(8,19,23,.55), rgba(8,19,23,.88));
-      z-index:1;
-    }
-
-    /* 模糊/透明效果：用 after 套一層「同一張背景」再模糊 */
-    .hero.hero-cinematic::after{
-      content:"";
-      position:absolute; inset:0;
-      background:inherit;
-      filter: blur(10px) saturate(.95) contrast(1.05);
-      transform: scale(1.08);
-      opacity:.24;
-      z-index:0;
-    }
-
-    .hero-foreground{
-      position:relative;
-      z-index:2;
-      width:min(980px, 92%);
-      padding:46px 18px 40px;
-    }
-
-    /* 標題：風雅宋 + 藍綠霧感流動 */
-    .game-title{
-      font-family:"FengYaSong","Noto Sans TC", serif;
-      font-size: clamp(48px, 7vw, 92px);
-      margin:0 0 10px;
-      letter-spacing:.16em;
-      font-weight:700;
-
-      background: linear-gradient(
-        120deg,
-        rgba(140, 244, 232, .95),
-        rgba(90, 200, 210, .95),
-        rgba(70, 160, 185, .95),
-        rgba(140, 244, 232, .95)
-      );
-      background-size:260% 260%;
-
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-
-      animation:mistFlow 6.5s ease-in-out infinite;
-
-      filter:
-        drop-shadow(0 0 10px rgba(140,244,232,.20))
-        drop-shadow(0 0 22px rgba(90,200,210,.18))
-        drop-shadow(0 0 42px rgba(70,160,185,.14));
-    }
-
-    @keyframes mistFlow{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-
-    .hero-sub{
-      color:rgba(232,246,249,.85);
-      margin:0 0 20px;
-      letter-spacing:.04em;
-      text-shadow:0 2px 18px rgba(0,0,0,.35);
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-
-    .btn{
-      display:inline-block;
-      padding:10px 16px;
-      border-radius:12px;
-      background: rgba(158,216,240,.14);
-      border:1px solid rgba(158,216,240,.25);
-      color:var(--text);
-      text-decoration:none;
-    }
-    .btn.ghost{
-      background: transparent;
-      border:1px solid var(--line);
-      color:var(--muted);
-    }
-    .btn:hover{transform:translateY(-1px)}
-
-    /* Sections */
-    .section{
-      max-width:980px;
-      margin:0 auto;
-      padding:52px 18px;
-    }
-    .section h2{font-size:26px; margin:0 0 10px}
-    .lead{color:var(--muted); margin:0 0 22px}
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:14px;
-    }
-    @media (max-width:780px){ .grid-2{grid-template-columns:1fr} }
-
-    .card{
-      background: rgba(11,27,33,.75);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-      text-decoration:none;
-      color:inherit;
-    }
-    .card.clickable{cursor:pointer; text-align:left}
-    .card:hover{border-color: rgba(158,216,240,.28)}
-
-    .callout{
-      background: rgba(13,34,42,.55);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px 16px;
-      color:var(--muted);
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:14px;
-    }
-    @media (max-width:780px){ .cards{grid-template-columns:1fr} }
-
-    .character{
-      display:flex;
-      gap:14px;
-      align-items:stretch;
-    }
-    .thumb{
-      width:120px; min-width:120px;
-      border-radius:12px;
-      overflow:hidden;
-      background: rgba(255,255,255,.04);
-      border:1px solid var(--line);
-    }
-    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
-
-    .meta .name{font-size:20px; font-weight:700; margin-bottom:6px}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px}
-    .tags span{
-      font-size:12px;
-      padding:3px 8px;
-      border-radius:999px;
-      background: rgba(158,216,240,.12);
-      border:1px solid rgba(158,216,240,.18);
-      color:var(--muted);
-    }
-    .desc{margin:0; color:var(--muted)}
-
-    .footer{
-      padding:26px 18px 40px;
-      text-align:center;
-      color:rgba(232,246,249,.55);
-      border-top:1px solid var(--line);
-    }
-
-    /* Modal */
-    .modal-backdrop{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
-      display:none;
-      align-items:center; justify-content:center;
-      padding:18px;
-      z-index:9999;
-    }
-    .modal-backdrop.show{display:flex}
-    .modal{
-      width:min(760px, 100%);
-      background: rgba(11,27,33,.95);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:16px;
-      overflow:hidden;
-    }
-    .modal-head{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 16px;
-      border-bottom:1px solid var(--line);
-    }
-    .modal-title{font-weight:700}
-    .modal-body{padding:16px; color:var(--muted)}
-    .x{
-      background:transparent;
-      border:1px solid var(--line);
-      color:var(--text);
-      border-radius:10px;
-      padding:6px 10px;
-      cursor:pointer;
-    }
-    .x:hover{border-color: rgba(158,216,240,.28)}
-
-    @media (max-width:780px){
-      .hero.hero-cinematic{ height:340px; }
-      .hero-foreground{ padding:36px 16px 30px; }
-    }
-    /* === 世界觀置中 === */
-#world{
-  text-align:center;
-}
-
-#world p{
-  max-width:760px;
-  margin: 0 auto 18px;
-}
-
-#world .grid-2{
-  justify-content:center;
-}
-/* ====== Fog / Noise Background Layers ====== */
-.bg-fog{
-  position: fixed;
-  inset: -20vh -12vw;         /* 延伸出去避免邊緣裁切 */
-  pointer-events: none;
-  z-index: 0;                 /* 最底層 */
-  opacity: .45;               /* 想更淡：.25~.35 */
-  filter: blur(12px) saturate(1.05);
-  mix-blend-mode: screen;     /* 想更穩更暗：改 normal */
-
-  background:
-    radial-gradient(900px 520px at 20% 25%, rgba(120,210,220,.18), transparent 60%),
-    radial-gradient(760px 520px at 72% 35%, rgba(80,170,200,.14), transparent 62%),
-    radial-gradient(980px 620px at 50% 78%, rgba(255,255,255,.08), transparent 65%),
-    linear-gradient(to bottom, rgba(8,19,23,.10), rgba(8,19,23,.40));
-
-  animation: fogDrift 18s ease-in-out infinite;
-}
-
-@keyframes fogDrift{
-  0%   { transform: translate3d(0,0,0) scale(1.02); }
-  50%  { transform: translate3d(-2%, 1%, 0) scale(1.06); }
-  100% { transform: translate3d(0,0,0) scale(1.02); }
-}
-
-.bg-noise{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;                 /* 在霧上面一點點 */
-  opacity: .06;               /* 想更淡：.03 */
-  mix-blend-mode: overlay;
-
-  background-image:
-    repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,.08) 0 1px, transparent 1px 6px),
-    repeating-radial-gradient(circle at 70% 60%, rgba(255,255,255,.06) 0 1px, transparent 1px 7px);
-  filter: blur(.2px);
-}
-
-/* 讓內容永遠在霧層上面 */
-body > header,
-body > section,
-body > footer{
-  position: relative;
-  z-index: 2;
-}
-  </style>
+  <!-- ✅ 全部樣式集中到 style.css（請確保同層有 style.css） -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -347,6 +14,7 @@ body > footer{
   <div class="bg-fog" aria-hidden="true"></div>
   <!-- ✅ 很淡的噪點（可留可刪） -->
   <div class="bg-noise" aria-hidden="true"></div>
+
   <header class="topbar">
     <div class="brand">汐島</div>
     <nav class="nav">
@@ -356,7 +24,7 @@ body > footer{
     </nav>
   </header>
 
-  <!-- HERO：文字壓在背景圖上 -->
+  <!-- HERO：文字壓在背景圖上（背景圖在 style.css 內設定 images/background.jpg） -->
   <section class="hero hero-cinematic">
     <div class="hero-foreground">
       <h1 class="game-title">汐島</h1>
@@ -381,12 +49,12 @@ body > footer{
     <p>你呢？你為何選擇來到汐島？</p>
 
     <div class="grid-2">
-      <button class="card clickable" data-modal="m1">
+      <button class="card clickable" type="button" data-modal="m1">
         <h3>汐島如▙▞▗</h3>
         <p>（點我展開）</p>
       </button>
 
-      <button class="card clickable" data-modal="m2">
+      <button class="card clickable" type="button" data-modal="m2">
         <h3>異常</h3>
         <p>（點我展開）</p>
       </button>
@@ -398,9 +66,10 @@ body > footer{
     <p class="lead">
       汐島位於外海沿線，是一座以自然景觀聞名的小型海島。四面環海，地勢由中央山林緩緩延伸至海岸線，形成層次分明的地貌景觀。
     </p>
+
     <div class="callout">
-      <p>▸ 島上最具特色的是清晰可見的潮汐變化。
-      <p>▸ 每日海水隨著時序起伏，退潮時露出平整礁岩與細緻沙灘，漲潮時海面映照天光，波紋隨風推移。
+      <p>▸ 島上最具特色的是清晰可見的潮汐變化。</p>
+      <p>▸ 每日海水隨著時序起伏，退潮時露出平整礁岩與細緻沙灘，漲潮時海面映照天光，波紋隨風推移。</p>
       <p>▸ 晨昏時分，海岸線在光影交錯下呈現不同色澤，是許多旅人特地前來駐足的時刻。</p>
       <p>▸ 島嶼中央保留大片原生林木，沿步道可俯瞰海岸與港區景色。氣候溫和，海風穩定，全年皆適合短期停留與慢步探索。</p>
     </div>
@@ -460,12 +129,12 @@ body > footer{
 
   <footer class="footer">© 2026 by 9dando_75 powered and secured by Lovey-Dovey:汐島</footer>
 
-  <!-- Modal -->
+  <!-- Modal (index 用這套) -->
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-head">
         <div id="modalTitle" class="modal-title">標題</div>
-        <button class="x" id="modalClose" aria-label="Close">✕</button>
+        <button class="x" id="modalClose" type="button" aria-label="Close">✕</button>
       </div>
       <div class="modal-body" id="modalBody"></div>
     </div>
@@ -498,7 +167,11 @@ body > footer{
       if (!tpl) return;
 
       const tmp = tpl.content.cloneNode(true);
-      const h = tmp.querySelector("h3,h4");
+
+      // ✅ 修正：原本你有抓 h3/h4，但 template 裡沒有標題
+      // 這裡改成抓「觸發按鈕」上的 h3 作為標題
+      const btn = document.querySelector(`[data-modal="${templateId}"]`);
+      const h = btn ? btn.querySelector("h3,h4") : null;
       modalTitle.textContent = h ? h.textContent : "介紹";
 
       modalBody.innerHTML = "";
@@ -526,7 +199,6 @@ body > footer{
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
-
   </script>
 </body>
 </html>
