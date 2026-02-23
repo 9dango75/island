@@ -5,8 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>汐島</title>
 
-  <!-- ✅ 全部樣式集中到 style.css（請確保同層有 style.css） -->
-  <link rel="stylesheet" href="style.css?v=20260223-1" />
+  <!-- 你的原本外部 CSS 先保留 -->
+  <link rel="stylesheet" href="style.css?v=force-1" />
+
+  <!-- ✅ 霧氣驗證：直接寫在 index.html 內，一定會生效 -->
+  <style>
+    /* 讓霧一定蓋得住 hero 遮罩 */
+    .bg-fog, .bg-noise{
+      position: fixed;
+      inset: -25vh -20vw;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    header, section, footer{
+      position: relative;
+      z-index: 10000;
+    }
+
+    /* C：霧絲帶（非常明顯） */
+    .bg-fog.fog-c{
+      opacity: .75;
+      mix-blend-mode: screen;
+      filter: blur(10px) contrast(1.2);
+      background:
+        linear-gradient(90deg, transparent 0%,
+          rgba(255,255,255,0) 10%,
+          rgba(235,255,250,.16) 18%,
+          rgba(255,255,255,0) 26%,
+          transparent 34%),
+        linear-gradient(90deg, transparent 0%,
+          rgba(255,255,255,0) 38%,
+          rgba(170,235,230,.14) 46%,
+          rgba(255,255,255,0) 54%,
+          transparent 62%),
+        linear-gradient(90deg, transparent 0%,
+          rgba(255,255,255,0) 66%,
+          rgba(200,240,255,.12) 74%,
+          rgba(255,255,255,0) 82%,
+          transparent 90%);
+      background-size: 170% 100%, 180% 100%, 190% 100%;
+      background-repeat: repeat;
+      animation: ribbonSlide 8s linear infinite;
+    }
+
+    /* A/B：底霧（淡淡動） */
+    .bg-fog.fog-a{
+      opacity: .18;
+      mix-blend-mode: screen;
+      filter: blur(26px);
+      background:
+        radial-gradient(1000px 640px at 22% 28%, rgba(80,170,200,.22), transparent 62%),
+        radial-gradient(980px 640px at 76% 44%, rgba(110,220,205,.18), transparent 66%);
+      animation: fogA 18s ease-in-out infinite;
+    }
+    .bg-fog.fog-b{
+      opacity: .12;
+      mix-blend-mode: screen;
+      filter: blur(30px);
+      background:
+        radial-gradient(980px 700px at 70% 18%, rgba(60,140,165,.18), transparent 70%),
+        radial-gradient(1100px 760px at 30% 72%, rgba(130,235,225,.12), transparent 74%);
+      animation: fogB 32s ease-in-out infinite;
+    }
+
+    @keyframes ribbonSlide{
+      0%{ transform: translate3d(0,0,0); }
+      100%{ transform: translate3d(-18%, 0, 0); }
+    }
+    @keyframes fogA{
+      0%{ transform: translate3d(0,0,0) scale(1.05); }
+      50%{ transform: translate3d(-2%, 1%, 0) scale(1.12); }
+      100%{ transform: translate3d(0,0,0) scale(1.05); }
+    }
+    @keyframes fogB{
+      0%{ transform: translate3d(0,0,0) scale(1.06); }
+      50%{ transform: translate3d(2%, -1%, 0) scale(1.14); }
+      100%{ transform: translate3d(0,0,0) scale(1.06); }
+    }
+
+    /* 也給你一點點顆粒，讓你更好辨認真的套用了 */
+    .bg-noise{
+      opacity: .06;
+      mix-blend-mode: overlay;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px);
+    }
+  </style>
 </head>
 
 <body>
