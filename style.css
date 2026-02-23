@@ -577,42 +577,55 @@ body{
 }
 
 .flip-back{ transform: rotateY(180deg); }
-/* ✅ 修正：翻轉後圖片消失 = thumb 高度變 0 */
+/* =========================
+   角色縮圖翻轉（背景圖穩定版）
+========================= */
+
+/* 讓 thumb 本體有高度（避免翻過去變空白） */
 .thumb.flip{
-  position: relative;      /* 保險 */
-  height: 120px;           /* ✅ 關鍵：給高度 */
-  overflow: hidden;        /* 你原本有也沒關係 */
+  position: relative;
+  width: 120px;
+  min-width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
   perspective: 1000px;
 }
 
-.flip-inner{
-  position: relative;
-  width: 100%;
-  height: 100%;            /* ✅ 現在 100% 才有意義 */
+/* 旋轉的是 inner */
+.thumb.flip .flip-inner{
+  position: absolute;
+  inset: 0;
   transform-style: preserve-3d;
   transition: transform .6s ease;
   will-change: transform;
 }
 
-.card.character:hover .flip-inner{
+/* hover 觸發：跟你現有結構一致（hover 在整張卡上） */
+.card.character:hover .thumb.flip .flip-inner{
   transform: rotateY(180deg);
 }
 
-.flip-front, .flip-back{
+/* 正反面用 pseudo element 畫出來（不靠 img） */
+.thumb.flip .flip-inner::before,
+.thumb.flip .flip-inner::after{
+  content:"";
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-
-  /* ✅ Safari/Chrome 都更穩 */
+  background-size: cover;
+  background-position: center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
-  border-radius: inherit;
 }
 
-.flip-back{
+/* 正面 */
+.thumb.flip .flip-inner::before{
+  background-image: var(--front);
+}
+
+/* 背面 */
+.thumb.flip .flip-inner::after{
+  background-image: var(--back);
   transform: rotateY(180deg) translateZ(0);
 }
