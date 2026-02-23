@@ -1,135 +1,156 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>藍昱｜汐島</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>藍昱｜汐島</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
+  <div class="bg-fog" aria-hidden="true"></div>
+  <div class="bg-noise" aria-hidden="true"></div>
 
-<section class="section">
-  <h2>藍昱</h2>
-  <p>32歲 | 186公分 | 酒吧調酒師</p>
-  
-  <!-- 圓形頭像 -->
-  <div class="profile-avatar">
-  <img src="images/藍昱2.png" alt="藍昱2" style="object-position: center 3%;">
-</div>
-  
-  <div class="callout">
-  <p>藍昱在汐島經營港口旁的酒吧。</p>
-  <p>白天他會幫忙卸貨、跑腿、修燈修門，到了晚上才真正屬於他的時間。</p>
-  <p>木門一推開，燈光亮起、音樂流動，他站在吧台後像是掌控全場的主持人。調酒是他的拿手本事，但更擅長的其實是讀人。</p>
-  <p>他記得每個常客的習慣：誰喜歡烈一點、誰心情不好會假裝沒事、誰只是想找人陪著說話。</p>
-  <p>島上有點無聊的時候，他會故意鬧場，講幾句誇張的玩笑把氣氛拱起來；有人悶著不說話，他又會不動聲色地坐到旁邊。</p>
-  <p>藍昱直來直往，說話不太修飾，偶爾帶點惡作劇的意味。但他從不真的越界。</p>
-  <p>他喜歡熱鬧，卻也懂得安靜。</p>
-  <p>在酒吧打烊後，燈光熄滅，他會一個人坐在門口，看著海風把夜色吹得更遠。</p>
-  <p><a class="btn ghost" href="index.html">← 回到汐島</a></p>
-</section>
-  
-<hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+  <section class="section">
+    <h2>藍昱</h2>
+    <p class="lead">32歲 | 186公分 | 酒吧調酒師</p>
 
-<button class="memory-btn" type="button" onclick="openMemory()">
-  查看▗▟蓋▞憶
-</button>
-
-<!-- 遺失的碎片：Modal -->
-<div class="modal-bg" id="modalBg" style="display:none; z-index:9999;">
-  <div class="modal">
-    <div id="modalContent">
-      <h3>他說</h3>
-      <input type="text" id="codeInput" placeholder="輸入密語">
-      <button type="button" onclick="checkCode()">確認</button>
+    <!-- 圓形頭像 -->
+    <div class="profile-avatar">
+      <img src="images/藍昱2.png" alt="藍昱" style="object-position:center 3%;">
     </div>
-    <div class="close" onclick="closeModal()">關閉</div>
+
+    <div class="callout">
+      <p>藍昱在汐島經營港口旁的酒吧。</p>
+      <p>白天他會幫忙卸貨、跑腿、修燈修門，到了晚上才真正屬於他的時間。</p>
+      <p>木門一推開，燈光亮起、音樂流動，他站在吧台後像是掌控全場的主持人。調酒是他的拿手本事，但更擅長的其實是讀人。</p>
+      <p>他記得每個常客的習慣：誰喜歡烈一點、誰心情不好會假裝沒事、誰只是想找人陪著說話。</p>
+      <p>島上有點無聊的時候，他會故意鬧場，講幾句誇張的玩笑把氣氛拱起來；有人悶著不說話，他又會不動聲色地坐到旁邊。</p>
+      <p>藍昱直來直往，說話不太修飾，偶爾帶點惡作劇的意味。但他從不真的越界。</p>
+      <p>他喜歡熱鬧，卻也懂得安靜。</p>
+      <p>在酒吧打烊後，燈光熄滅，他會一個人坐在門口，看著海風把夜色吹得更遠。</p>
+
+      <p style="margin-top:14px">
+        <a class="btn ghost" href="index.html">← 回到汐島</a>
+      </p>
+    </div>
+
+    <hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+
+    <button class="memory-btn" type="button" onclick="openMemory()">
+      查看▗▟蓋▞憶
+    </button>
+  </section>
+
+  <!-- 遺失的碎片：Modal -->
+  <div class="modal-bg" id="modalBg" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="memTitle">
+      <div id="modalContent">
+        <h3 id="memTitle">他說</h3>
+        <input type="text" id="codeInput" placeholder="輸入密語">
+        <button type="button" onclick="checkCode()">確認</button>
+      </div>
+      <div class="close" onclick="closeModal()">關閉</div>
+    </div>
   </div>
-</div>
 
-<script>
-  function openMemory(){
-    const bg = document.getElementById("modalBg");
-    if(!bg){
-      alert("找不到 modalBg，請確認已貼上 Modal 區塊");
-      return;
-    }
-    bg.style.display = "flex";
-  }
-
-  function closeModal(){
-    const bg = document.getElementById("modalBg");
-    if(bg) bg.style.display = "none";
-  }
-
-  function checkCode(){
-    const input = document.getElementById("codeInput");
-    const content = document.getElementById("modalContent");
-    if(!input || !content){
-      alert("找不到輸入框或內容區塊，請確認 id 是否正確");
-      return;
+  <script>
+    function openMemory(){
+      const bg = document.getElementById("modalBg");
+      if(!bg){
+        alert("找不到 modalBg，請確認已貼上 Modal 區塊");
+        return;
+      }
+      bg.style.display = "flex";
+      bg.setAttribute("aria-hidden", "false");
+      document.getElementById("codeInput")?.focus();
     }
 
-    const code = input.value.trim();
-
-    // 被否定了嗎
-    if(code === "何謂正確"){
-      content.innerHTML = `
-        <h3>▸ 被覆蓋的記憶1 ◂</h3>
-        <p>我其實知道那不是我該插手的事。</p>
-
-        <p>命令很清楚，名單已經下來，被指派的人就必須上前線。我不在那一列，我只需要照規矩站在原地等下一波指示。</p>
-        <p>所有人都知道流程，所有人都懂什麼叫服從。</p>
-        <p>但旁邊的他站得筆直，像是什麼都準備好了，可我看得出來他的手在抖。那種抖不是害怕，是明明不適合卻還是被推上去的那種無聲抗議。</p>
-        <p>我知道他最近的身體狀況，也知道那次任務的風險等級根本被低估。報告寫得太好看了，好看到讓人誤判。</p>
-
-        <p>我腦子裡有聲音在提醒我——這不是你的責任，可我還是往前一步。</p>
-
-        <p>語氣太快，甚至帶點挑釁。</p>
-        <p>像是在等誰阻止我，等誰說「回去，這不是你的任務」，但沒有人說。指揮官只是冷冷地看著我，問我是不是確定。</p>
-        <p>我說確定。那一刻我其實是有點得意的，覺得自己做了一件正確又帥氣的事，覺得自己替好朋友出頭，替錯誤的安排補上漏洞。</p>
-
-        <p>我一直以為自己很能扛。</p>
-
-        <p>任務過程裡我確實撐住了，甚至比預期更快完成。但回來後我收到的不是嘉獎，是處分。</p>
-        <p>違反軍令、擅自調動任務人員、破壞指揮鏈結構。那份通知書寫得比子彈還乾脆。</p>
-
-        <p>降階。</p>
-
-        <p>兩個字。</p>
-
-        <p>我盯著那張紙看了很久，突然覺得臉燒起來。不是因為錯，是因為丟臉。所有人都知道我衝動，知道我嘴快，知道我愛逞強。</p>
-        <p>現在，他們也知道我不配站在原來的位置。</p>
-
-        <p>我開始懷疑是不是其實我真的不適合？是不是我只是太愛出風頭，太急著證明自己？能力如果真的夠，為什麼還需要用違規來證明？我嘴上說不在乎階級，可當那個標誌從肩上被換掉時，我才發現自己比想像中更在意。</p>
-
-        <p>最難堪的是他後來來找我，特地說謝謝。</p>
-
-        <p>他說如果那天不是我，他可能撐不過去。</p>
-
-        <p>我聽著卻笑不出來。因為我救了他卻毀了自己。</p>
-        <p>我不知道這是不是公平，也不知道值不值得。</p>
-        <p>我只知道，那一刻我突然失去了被肯定的資格。</p>
-        <p>上面的人看我，只剩下「不穩定」、「不可控」、「情緒用事」。</p>
-
-        <p>我不喜歡那樣的評價，可我也無法否認。</p>
-        <p>那的確是我。</p>
-
-        <p>在那之後我變得散漫，與其再被否定一次，不如先裝成自己不在乎。</p>
-
-        <p>但其實我在乎。</p>
-
-        <p>我在乎那次決定也在乎那次處分。我不後悔替他出頭，我後悔的是，原來在這個體系裡，正義跟服從從來不是同一件事。</p>
-      `;
-    }else{
-      content.innerHTML = `
-        <h3>……</h3>
-        <p>我沒說過這句。</p>
-      `;
+    function closeModal(){
+      const bg = document.getElementById("modalBg");
+      if(bg){
+        bg.style.display = "none";
+        bg.setAttribute("aria-hidden", "true");
+      }
     }
-  }
-</script>
 
+    // 點背景關閉
+    document.getElementById("modalBg")?.addEventListener("click", (e) => {
+      if(e.target.id === "modalBg") closeModal();
+    });
 
+    // ESC 關閉
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
+
+    function checkCode(){
+      const input = document.getElementById("codeInput");
+      const content = document.getElementById("modalContent");
+      if(!input || !content){
+        alert("找不到輸入框或內容區塊，請確認 id 是否正確");
+        return;
+      }
+
+      const code = input.value.trim();
+
+      // 被否定了嗎
+      if(code === "何謂正確"){
+        content.innerHTML = `
+          <h3>▸ 被覆蓋的記憶1 ◂</h3>
+
+          <p>我其實知道那不是我該插手的事。</p>
+
+          <p>命令很清楚，名單已經下來，被指派的人就必須上前線。我不在那一列，我只需要照規矩站在原地等下一波指示。</p>
+          <p>所有人都知道流程，所有人都懂什麼叫服從。</p>
+          <p>但旁邊的他站得筆直，像是什麼都準備好了，可我看得出來他的手在抖。那種抖不是害怕，是明明不適合卻還是被推上去的那種無聲抗議。</p>
+          <p>我知道他最近的身體狀況，也知道那次任務的風險等級根本被低估。報告寫得太好看了，好看到讓人誤判。</p>
+
+          <p>我腦子裡有聲音在提醒我——這不是你的責任，可我還是往前一步。</p>
+
+          <p>語氣太快，甚至帶點挑釁。</p>
+          <p>像是在等誰阻止我，等誰說「回去，這不是你的任務」，但沒有人說。指揮官只是冷冷地看著我，問我是不是確定。</p>
+          <p>我說確定。那一刻我其實是有點得意的，覺得自己做了一件正確又帥氣的事，覺得自己替好朋友出頭，替錯誤的安排補上漏洞。</p>
+
+          <p>我一直以為自己很能扛。</p>
+
+          <p>任務過程裡我確實撐住了，甚至比預期更快完成。但回來後我收到的不是嘉獎，是處分。</p>
+          <p>違反軍令、擅自調動任務人員、破壞指揮鏈結構。那份通知書寫得比子彈還乾脆。</p>
+
+          <p>降階。</p>
+          <p>兩個字。</p>
+
+          <p>我盯著那張紙看了很久，突然覺得臉燒起來。不是因為錯，是因為丟臉。所有人都知道我衝動，知道我嘴快，知道我愛逞強。</p>
+          <p>現在，他們也知道我不配站在原來的位置。</p>
+
+          <p>我開始懷疑是不是其實我真的不適合？是不是我只是太愛出風頭，太急著證明自己？能力如果真的夠，為什麼還需要用違規來證明？</p>
+          <p>我嘴上說不在乎階級，可當那個標誌從肩上被換掉時，我才發現自己比想像中更在意。</p>
+
+          <p>最難堪的是他後來來找我，特地說謝謝。</p>
+          <p>他說如果那天不是我，他可能撐不過去。</p>
+
+          <p>我聽著卻笑不出來。因為我救了他卻毀了自己。</p>
+          <p>我不知道這是不是公平，也不知道值不值得。</p>
+          <p>我只知道，那一刻我突然失去了被肯定的資格。</p>
+          <p>上面的人看我，只剩下「不穩定」、「不可控」、「情緒用事」。</p>
+
+          <p>我不喜歡那樣的評價，可我也無法否認。</p>
+          <p>那的確是我。</p>
+
+          <p>在那之後我變得散漫，與其再被否定一次，不如先裝成自己不在乎。</p>
+          <p>但其實我在乎。</p>
+
+          <p>我在乎那次決定也在乎那次處分。我不後悔替他出頭，我後悔的是，原來在這個體系裡，正義跟服從從來不是同一件事。</p>
+        `;
+      }else{
+        content.innerHTML = `
+          <h3>……</h3>
+          <p>我沒說過這句。</p>
+        `;
+      }
+    }
+  </script>
 </body>
 </html>
