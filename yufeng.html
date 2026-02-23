@@ -1,147 +1,167 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>於楓｜汐島</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>於楓｜汐島</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
+  <div class="bg-fog" aria-hidden="true"></div>
+  <div class="bg-noise" aria-hidden="true"></div>
 
-<section class="section">
-  <h2>於楓</h2>
-  <p>29歲 | 182公分 | 小兒科醫生</p>
- 
-  <!-- 圓形頭像 -->
-  <div class="profile-avatar">
-  <img src="images/於楓2.png" alt="於楓2" style="object-position: center 3%;">
-</div>
-  
-  <div class="callout">
-  <p>於楓是汐島診所的小兒科醫生。</p>
-  <p>診所規模不大，設備卻齊全。他每天固定門診時間，下午偶爾會出診到島民家裡。孩子們見到他時總是兩種反應——要嘛黏上去，要嘛被他一句調侃嚇得愣住。</p>
-  <p>他說話帶點毒舌，語氣懶散，像是什麼都不太在意。但真正看診時，他比誰都細心。</p>
-  <p>藥量計算得精準，病歷整理得乾淨，甚至會記得某個孩子上次哭的理由。島上的家長對他既放心又無奈，因為他嘴上嫌麻煩，卻從不敷衍。</p>
-  <p>閒下來時，他會靠在診所門邊看海，像是在偷懶。</p>
-  <p>他總能輕描淡寫地把緊張化開。有人受傷，他先說一句玩笑話；有人焦慮，他慢悠悠地倒杯水給對方。那份漫不經心像是保護色，卻掩不住他的耐心</p>
-  <p>那雙紅色的眼睛總帶著一點看透人心的戲謔——卻又在某個瞬間，顯得格外真誠。</p>
-  <p><a class="btn ghost" href="index.html">← 回到汐島</a></p>
-</section>
-  
-<hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+  <section class="section">
+    <h2>於楓</h2>
+    <p class="lead">29歲 | 182公分 | 小兒科醫生</p>
 
-<button class="memory-btn" type="button" onclick="openMemory()">
-
-  查看▗▟蓋▞憶
-</button>
-
-<!-- 遺失的碎片：Modal -->
-<div class="modal-bg" id="modalBg" style="display:none; z-index:9999;">
-  <div class="modal">
-    <div id="modalContent">
-      <h3>他說</h3>
-      <input type="text" id="codeInput" placeholder="輸入密語">
-      <button type="button" onclick="checkCode()">確認</button>
+    <!-- 圓形頭像 -->
+    <div class="profile-avatar">
+      <img src="images/於楓2.png" alt="於楓" style="object-position:center 3%;">
     </div>
-    <div class="close" onclick="closeModal()">關閉</div>
+
+    <div class="callout">
+      <p>於楓是汐島診所的小兒科醫生。</p>
+      <p>診所規模不大，設備卻齊全。他每天固定門診時間，下午偶爾會出診到島民家裡。孩子們見到他時總是兩種反應——要嘛黏上去，要嘛被他一句調侃嚇得愣住。</p>
+      <p>他說話帶點毒舌，語氣懶散，像是什麼都不太在意。但真正看診時，他比誰都細心。</p>
+      <p>藥量計算得精準，病歷整理得乾淨，甚至會記得某個孩子上次哭的理由。島上的家長對他既放心又無奈，因為他嘴上嫌麻煩，卻從不敷衍。</p>
+      <p>閒下來時，他會靠在診所門邊看海，像是在偷懶。</p>
+      <p>他總能輕描淡寫地把緊張化開。有人受傷，他先說一句玩笑話；有人焦慮，他慢悠悠地倒杯水給對方。那份漫不經心像是保護色，卻掩不住他的耐心。</p>
+      <p>那雙紅色的眼睛總帶著一點看透人心的戲謔——卻又在某個瞬間，顯得格外真誠。</p>
+
+      <p style="margin-top:14px">
+        <a class="btn ghost" href="index.html">← 回到汐島</a>
+      </p>
+    </div>
+
+    <hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+
+    <button class="memory-btn" type="button" onclick="openMemory()">
+      查看▗▟蓋▞憶
+    </button>
+  </section>
+
+  <!-- 遺失的碎片：Modal -->
+  <div class="modal-bg" id="modalBg" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="memTitle">
+      <div id="modalContent">
+        <h3 id="memTitle">他說</h3>
+        <input type="text" id="codeInput" placeholder="輸入密語">
+        <button type="button" onclick="checkCode()">確認</button>
+      </div>
+      <div class="close" onclick="closeModal()">關閉</div>
+    </div>
   </div>
-</div>
 
-<script>
-  function openMemory(){
-    const bg = document.getElementById("modalBg");
-    if(!bg){
-      alert("找不到 modalBg，請確認已貼上 Modal 區塊");
-      return;
-    }
-    bg.style.display = "flex";
-  }
-
-  function closeModal(){
-    const bg = document.getElementById("modalBg");
-    if(bg) bg.style.display = "none";
-  }
-
-  function checkCode(){
-    const input = document.getElementById("codeInput");
-    const content = document.getElementById("modalContent");
-    if(!input || !content){
-      alert("找不到輸入框或內容區塊，請確認 id 是否正確");
-      return;
+  <script>
+    function openMemory(){
+      const bg = document.getElementById("modalBg");
+      if(!bg){
+        alert("找不到 modalBg，請確認已貼上 Modal 區塊");
+        return;
+      }
+      bg.style.display = "flex";
+      bg.setAttribute("aria-hidden", "false");
+      document.getElementById("codeInput")?.focus();
     }
 
-    const code = input.value.trim();
-
-    // 他快倒下了
-    if(code === "醫者治人"){
-      content.innerHTML = `
-        <h3>▸ 被覆蓋的記憶1 ◂</h3>
-        <p>我其實比誰都清楚他撐不住。</p>
-
-        <p>數據很誠實。心率過高、血壓波動異常、創傷後壓力反應還沒穩定。從醫學角度來看，他至少需要再觀察兩週，這是最基本的判斷。</p>
-        <p>我看著檢測報告，手指在紙面上敲了敲，然後把文件闔起來。</p>
-
-        <p>那天任務人手不足。調度表已經排好，替補人員還在路上，時間不等人。指揮官問我一句話：「能不能上？」</p>
-        <p>如果我說不能，他就不能。</p>
-
-        <p>那個決定在我手上。</p>
-
-        <p>他坐在診療床邊抬頭看我，眼神裡沒有逞強，只有一點點不安。他知道自己的狀況，我也知道。他甚至先開口說，如果真的不行就換人。</p>
-        <p>那一瞬間，我應該點頭的。</p>
-
-        <p>可我沒有。</p>
-
-        <p>我告訴自己，心理壓力很多時候只是暫時反應。告訴自己他是訓練有素的人，身體恢復得比數據顯示的快。告訴自己，只要這次任務完成，他或許反而能重新找回信心。</p>
-        <p>我用的是醫生的語氣，說的是冷靜的判斷。其實我心裡很清楚，我在做風險計算，而不是在守護生命。</p>
-
-        <p>我簽了「可出勤」。</p>
-
-        <p>他點頭的樣子很乾脆，像是終於鬆了口氣。那種被允許上場的安心，現在想起來，只讓我更難受。</p>
-        <p>任務途中出事時，我還在診療區。</p>
-        <p>對講機裡傳來混亂的聲音，有人喊他的名字。我握著通訊器的手發冷，卻沒有立刻說話。那幾秒鐘我突然意識到一件事——如果他撐不住，那不是意外，是我放行。</p>
-
-        <p>他被送回來時傷勢比預期嚴重。</p>
-        <p>不是瞬間死亡，也不是乾脆的結局。</p>
-        <p>是那種拖著呼吸、拖著意識的狀態。</p>
-
-        <p>我站在手術台前，手很穩。縫合、止血、固定，每一個動作都精準到沒有多餘誤差。我救人救得很好，所有人都這麼說。</p>
-        <p>可我心裡很清楚，我是在彌補。</p>
-
-        <p>手術結束後他的狀況仍然不樂觀。</p>
-        <p>器官衰竭逐步擴大，最終沒能撐過去。我坐在無人的走廊裡，聽著儀器聲慢慢歸零，突然覺得自己像個笑話。</p>
-
-        <p>醫生。</p>
-
-        <p>救死扶傷。</p>
-
-        <p>我卻在明知他不適合出勤的情況下，把他送回前線。</p>
-        <p>有人說任務需要人手，說判斷有時只能在有限資訊下做出選擇。也有人說，即便我拒絕他可能也會主動申請。聽起來都合理。</p>
-
-        <p>但合理不代表正確。</p>
-
-        <p>我不是被命令的那個，我是簽字的人。</p>
-        <p>那支筆其實比任何武器都鋒利。</p>
-
-        <p>有時候我會想，是不是我太冷靜了？冷靜到可以把生命換算成成功率，換算成任務完整度。</p>
-        <p>冷靜到忘了，醫生的責任不是讓任務成功，而是讓人活下來。</p>
-
-        <p>我討厭那樣的自己。</p>
-
-        <p>我可以裝得漫不經心，可以開玩笑假裝一切都只是過去，但只要想到他當時抬頭看我的眼神，我就知道——</p>
-
-        <p>那不是任務的失敗。</p>
-
-        <p>那是我作為醫生的失敗。</p>
-      `;
-    }else{
-      content.innerHTML = `
-        <h3>……</h3>
-        <p>我沒說過這句。</p>
-      `;
+    function closeModal(){
+      const bg = document.getElementById("modalBg");
+      if(bg){
+        bg.style.display = "none";
+        bg.setAttribute("aria-hidden", "true");
+      }
     }
-  }
-</script>
 
+    // 點背景關閉
+    document.getElementById("modalBg")?.addEventListener("click", (e) => {
+      if(e.target.id === "modalBg") closeModal();
+    });
 
+    // ESC 關閉
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
+
+    function checkCode(){
+      const input = document.getElementById("codeInput");
+      const content = document.getElementById("modalContent");
+      if(!input || !content){
+        alert("找不到輸入框或內容區塊，請確認 id 是否正確");
+        return;
+      }
+
+      const code = input.value.trim();
+
+      // 他快倒下了
+      if(code === "醫者治人"){
+        content.innerHTML = `
+          <h3>▸ 被覆蓋的記憶1 ◂</h3>
+
+          <p>我其實比誰都清楚他撐不住。</p>
+
+          <p>數據很誠實。心率過高、血壓波動異常、創傷後壓力反應還沒穩定。從醫學角度來看，他至少需要再觀察兩週，這是最基本的判斷。</p>
+          <p>我看著檢測報告，手指在紙面上敲了敲，然後把文件闔起來。</p>
+
+          <p>那天任務人手不足。調度表已經排好，替補人員還在路上，時間不等人。指揮官問我一句話：「能不能上？」</p>
+          <p>如果我說不能，他就不能。</p>
+
+          <p>那個決定在我手上。</p>
+
+          <p>他坐在診療床邊抬頭看我，眼神裡沒有逞強，只有一點點不安。他知道自己的狀況，我也知道。他甚至先開口說，如果真的不行就換人。</p>
+          <p>那一瞬間，我應該點頭的。</p>
+
+          <p>可我沒有。</p>
+
+          <p>我告訴自己，心理壓力很多時候只是暫時反應。告訴自己他是訓練有素的人，身體恢復得比數據顯示的快。告訴自己，只要這次任務完成，他或許反而能重新找回信心。</p>
+          <p>我用的是醫生的語氣，說的是冷靜的判斷。其實我心裡很清楚，我在做風險計算，而不是在守護生命。</p>
+
+          <p>我簽了「可出勤」。</p>
+
+          <p>他點頭的樣子很乾脆，像是終於鬆了口氣。那種被允許上場的安心，現在想起來，只讓我更難受。</p>
+          <p>任務途中出事時，我還在診療區。</p>
+          <p>對講機裡傳來混亂的聲音，有人喊他的名字。我握著通訊器的手發冷，卻沒有立刻說話。那幾秒鐘我突然意識到一件事——如果他撐不住，那不是意外，是我放行。</p>
+
+          <p>他被送回來時傷勢比預期嚴重。</p>
+          <p>不是瞬間死亡，也不是乾脆的結局。</p>
+          <p>是那種拖著呼吸、拖著意識的狀態。</p>
+
+          <p>我站在手術台前，手很穩。縫合、止血、固定，每一個動作都精準到沒有多餘誤差。我救人救得很好，所有人都這麼說。</p>
+          <p>可我心裡很清楚，我是在彌補。</p>
+
+          <p>手術結束後他的狀況仍然不樂觀。</p>
+          <p>器官衰竭逐步擴大，最終沒能撐過去。我坐在無人的走廊裡，聽著儀器聲慢慢歸零，突然覺得自己像個笑話。</p>
+
+          <p>醫生。</p>
+          <p>救死扶傷。</p>
+
+          <p>我卻在明知他不適合出勤的情況下，把他送回前線。</p>
+          <p>有人說任務需要人手，說判斷有時只能在有限資訊下做出選擇。也有人說，即便我拒絕他可能也會主動申請。聽起來都合理。</p>
+
+          <p>但合理不代表正確。</p>
+
+          <p>我不是被命令的那個，我是簽字的人。</p>
+          <p>那支筆其實比任何武器都鋒利。</p>
+
+          <p>有時候我會想，是不是我太冷靜了？冷靜到可以把生命換算成成功率，換算成任務完整度。</p>
+          <p>冷靜到忘了，醫生的責任不是讓任務成功，而是讓人活下來。</p>
+
+          <p>我討厭那樣的自己。</p>
+
+          <p>我可以裝得漫不經心，可以開玩笑假裝一切都只是過去，但只要想到他當時抬頭看我的眼神，我就知道——</p>
+
+          <p>那不是任務的失敗。</p>
+          <p>那是我作為醫生的失敗。</p>
+        `;
+      }else{
+        content.innerHTML = `
+          <h3>……</h3>
+          <p>我沒說過這句。</p>
+        `;
+      }
+    }
+  </script>
 </body>
 </html>
