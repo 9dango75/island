@@ -382,3 +382,27 @@ header, section, footer{
 @media (prefers-reduced-motion: reduce){
   .bg-fog{ animation: none !important; }
 }
+/* =========================
+   World section center align
+   （補回你原本的世界觀置中）
+========================= */
+#world{
+  text-align:center;
+}
+
+#world p{
+  max-width:760px;
+  margin: 0 auto 18px;
+}
+
+#world .grid-2{
+  justify-content:center;
+}
+#world h2{
+  text-align:center;
+}
+
+#world .grid-2{
+  max-width:760px;
+  margin: 16px auto 0;
+}
