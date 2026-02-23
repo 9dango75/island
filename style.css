@@ -434,91 +434,121 @@ header, section, footer{
   margin: 16px auto 0;
 }
 /* =========================
-   Ribbon Fog（流線絲帶霧）
-   - 不用 repeat
-   - 不整片平移
-   - alternate 避免重播頓點
+   汐島 精緻度套件 v1
+   不靠霧也會變高級
 ========================= */
 
-.fog-wrap{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 6;                 /* 在背景之上 */
-  opacity: .85;               /* 整體強度 */
-  overflow: hidden;
-}
-
-/* 每條絲帶 */
-.fog-ribbon{
-  position: absolute;
-  left: -22vw;
-  width: 140vw;
-  height: 22vh;
-  border-radius: 999px;
-
-  /* 薄紗霧：中間亮、邊緣透明 */
-  background: radial-gradient(closest-side,
-    rgba(215,255,245,.12) 0%,
-    rgba(160,235,225,.10) 35%,
-    rgba(120,200,210,.06) 55%,
-    rgba(0,0,0,0) 70%);
-
-  filter: blur(18px) saturate(1.05);
-  mix-blend-mode: screen;
-  transform-origin: 50% 50%;
-}
-
-/* 不同位置 + 不同節奏（關鍵：每條都不同，才像自然流） */
-.fog-ribbon.r1{ top: 10vh; height: 16vh; opacity: .85; animation: drift1 14s ease-in-out infinite alternate; }
-.fog-ribbon.r2{ top: 26vh; height: 20vh; opacity: .70; animation: drift2 19s ease-in-out infinite alternate; }
-.fog-ribbon.r3{ top: 44vh; height: 18vh; opacity: .65; animation: drift3 23s ease-in-out infinite alternate; }
-.fog-ribbon.r4{ top: 62vh; height: 22vh; opacity: .60; animation: drift4 27s ease-in-out infinite alternate; }
-.fog-ribbon.r5{ top: 78vh; height: 16vh; opacity: .55; animation: drift5 31s ease-in-out infinite alternate; }
-
-/* ✅ 漂移：是「流線」不是整片滑動（位移幅度小 + 旋轉小） */
-@keyframes drift1{
-  from{ transform: translate3d(0,0,0) rotate(-1.2deg) scale(1.02); }
-  to  { transform: translate3d(6vw, -1.2vh, 0) rotate(1.0deg) scale(1.06); }
-}
-@keyframes drift2{
-  from{ transform: translate3d(2vw,0,0) rotate(1.4deg) scale(1.02); }
-  to  { transform: translate3d(-6vw, 1.4vh, 0) rotate(-1.0deg) scale(1.05); }
-}
-@keyframes drift3{
-  from{ transform: translate3d(0,0,0) rotate(-1.0deg) scale(1.01); }
-  to  { transform: translate3d(5vw, 1.0vh, 0) rotate(1.2deg) scale(1.05); }
-}
-@keyframes drift4{
-  from{ transform: translate3d(1vw,0,0) rotate(1.0deg) scale(1.02); }
-  to  { transform: translate3d(-5vw, -1.0vh, 0) rotate(-1.2deg) scale(1.06); }
-}
-@keyframes drift5{
-  from{ transform: translate3d(0,0,0) rotate(-1.4deg) scale(1.02); }
-  to  { transform: translate3d(4vw, 1.2vh, 0) rotate(1.1deg) scale(1.06); }
-}
-
-/* 顆粒（可留可刪）：森林濕冷感，不會像螢幕壞掉 */
-body::after{
+/* 1) 全站微暗角 + 冷色空氣層（提升「電影感」） */
+body::before{
   content:"";
   position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 5;
-  opacity: .018;
-  mix-blend-mode: overlay;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 7px);
+  inset: -10vh -10vw;
+  pointer-events:none;
+  z-index: 0;
+  background:
+    radial-gradient(1000px 600px at 50% 10%, rgba(120,200,210,.10), transparent 60%),
+    radial-gradient(1200px 700px at 50% 110%, rgba(0,0,0,.35), transparent 60%),
+    radial-gradient(1400px 900px at 50% 50%, rgba(0,0,0,.45), rgba(0,0,0,.72));
 }
 
-/* 內容永遠在霧上面 */
-header, section, footer{
+/* 確保內容在背景層上 */
+header, section, footer{ position: relative; z-index: 2; }
+
+/* 2) 排版節奏：字更乾淨、段落更像小說排版 */
+body{
+  letter-spacing: .01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.section p{ margin: 0 0 14px; }
+.section .lead{
+  font-size: 15px;
+  line-height: 1.9;
+  opacity: .92;
+}
+
+/* 3) 標題：更精緻的字距與光暈 */
+.section h2{
+  letter-spacing: .08em;
+  text-shadow: 0 12px 40px rgba(0,0,0,.35);
+}
+
+/* 4) 卡片：玻璃質感 + 內光邊 + 更細緻 hover */
+.card{
+  background: linear-gradient(
+    180deg,
+    rgba(12,30,36,.78),
+    rgba(10,24,30,.62)
+  );
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 18px 48px rgba(0,0,0,.36),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter: blur(10px);
+}
+.card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(158,216,240,.22);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.45),
+    0 0 0 1px rgba(158,216,240,.12),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* 5) 角色縮圖：統一色調，質感像封面照 */
+.thumb{
+  box-shadow: 0 14px 40px rgba(0,0,0,.40);
+}
+.thumb img{
+  filter: contrast(1.05) saturate(.92) brightness(.95);
+  transform: scale(1.04);
+}
+
+/* 6) tags：更像「質感膠囊標籤」 */
+.tags span{
+  background: rgba(158,216,240,.10);
+  border: 1px solid rgba(158,216,240,.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+/* 7) 按鈕：更像 UI 元件，有按壓感 */
+.btn{
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.btn:hover{
+  transform: translateY(-2px);
+  border-color: rgba(158,216,240,.28);
+}
+.btn:active{
+  transform: translateY(0px);
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+/* 8) 區塊分隔：用淡淡的光線取代硬切 */
+.section{
   position: relative;
-  z-index: 10;
+}
+.section::after{
+  content:"";
+  position: absolute;
+  left: 18px; right: 18px;
+  bottom: 10px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(158,216,240,.12), transparent);
+  opacity: .55;
 }
 
-/* 使用者開啟減少動態 → 停霧動畫 */
-@media (prefers-reduced-motion: reduce){
-  .fog-ribbon{ animation: none !important; }
+/* 9) Hero：更像封面（不改你原本背景圖設定也會更精緻） */
+.hero.hero-cinematic::before{
+  background:
+    radial-gradient(900px 420px at 50% 26%, rgba(30,110,140,.18), transparent 60%),
+    linear-gradient(to bottom, rgba(8,19,23,.40), rgba(8,19,23,.90));
+}
+.hero-foreground{
+  text-shadow: 0 16px 60px rgba(0,0,0,.55);
 }
