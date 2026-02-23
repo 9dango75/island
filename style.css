@@ -294,50 +294,132 @@ body{
 .x:hover{ border-color: rgba(158,216,240,.28); }
 
 /* =========================
-   強烈流動迷霧版本
+   Fog / Noise — C版：霧絲帶飄過
+   ✅ 需要 HTML 有 fog-a / fog-b / fog-c + noise
 ========================= */
 
+/* 霧層共通：放在內容上、但不擋點擊 */
 .bg-fog{
   position: fixed;
-  inset: -20vh -20vw;
+  inset: -22vh -18vw;
   pointer-events: none;
-  z-index: 5;              /* 提高層級，避免被 hero 壓住 */
-  opacity: .65;            /* 明顯霧 */
+  z-index: 4;
   mix-blend-mode: screen;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
-/* 主霧層（大片慢移動） */
+/* A：底層淡霧（讓空氣有濕冷感） */
 .bg-fog.fog-a{
+  opacity: .22;
+  filter: blur(24px) saturate(1.05) contrast(1.05);
   background:
-    radial-gradient(900px 600px at 20% 30%, rgba(255,255,255,.25), transparent 60%),
-    radial-gradient(1000px 700px at 70% 60%, rgba(180,220,230,.22), transparent 65%);
-  filter: blur(40px);
-  animation: fogMoveA 18s linear infinite;
+    radial-gradient(980px 620px at 22% 30%, rgba(120,210,220,.14), transparent 62%),
+    radial-gradient(860px 560px at 75% 40%, rgba(40,110,135,.18), transparent 64%),
+    radial-gradient(1100px 680px at 52% 78%, rgba(255,255,255,.06), transparent 66%),
+    linear-gradient(to bottom, rgba(7,16,20,.08), rgba(7,16,20,.32));
+  animation: fogFloatA 28s ease-in-out infinite;
 }
 
-/* 第二層（反方向） */
+/* B：視差霧（更慢，反向漂移） */
 .bg-fog.fog-b{
+  opacity: .16;
+  filter: blur(30px) saturate(1.02) contrast(1.08);
   background:
-    radial-gradient(800px 500px at 60% 20%, rgba(255,255,255,.20), transparent 60%),
-    radial-gradient(900px 600px at 30% 70%, rgba(200,240,255,.18), transparent 65%);
-  filter: blur(55px);
-  animation: fogMoveB 28s linear infinite;
+    radial-gradient(900px 620px at 68% 18%, rgba(60,140,165,.14), transparent 66%),
+    radial-gradient(1020px 720px at 30% 70%, rgba(120,210,220,.10), transparent 70%),
+    linear-gradient(to bottom, rgba(7,16,20,.06), rgba(7,16,20,.22));
+  animation: fogFloatB 44s ease-in-out infinite;
 }
 
-/* 霧絲層（明顯飄動） */
+/* C：霧絲帶（主角）— 很像薄紗在空中滑過 */
 .bg-fog.fog-c{
+  opacity: .46;
+  filter: blur(10px) contrast(1.10) saturate(1.06);
+  /* 霧絲帶：用多條超長的柔邊帶狀漸層堆疊 */
   background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255,255,255,.10) 0px,
-      rgba(255,255,255,.10) 2px,
-      transparent 2px,
-      transparent 80px
-    );
+    linear-gradient(90deg, transparent 0%,
+      rgba(255,255,255,.00) 10%,
+      rgba(235,255,250,.11) 18%,
+      rgba(255,255,255,.00) 26%,
+      transparent 34%),
+    linear-gradient(90deg, transparent 0%,
+      rgba(255,255,255,.00) 38%,
+      rgba(180,240,235,.10) 46%,
+      rgba(255,255,255,.00) 54%,
+      transparent 62%),
+    linear-gradient(90deg, transparent 0%,
+      rgba(255,255,255,.00) 66%,
+      rgba(200,240,255,.09) 74%,
+      rgba(255,255,255,.00) 82%,
+      transparent 90%);
+
+  /* 讓帶狀重複、而且每層有不同尺度 */
+  background-size: 140% 100%, 160% 100%, 180% 100%;
+  background-repeat: repeat;
+  animation: ribbonSlide 12s linear infinite;
+}
+
+/* ✅ 霧絲帶更立體：加一層「高度起伏」(上下飄) */
+.bg-fog.fog-c::before{
+  content:"";
+  position:absolute;
+  inset:-10vh -10vw;
+  background:
+    radial-gradient(900px 240px at 30% 30%, rgba(255,255,255,.10), transparent 60%),
+    radial-gradient(820px 220px at 70% 55%, rgba(160,230,220,.08), transparent 62%);
   filter: blur(18px);
-  opacity: .35;
-  animation: fogSlide 12s linear infinite;
+  opacity: .75;
+  animation: ribbonLift 9s ease-in-out infinite;
+}
+
+/* 噪點：微顆粒（濕冷空氣感） */
+.bg-noise{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: .05;
+  mix-blend-mode: overlay;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px);
+}
+
+/* 霧的漂移動畫（很慢很柔） */
+@keyframes fogFloatA{
+  0%   { transform: translate3d(0,0,0) scale(1.04); }
+  50%  { transform: translate3d(-2.2%, 1.1%, 0) scale(1.10); }
+  100% { transform: translate3d(0,0,0) scale(1.04); }
+}
+@keyframes fogFloatB{
+  0%   { transform: translate3d(0,0,0) scale(1.06); }
+  50%  { transform: translate3d(2.0%, -1.0%, 0) scale(1.12); }
+  100% { transform: translate3d(0,0,0) scale(1.06); }
+}
+
+/* 霧絲帶：橫向滑過（主動感很明顯） */
+@keyframes ribbonSlide{
+  0%   { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-12%, 0, 0); }
+}
+
+/* 霧絲帶：上下起伏（像空氣流動） */
+@keyframes ribbonLift{
+  0%   { transform: translate3d(0,0,0) scale(1.02); opacity:.70; }
+  50%  { transform: translate3d(-1.4%, -1.2%, 0) scale(1.06); opacity:.88; }
+  100% { transform: translate3d(0,0,0) scale(1.02); opacity:.70; }
+}
+
+/* ✅ 確保內容永遠在霧上面 */
+header, section, footer{
+  position: relative;
+  z-index: 10;
+}
+
+/* ✅ 使用者若開啟「減少動態效果」則停用霧動畫 */
+@media (prefers-reduced-motion: reduce){
+  .bg-fog{ animation: none !important; }
+  .bg-fog.fog-c::before{ animation: none !important; }
 }
 
 @keyframes fogMoveA{
