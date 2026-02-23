@@ -1,69 +1,76 @@
-/* =========================
-   Font
-========================= */
 @font-face{
-  font-family:"FengYaSong";
-  src:url("fengyasong.woff2") format("woff2");
-  font-weight:normal;
-  font-style:normal;
-  font-display:swap;
+  font-family: "FengYaSong";
+  src: url("fengyasong.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* =========================
-   Theme
-========================= */
 :root{
-  --bg:#081317;
+  --bg:#071014;               /* 更深更冷 */
   --panel:#0b1b21;
+  --panel2:#0d222a;
   --text:#e8f6f9;
   --muted:#9fb7c2;
   --line:rgba(255,255,255,.08);
   --accent:#9ed8f0;
+
+  /* 迷霧森林色系微調 */
+  --mistA: rgba(110, 205, 190, .16);
+  --mistB: rgba(40, 110, 135, .18);
+  --mistC: rgba(255,255,255,.07);
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
 
 body{
   margin:0;
   background:
-    radial-gradient(1200px 800px at 70% 10%, rgba(30,110,140,.18), transparent 60%),
-    radial-gradient(1000px 700px at 20% 30%, rgba(0,90,120,.10), transparent 55%),
+    radial-gradient(1200px 800px at 70% 10%, rgba(20,80,95,.18), transparent 60%),
+    radial-gradient(1000px 700px at 20% 30%, rgba(0,70,90,.10), transparent 55%),
     var(--bg);
   color:var(--text);
   font-family:"Noto Sans TC", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   line-height:1.8;
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================
    Topbar
 ========================= */
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:50;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
   padding:14px 22px;
-  background: rgba(8,19,23,.85);
+  background: rgba(7,16,20,.86);
   backdrop-filter: blur(10px);
   border-bottom:1px solid var(--line);
 }
-
-.brand{font-weight:700; letter-spacing:.08em}
-
+.brand{ font-weight:700; letter-spacing:.08em; }
 .nav a{
   color:var(--muted);
   text-decoration:none;
   margin-left:14px;
   font-size:14px;
 }
-.nav a:hover{color:var(--accent)}
+.nav a:hover{ color:var(--accent); }
 
 /* =========================
-   Hero (cinematic)
+   HERO (cinematic background)
 ========================= */
+.hero{
+  min-height:56vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:60px 18px 30px;
+}
+
+/* ✅ HERO：背景圖由 CSS 指定 images/background.jpg */
 .hero.hero-cinematic{
   position:relative;
   height:420px;
@@ -73,33 +80,29 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
-
-  /* 背景大圖 */
   background-image:url("images/background.jpg");
   background-size:cover;
   background-position:center 70%;
 }
 
-/* 暗化遮罩 */
+/* 讓背景更陰冷、更融入霧 */
 .hero.hero-cinematic::before{
   content:"";
-  position:absolute;
-  inset:0;
+  position:absolute; inset:0;
   background:
-    radial-gradient(900px 420px at 50% 30%, rgba(30,110,140,.22), transparent 60%),
-    linear-gradient(to bottom, rgba(8,19,23,.55), rgba(8,19,23,.88));
+    radial-gradient(900px 420px at 50% 28%, rgba(40,110,135,.22), transparent 60%),
+    linear-gradient(to bottom, rgba(7,16,20,.60), rgba(7,16,20,.92));
   z-index:1;
 }
 
-/* 柔霧層：用同一張背景繼承再模糊 */
+/* 輕微朦朧層（讓圖有濕冷感） */
 .hero.hero-cinematic::after{
   content:"";
-  position:absolute;
-  inset:0;
+  position:absolute; inset:0;
   background:inherit;
-  filter: blur(10px) saturate(.95) contrast(1.05);
+  filter: blur(10px) saturate(.92) contrast(1.08) brightness(.92);
   transform: scale(1.08);
-  opacity:.24;
+  opacity:.18;
   z-index:0;
 }
 
@@ -110,52 +113,46 @@ body{
   padding:46px 18px 40px;
 }
 
-/* 標題：風雅宋 + 藍綠霧感流動 */
 .game-title{
-  font-family:"FengYaSong","Noto Sans TC", serif;
+  font-family:"FengYaSong", "Noto Sans TC", serif;
   font-size: clamp(48px, 7vw, 92px);
-  margin:0 0 10px;
-  letter-spacing:.16em;
-  font-weight:700;
+  margin: 0 0 10px;
+  letter-spacing: .16em;
+  font-weight: 700;
 
+  /* 更冷的霧感漸層 */
   background: linear-gradient(
     120deg,
-    rgba(140, 244, 232, .95),
-    rgba(90, 200, 210, .95),
-    rgba(70, 160, 185, .95),
-    rgba(140, 244, 232, .95)
+    rgba(150, 255, 240, .92),
+    rgba(90, 210, 210, .92),
+    rgba(55, 145, 175, .92),
+    rgba(150, 255, 240, .92)
   );
-  background-size:260% 260%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:mistFlow 6.5s ease-in-out infinite;
-
+  background-size: 260% 260%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: mistFlow 7.5s ease-in-out infinite;
   filter:
-    drop-shadow(0 0 10px rgba(140,244,232,.20))
-    drop-shadow(0 0 22px rgba(90,200,210,.18))
-    drop-shadow(0 0 42px rgba(70,160,185,.14));
+    drop-shadow(0 0 10px rgba(120,210,220,.18))
+    drop-shadow(0 0 24px rgba(50,140,170,.16))
+    drop-shadow(0 0 52px rgba(0,0,0,.35));
 }
 
 @keyframes mistFlow{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hero-sub{
-  color:rgba(232,246,249,.85);
-  margin:0 0 20px;
+  color:rgba(232,246,249,.86);
+  margin:0 0 18px;
   letter-spacing:.04em;
   text-shadow:0 2px 18px rgba(0,0,0,.35);
 }
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
+.hero p{ color:rgba(232,246,249,.72); margin:0 0 20px; }
+.hero-actions{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
 
 .btn{
   display:inline-block;
@@ -171,7 +168,7 @@ body{
   border:1px solid var(--line);
   color:var(--muted);
 }
-.btn:hover{transform:translateY(-1px)}
+.btn:hover{ transform:translateY(-1px); }
 
 @media (max-width:780px){
   .hero.hero-cinematic{ height:340px; }
@@ -179,19 +176,15 @@ body{
 }
 
 /* =========================
-   Sections / Layout
+   Sections / Cards
 ========================= */
 .section{
   max-width:980px;
   margin:0 auto;
   padding:52px 18px;
 }
-.section h2{font-size:26px; margin:0 0 10px}
-.lead{color:var(--muted); margin:0 0 22px}
-
-/* 世界觀置中 */
-#world{ text-align:center; }
-#world p{ max-width:760px; margin: 0 auto 18px; }
+.section h2{ font-size:26px; margin:0 0 10px; }
+.lead{ color:var(--muted); margin:0 0 22px; }
 
 .grid-2{
   display:grid;
@@ -199,7 +192,7 @@ body{
   gap:14px;
 }
 @media (max-width:780px){
-  .grid-2{grid-template-columns:1fr}
+  .grid-2{ grid-template-columns:1fr; }
 }
 
 .card{
@@ -210,8 +203,8 @@ body{
   text-decoration:none;
   color:inherit;
 }
-.card.clickable{cursor:pointer; text-align:left}
-.card:hover{border-color: rgba(158,216,240,.28)}
+.card.clickable{ cursor:pointer; text-align:left; }
+.card:hover{ border-color: rgba(158,216,240,.28); }
 
 .callout{
   background: rgba(13,34,42,.55);
@@ -221,16 +214,13 @@ body{
   color:var(--muted);
 }
 
-/* =========================
-   Character cards
-========================= */
 .cards{
   display:grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap:14px;
 }
 @media (max-width:780px){
-  .cards{grid-template-columns:1fr}
+  .cards{ grid-template-columns:1fr; }
 }
 
 .character{
@@ -240,22 +230,16 @@ body{
 }
 
 .thumb{
-  width:120px;
-  min-width:120px;
+  width:120px; min-width:120px;
   border-radius:12px;
   overflow:hidden;
   background: rgba(255,255,255,.04);
   border:1px solid var(--line);
 }
-.thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
+.thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-.meta .name{font-size:20px; font-weight:700; margin-bottom:6px}
-.tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px}
+.meta .name{ font-size:20px; font-weight:700; margin-bottom:6px; }
+.tags{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
 .tags span{
   font-size:12px;
   padding:3px 8px;
@@ -264,11 +248,8 @@ body{
   border:1px solid rgba(158,216,240,.18);
   color:var(--muted);
 }
-.desc{margin:0; color:var(--muted)}
+.desc{ margin:0; color:var(--muted); }
 
-/* =========================
-   Footer
-========================= */
 .footer{
   padding:26px 18px 40px;
   text-align:center;
@@ -277,20 +258,17 @@ body{
 }
 
 /* =========================
-   Modal (index uses this one)
+   Index modal (modal-backdrop)
 ========================= */
 .modal-backdrop{
-  position:fixed;
-  inset:0;
+  position:fixed; inset:0;
   background: rgba(0,0,0,.55);
   display:none;
-  align-items:center;
-  justify-content:center;
+  align-items:center; justify-content:center;
   padding:18px;
   z-index:9999;
 }
-.modal-backdrop.show{display:flex}
-
+.modal-backdrop.show{ display:flex; }
 .modal{
   width:min(760px, 100%);
   background: rgba(11,27,33,.95);
@@ -298,18 +276,13 @@ body{
   border-radius:16px;
   overflow:hidden;
 }
-
 .modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display:flex; align-items:center; justify-content:space-between;
   padding:14px 16px;
   border-bottom:1px solid var(--line);
 }
-
-.modal-title{font-weight:700}
-.modal-body{padding:16px; color:var(--muted)}
-
+.modal-title{ font-weight:700; }
+.modal-body{ padding:16px; color:var(--muted); }
 .x{
   background:transparent;
   border:1px solid var(--line);
@@ -318,412 +291,94 @@ body{
   padding:6px 10px;
   cursor:pointer;
 }
-.x:hover{border-color: rgba(158,216,240,.28)}
+.x:hover{ border-color: rgba(158,216,240,.28); }
 
 /* =========================
-   Fog / Noise layers
+   Fog / Noise (陰冷迷霧森林版)
+   ✅ 你會在 HTML 放 3 層 fog + 1 層 noise
 ========================= */
+
+/* 霧的共通設定 */
 .bg-fog{
   position: fixed;
-  inset: -20vh -12vw; /* 延伸避免邊緣裁切 */
+  inset: -28vh -20vw;
   pointer-events: none;
   z-index: 0;
-  opacity: .45;
-  filter: blur(12px) saturate(1.05);
   mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* A：主霧（最大面積） */
+.bg-fog.fog-a{
+  opacity: .42;
+  filter: blur(18px) saturate(1.05) contrast(1.05);
   background:
-    radial-gradient(900px 520px at 20% 25%, rgba(120,210,220,.18), transparent 60%),
-    radial-gradient(760px 520px at 72% 35%, rgba(80,170,200,.14), transparent 62%),
-    radial-gradient(980px 620px at 50% 78%, rgba(255,255,255,.08), transparent 65%),
-    linear-gradient(to bottom, rgba(8,19,23,.10), rgba(8,19,23,.40));
-  animation: fogDrift 18s ease-in-out infinite;
+    radial-gradient(980px 620px at 22% 26%, var(--mistB), transparent 62%),
+    radial-gradient(860px 560px at 75% 34%, var(--mistA), transparent 64%),
+    radial-gradient(1100px 680px at 52% 78%, var(--mistC), transparent 66%),
+    linear-gradient(to bottom, rgba(7,16,20,.10), rgba(7,16,20,.46));
+  animation: fogDriftA 26s ease-in-out infinite;
 }
 
-@keyframes fogDrift{
-  0%{ transform: translate3d(0,0,0) scale(1.02); }
-  50%{ transform: translate3d(-2%, 1%, 0) scale(1.06); }
-  100%{ transform: translate3d(0,0,0) scale(1.02); }
+/* B：視差霧（更慢、方向反） */
+.bg-fog.fog-b{
+  opacity: .26;
+  filter: blur(22px) saturate(1.02) contrast(1.08);
+  background:
+    radial-gradient(900px 620px at 68% 18%, rgba(60,140,165,.14), transparent 66%),
+    radial-gradient(1020px 720px at 30% 70%, rgba(120,210,220,.12), transparent 70%),
+    linear-gradient(to bottom, rgba(7,16,20,.08), rgba(7,16,20,.34));
+  animation: fogDriftB 40s ease-in-out infinite;
 }
 
+/* C：霧絲（更淡但更動感） */
+.bg-fog.fog-c{
+  opacity: .18;
+  filter: blur(12px) saturate(1.06) contrast(1.10);
+  background:
+    radial-gradient(560px 360px at 18% 52%, rgba(255,255,255,.09), transparent 60%),
+    radial-gradient(620px 420px at 82% 60%, rgba(158,216,240,.10), transparent 62%),
+    radial-gradient(520px 340px at 55% 20%, rgba(255,255,255,.06), transparent 60%);
+  animation: fogDriftC 18s ease-in-out infinite;
+}
+
+/* 霧動畫（漂移 + 微縮放） */
+@keyframes fogDriftA{
+  0%   { transform: translate3d(0,0,0) scale(1.03); }
+  50%  { transform: translate3d(-3.2%, 1.8%, 0) scale(1.10); }
+  100% { transform: translate3d(0,0,0) scale(1.03); }
+}
+@keyframes fogDriftB{
+  0%   { transform: translate3d(0,0,0) scale(1.06); }
+  50%  { transform: translate3d(2.8%, -1.6%, 0) scale(1.12); }
+  100% { transform: translate3d(0,0,0) scale(1.06); }
+}
+@keyframes fogDriftC{
+  0%   { transform: translate3d(0,0,0) scale(1.02); }
+  50%  { transform: translate3d(-1.8%, -1.2%, 0) scale(1.07); }
+  100% { transform: translate3d(0,0,0) scale(1.02); }
+}
+
+/* 顆粒噪點（更像潮濕空氣的質感） */
 .bg-noise{
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  opacity: .06;
+  opacity: .055;
   mix-blend-mode: overlay;
   background-image:
-    repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,.08) 0 1px, transparent 1px 6px),
-    repeating-radial-gradient(circle at 70% 60%, rgba(255,255,255,.06) 0 1px, transparent 1px 7px);
-  filter: blur(.2px);
+    repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px);
 }
 
-/* 內容永遠在霧層上面 */
+/* ✅ 確保內容永遠在霧上面 */
 header, section, footer{
   position: relative;
   z-index: 2;
-}/* =========================
-   Font
-========================= */
-@font-face{
-  font-family:"FengYaSong";
-  src:url("fengyasong.woff2") format("woff2");
-  font-weight:normal;
-  font-style:normal;
-  font-display:swap;
 }
 
-/* =========================
-   Theme
-========================= */
-:root{
-  --bg:#081317;
-  --panel:#0b1b21;
-  --text:#e8f6f9;
-  --muted:#9fb7c2;
-  --line:rgba(255,255,255,.08);
-  --accent:#9ed8f0;
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  background:
-    radial-gradient(1200px 800px at 70% 10%, rgba(30,110,140,.18), transparent 60%),
-    radial-gradient(1000px 700px at 20% 30%, rgba(0,90,120,.10), transparent 55%),
-    var(--bg);
-  color:var(--text);
-  font-family:"Noto Sans TC", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-  line-height:1.8;
-}
-
-/* =========================
-   Topbar
-========================= */
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:50;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 22px;
-  background: rgba(8,19,23,.85);
-  backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--line);
-}
-
-.brand{font-weight:700; letter-spacing:.08em}
-
-.nav a{
-  color:var(--muted);
-  text-decoration:none;
-  margin-left:14px;
-  font-size:14px;
-}
-.nav a:hover{color:var(--accent)}
-
-/* =========================
-   Hero (cinematic)
-========================= */
-.hero.hero-cinematic{
-  position:relative;
-  height:420px;
-  padding:0;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-
-  /* 背景大圖 */
-  background-image:url("images/background.jpg");
-  background-size:cover;
-  background-position:center 70%;
-}
-
-/* 暗化遮罩 */
-.hero.hero-cinematic::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(900px 420px at 50% 30%, rgba(30,110,140,.22), transparent 60%),
-    linear-gradient(to bottom, rgba(8,19,23,.55), rgba(8,19,23,.88));
-  z-index:1;
-}
-
-/* 柔霧層：用同一張背景繼承再模糊 */
-.hero.hero-cinematic::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:inherit;
-  filter: blur(10px) saturate(.95) contrast(1.05);
-  transform: scale(1.08);
-  opacity:.24;
-  z-index:0;
-}
-
-.hero-foreground{
-  position:relative;
-  z-index:2;
-  width:min(980px, 92%);
-  padding:46px 18px 40px;
-}
-
-/* 標題：風雅宋 + 藍綠霧感流動 */
-.game-title{
-  font-family:"FengYaSong","Noto Sans TC", serif;
-  font-size: clamp(48px, 7vw, 92px);
-  margin:0 0 10px;
-  letter-spacing:.16em;
-  font-weight:700;
-
-  background: linear-gradient(
-    120deg,
-    rgba(140, 244, 232, .95),
-    rgba(90, 200, 210, .95),
-    rgba(70, 160, 185, .95),
-    rgba(140, 244, 232, .95)
-  );
-  background-size:260% 260%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:mistFlow 6.5s ease-in-out infinite;
-
-  filter:
-    drop-shadow(0 0 10px rgba(140,244,232,.20))
-    drop-shadow(0 0 22px rgba(90,200,210,.18))
-    drop-shadow(0 0 42px rgba(70,160,185,.14));
-}
-
-@keyframes mistFlow{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-.hero-sub{
-  color:rgba(232,246,249,.85);
-  margin:0 0 20px;
-  letter-spacing:.04em;
-  text-shadow:0 2px 18px rgba(0,0,0,.35);
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.btn{
-  display:inline-block;
-  padding:10px 16px;
-  border-radius:12px;
-  background: rgba(158,216,240,.14);
-  border:1px solid rgba(158,216,240,.25);
-  color:var(--text);
-  text-decoration:none;
-}
-.btn.ghost{
-  background: transparent;
-  border:1px solid var(--line);
-  color:var(--muted);
-}
-.btn:hover{transform:translateY(-1px)}
-
-@media (max-width:780px){
-  .hero.hero-cinematic{ height:340px; }
-  .hero-foreground{ padding:36px 16px 30px; }
-}
-
-/* =========================
-   Sections / Layout
-========================= */
-.section{
-  max-width:980px;
-  margin:0 auto;
-  padding:52px 18px;
-}
-.section h2{font-size:26px; margin:0 0 10px}
-.lead{color:var(--muted); margin:0 0 22px}
-
-/* 世界觀置中 */
-#world{ text-align:center; }
-#world p{ max-width:760px; margin: 0 auto 18px; }
-
-.grid-2{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:14px;
-}
-@media (max-width:780px){
-  .grid-2{grid-template-columns:1fr}
-}
-
-.card{
-  background: rgba(11,27,33,.75);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
-  text-decoration:none;
-  color:inherit;
-}
-.card.clickable{cursor:pointer; text-align:left}
-.card:hover{border-color: rgba(158,216,240,.28)}
-
-.callout{
-  background: rgba(13,34,42,.55);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:14px 16px;
-  color:var(--muted);
-}
-
-/* =========================
-   Character cards
-========================= */
-.cards{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:14px;
-}
-@media (max-width:780px){
-  .cards{grid-template-columns:1fr}
-}
-
-.character{
-  display:flex;
-  gap:14px;
-  align-items:stretch;
-}
-
-.thumb{
-  width:120px;
-  min-width:120px;
-  border-radius:12px;
-  overflow:hidden;
-  background: rgba(255,255,255,.04);
-  border:1px solid var(--line);
-}
-.thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.meta .name{font-size:20px; font-weight:700; margin-bottom:6px}
-.tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px}
-.tags span{
-  font-size:12px;
-  padding:3px 8px;
-  border-radius:999px;
-  background: rgba(158,216,240,.12);
-  border:1px solid rgba(158,216,240,.18);
-  color:var(--muted);
-}
-.desc{margin:0; color:var(--muted)}
-
-/* =========================
-   Footer
-========================= */
-.footer{
-  padding:26px 18px 40px;
-  text-align:center;
-  color:rgba(232,246,249,.55);
-  border-top:1px solid var(--line);
-}
-
-/* =========================
-   Modal (index uses this one)
-========================= */
-.modal-backdrop{
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:9999;
-}
-.modal-backdrop.show{display:flex}
-
-.modal{
-  width:min(760px, 100%);
-  background: rgba(11,27,33,.95);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:16px;
-  overflow:hidden;
-}
-
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 16px;
-  border-bottom:1px solid var(--line);
-}
-
-.modal-title{font-weight:700}
-.modal-body{padding:16px; color:var(--muted)}
-
-.x{
-  background:transparent;
-  border:1px solid var(--line);
-  color:var(--text);
-  border-radius:10px;
-  padding:6px 10px;
-  cursor:pointer;
-}
-.x:hover{border-color: rgba(158,216,240,.28)}
-
-/* =========================
-   Fog / Noise layers
-========================= */
-.bg-fog{
-  position: fixed;
-  inset: -20vh -12vw; /* 延伸避免邊緣裁切 */
-  pointer-events: none;
-  z-index: 0;
-  opacity: .45;
-  filter: blur(12px) saturate(1.05);
-  mix-blend-mode: screen;
-  background:
-    radial-gradient(900px 520px at 20% 25%, rgba(120,210,220,.18), transparent 60%),
-    radial-gradient(760px 520px at 72% 35%, rgba(80,170,200,.14), transparent 62%),
-    radial-gradient(980px 620px at 50% 78%, rgba(255,255,255,.08), transparent 65%),
-    linear-gradient(to bottom, rgba(8,19,23,.10), rgba(8,19,23,.40));
-  animation: fogDrift 18s ease-in-out infinite;
-}
-
-@keyframes fogDrift{
-  0%{ transform: translate3d(0,0,0) scale(1.02); }
-  50%{ transform: translate3d(-2%, 1%, 0) scale(1.06); }
-  100%{ transform: translate3d(0,0,0) scale(1.02); }
-}
-
-.bg-noise{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: .06;
-  mix-blend-mode: overlay;
-  background-image:
-    repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,.08) 0 1px, transparent 1px 6px),
-    repeating-radial-gradient(circle at 70% 60%, rgba(255,255,255,.06) 0 1px, transparent 1px 7px);
-  filter: blur(.2px);
-}
-
-/* 內容永遠在霧層上面 */
-header, section, footer{
-  position: relative;
-  z-index: 2;
+/* ✅ 使用者若開啟「減少動態效果」則停用霧動畫 */
+@media (prefers-reduced-motion: reduce){
+  .bg-fog{ animation: none !important; }
 }
