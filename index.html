@@ -108,10 +108,77 @@
 </head>
 
 <body>
-  <div class="bg-fog fog-a" aria-hidden="true"></div>
-<div class="bg-fog fog-b" aria-hidden="true"></div>
-<div class="bg-fog fog-c" aria-hidden="true"></div>
-<div class="bg-noise" aria-hidden="true"></div>
+<!-- ✅ 絲帶迷霧（SVG 噪声流体，不会像贴图滑动） -->
+<svg class="fog-ribbon" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <!-- 流動雜訊 -->
+    <filter id="fogFlow">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="3" seed="2" result="noise">
+        <animate attributeName="baseFrequency"
+                 dur="18s"
+                 values="0.008 0.02; 0.010 0.018; 0.008 0.02"
+                 repeatCount="indefinite" />
+      </feTurbulence>
+
+      <!-- 把雜訊拉成絲帶形狀 -->
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="35" xChannelSelector="R" yChannelSelector="G" />
+
+      <!-- 霧更柔 -->
+      <feGaussianBlur stdDeviation="1.4" />
+    </filter>
+
+    <!-- 絲帶遮罩：只留下幾條“薄紗”帶，不會整片糊 -->
+    <mask id="ribbonMask">
+      <rect width="1200" height="800" fill="black" />
+      <g filter="url(#fogFlow)" opacity="0.95">
+        <!-- 多條帶狀霧（上中下分佈），你要的是“絲帶”就靠這裡 -->
+        <path d="M-200 160 C  80  90,  320 240,  640 170 C  900 110, 1040 220, 1400 140
+                 L 1400 250 C 1100 300,  900 170,  640 280 C  320 390,  120 250, -200 310 Z" fill="white">
+          <animate attributeName="d" dur="16s" repeatCount="indefinite"
+                   values="
+                   M-200 160 C  80  90,  320 240,  640 170 C  900 110, 1040 220, 1400 140
+                   L 1400 250 C 1100 300,  900 170,  640 280 C  320 390,  120 250, -200 310 Z;
+                   M-200 185 C 120 120,  340 210,  640 210 C  920 250, 1060 130, 1400 185
+                   L 1400 275 C 1120 330,  900 250,  640 330 C  340 410,  120 300, -200 330 Z;
+                   M-200 160 C  80  90,  320 240,  640 170 C  900 110, 1040 220, 1400 140
+                   L 1400 250 C 1100 300,  900 170,  640 280 C  320 390,  120 250, -200 310 Z" />
+        </path>
+
+        <path d="M-200 360 C 120 300, 340 450, 640 380 C 920 320, 1060 460, 1400 360
+                 L 1400 470 C 1100 560,  920 430,  640 540 C  340 650,  120 520, -200 560 Z" fill="white" opacity="0.85">
+          <animate attributeName="d" dur="22s" repeatCount="indefinite"
+                   values="
+                   M-200 360 C 120 300, 340 450, 640 380 C 920 320, 1060 460, 1400 360
+                   L 1400 470 C 1100 560,  920 430,  640 540 C  340 650,  120 520, -200 560 Z;
+                   M-200 390 C 140 430, 360 320, 640 420 C 900 520, 1080 360, 1400 390
+                   L 1400 500 C 1120 620,  900 520,  640 600 C  360 680,  140 560, -200 610 Z;
+                   M-200 360 C 120 300, 340 450, 640 380 C 920 320, 1060 460, 1400 360
+                   L 1400 470 C 1100 560,  920 430,  640 540 C  340 650,  120 520, -200 560 Z" />
+        </path>
+
+        <path d="M-200 610 C  80 560,  320 720,  640 640 C  920 560, 1040 700, 1400 610
+                 L 1400 720 C 1100 820,  900 720,  640 780 C  320 840,  120 760, -200 800 Z" fill="white" opacity="0.70">
+          <animate attributeName="d" dur="28s" repeatCount="indefinite"
+                   values="
+                   M-200 610 C  80 560,  320 720,  640 640 C  920 560, 1040 700, 1400 610
+                   L 1400 720 C 1100 820,  900 720,  640 780 C  320 840,  120 760, -200 800 Z;
+                   M-200 640 C 120 700,  360 580,  640 700 C  900 820, 1060 660, 1400 640
+                   L 1400 740 C 1120 860,  900 820,  640 840 C  360 860,  140 820, -200 860 Z;
+                   M-200 610 C  80 560,  320 720,  640 640 C  920 560, 1040 700, 1400 610
+                   L 1400 720 C 1100 820,  900 720,  640 780 C  320 840,  120 760, -200 800 Z" />
+        </path>
+      </g>
+    </mask>
+  </defs>
+
+  <!-- 霧的顏色層：用遮罩裁成絲帶 -->
+  <rect width="1200" height="800" mask="url(#ribbonMask)"
+        fill="rgba(190,245,240,0.22)"/>
+  <rect width="1200" height="800" mask="url(#ribbonMask)"
+        fill="rgba(90,170,200,0.18)" opacity="0.75"/>
+</svg>
+
+<div class="bg-noise" aria-hidden="true"></div>"true"></div>
 
   <header class="topbar">
     <div class="brand">汐島</div>
