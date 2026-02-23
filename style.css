@@ -444,13 +444,32 @@ body{
   padding-top:80px !important;
 }
 
-/* 背景微粒質感 */
-.bg-noise{
+/* ========= 背景霧氣層（極淡、電影感） ========= */
+.bg-fog{
   position: fixed;
-  inset: 0;
+  inset: -20vh -10vw;            /* 霧氣延伸，避免邊緣切到 */
   pointer-events: none;
-  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: .04;
-  mix-blend-mode: overlay;
-  z-index: 0;
+  z-index: 1;                    /* 先放 1（下面會把內容抬到 2） */
+  opacity: .55;                  /* 整體霧量，想更淡改 .35 */
+  filter: blur(10px) saturate(1.05);
+  mix-blend-mode: screen;        /* 讓霧更柔；不喜歡可改 normal */
+
+  /* 多層霧：用漸層疊出雲霧感 */
+  background:
+    radial-gradient(900px 520px at 20% 25%, rgba(120, 210, 220, .18), transparent 60%),
+    radial-gradient(760px 520px at 72% 35%, rgba(80, 170, 200, .14), transparent 62%),
+    radial-gradient(980px 620px at 50% 78%, rgba(255, 255, 255, .08), transparent 65%),
+    linear-gradient(to bottom, rgba(8,19,23,.10), rgba(8,19,23,.35));
+
+  animation: fogDrift 18s ease-in-out infinite;
 }
+
+/* 霧氣微微漂移 */
+@keyframes fogDrift{
+  0%   { transform: translate3d(0,0,0) scale(1.02); }
+  50%  { transform: translate3d(-2%, 1%, 0) scale(1.06); }
+  100% { transform: translate3d(0,0,0) scale(1.02); }
+}
+
+/* ✅ 確保你的內容永遠在霧氣上面（非常重要） */
+body{ position: relative; z-index: 2; }
