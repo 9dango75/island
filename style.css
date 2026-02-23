@@ -433,45 +433,31 @@ header, section, footer{
   max-width:760px;
   margin: 16px auto 0;
 }
-/* ===== 絲帶迷霧（SVG） ===== */
-.fog-ribbon{
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
+/* ===== 陰冷森林氛圍（穩定版） ===== */
 
-  /* ✅ 霧要看得到，但不要“螢幕壞掉” */
-  opacity: .55;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
 
-  /* ✅ 在 hero 遮罩之上、文字之下 */
-  z-index: 60;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(120,200,210,.15), transparent 60%),
+    radial-gradient(900px 500px at 50% 120%, rgba(80,160,180,.12), transparent 60%),
+    linear-gradient(to bottom,
+      rgba(0,20,25,.55) 0%,
+      rgba(0,35,45,.40) 40%,
+      rgba(0,25,35,.55) 100%);
 
-  /* 更像陰冷濕霧 */
   mix-blend-mode: screen;
-  filter: blur(0.2px) saturate(1.05) contrast(1.02);
 }
 
-/* 顆粒很淡就好 */
-.bg-noise{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 55;
-  opacity: .025;
-  mix-blend-mode: overlay;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 6px);
+body{
+  background-color:#041b22;
 }
 
-/* 內容永遠在霧上面 */
-header, section, footer{
-  position: relative;
-  z-index: 80;
-}
-
-/* 偏好減少動態：停動畫（SVG 內 animate 仍會動，但濾鏡感會更不明顯） */
-@media (prefers-reduced-motion: reduce){
-  .fog-ribbon{ opacity: .35; }
+/* 微冷色調 */
+.section{
+  backdrop-filter: blur(1.5px);
 }
