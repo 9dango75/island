@@ -1,134 +1,157 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>劉子恩｜汐島</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>劉子恩｜汐島</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
+  <div class="bg-fog" aria-hidden="true"></div>
+  <div class="bg-noise" aria-hidden="true"></div>
 
-<section class="section">
-  <h2>劉子恩</h2>
-  <p>30歲 | 180公分 | 寵物旅館員工</p>
-  
-  <!-- 圓形頭像 -->
-  <div class="profile-avatar">
-  <img src="images/劉子恩2.png" alt="劉子恩2" style="object-position: center 3%;">
-</div>
-  
-  <div class="callout">
-  <p>劉子恩在汐島的寵物旅館工作。</p>
-  <p>島上的人家不多，但幾乎家家都有貓狗，偶爾還有臨時寄養的流浪動物。</p>
-  <p>他負責清理環境、準備飼料、陪動物活動，也會協助處理簡單的訓練與照護。力氣很大，搬飼料或整理圍欄對他來說都不算困難。</p>
-  <p>島民有時會笑他「太老實」，但需要幫忙時總會第一個想到他。有人家裡水管壞了，他會順手幫忙修；有人搬不動東西，他自然接過來。這些事情他從不特別提起，好像只是順便。</p>
-  <p>不太會拐彎抹角，也不擅長玩笑，卻總能在你真的需要時給出實在的建議。偶爾會因為太認真而顯得有點直率，但那份坦白並不刺人。</p>
-  <p>他做事不急，說話也慢半拍，但在他身旁總感覺很安心。</p>
-  <p><a class="btn ghost" href="index.html">← 回到汐島</a></p>
-</section>
-  
-<hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+  <section class="section">
+    <h2>劉子恩</h2>
+    <p class="lead">30歲 | 180公分 | 寵物旅館員工</p>
 
-<button class="memory-btn" type="button" onclick="openMemory()">
-  查看▗▟蓋▞憶
-</button>
-
-<!-- 遺失的碎片：Modal -->
-<div class="modal-bg" id="modalBg" style="display:none; z-index:9999;">
-  <div class="modal">
-    <div id="modalContent">
-      <h3>他說</h3>
-      <input type="text" id="codeInput" placeholder="輸入密語">
-      <button type="button" onclick="checkCode()">確認</button>
+    <!-- 圓形頭像 -->
+    <div class="profile-avatar">
+      <img src="images/劉子恩2.png" alt="劉子恩" style="object-position:center 3%;">
     </div>
-    <div class="close" onclick="closeModal()">關閉</div>
+
+    <div class="callout">
+      <p>劉子恩在汐島的寵物旅館工作。</p>
+      <p>島上的人家不多，但幾乎家家都有貓狗，偶爾還有臨時寄養的流浪動物。</p>
+      <p>他負責清理環境、準備飼料、陪動物活動，也會協助處理簡單的訓練與照護。力氣很大，搬飼料或整理圍欄對他來說都不算困難。</p>
+      <p>島民有時會笑他「太老實」，但需要幫忙時總會第一個想到他。有人家裡水管壞了，他會順手幫忙修；有人搬不動東西，他自然接過來。這些事情他從不特別提起，好像只是順便。</p>
+      <p>不太會拐彎抹角，也不擅長玩笑，卻總能在你真的需要時給出實在的建議。偶爾會因為太認真而顯得有點直率，但那份坦白並不刺人。</p>
+      <p>他做事不急，說話也慢半拍，但在他身旁總感覺很安心。</p>
+
+      <p style="margin-top:14px">
+        <a class="btn ghost" href="index.html">← 回到汐島</a>
+      </p>
+    </div>
+
+    <hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+
+    <button class="memory-btn" type="button" onclick="openMemory()">
+      查看▗▟蓋▞憶
+    </button>
+  </section>
+
+  <!-- 遺失的碎片：Modal -->
+  <div class="modal-bg" id="modalBg" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="memTitle">
+      <div id="modalContent">
+        <h3 id="memTitle">他說</h3>
+        <input type="text" id="codeInput" placeholder="輸入密語">
+        <button type="button" onclick="checkCode()">確認</button>
+      </div>
+      <div class="close" onclick="closeModal()">關閉</div>
+    </div>
   </div>
-</div>
 
-<script>
-  function openMemory(){
-    const bg = document.getElementById("modalBg");
-    if(!bg){
-      alert("找不到 modalBg，請確認已貼上 Modal 區塊");
-      return;
-    }
-    bg.style.display = "flex";
-  }
-
-  function closeModal(){
-    const bg = document.getElementById("modalBg");
-    if(bg) bg.style.display = "none";
-  }
-
-  function checkCode(){
-    const input = document.getElementById("codeInput");
-    const content = document.getElementById("modalContent");
-    if(!input || !content){
-      alert("找不到輸入框或內容區塊，請確認 id 是否正確");
-      return;
+  <script>
+    function openMemory(){
+      const bg = document.getElementById("modalBg");
+      if(!bg){
+        alert("找不到 modalBg，請確認已貼上 Modal 區塊");
+        return;
+      }
+      bg.style.display = "flex";
+      bg.setAttribute("aria-hidden", "false");
+      document.getElementById("codeInput")?.focus();
     }
 
-    const code = input.value.trim();
-
-    // 做錯的選擇
-    if(code === "恐懼是人性的一部分"){
-      content.innerHTML = `
-        <h3>▸ 被覆蓋的記憶1 ◂</h3>
-        <p>我其實一直覺得自己不是最衝的，也不是最聰明的那種，但至少在需要的時候能站出來。</p>
-        <p>那天之前，我真的這麼相信。</p>
-
-        <p>任務地點在開闊地帶，掩體少、風向又亂。情報說敵方火力分布偏左，我們的推進路線相對安全。我聽著簡報點頭心裡卻有點不安，可那種不安太模糊，我也說不上來。</p>
-        <p>真正讓我亂掉的，是第一波交火。</p>
-
-        <p>子彈擦過掩體的聲音很尖銳，像是有人在耳邊撕裂空氣。我趴在地上，呼吸突然變得很重，胸口像壓著什麼。不是沒經歷過戰場，可那一次身體先背叛了我。</p>
-
-        <p>指令在耳機裡響起，要求我從側翼壓制火力。</p>
-        <p>我知道那是我的位置，可我沒有動。</p>
-
-       <p>那幾秒鐘其實很短，可對我來說像是被拉長到沒有盡頭。我腦子裡閃過很多念頭——風向不對、角度太開、掩體不足。全都是理由，全都是讓我再等一下的理由。</p>
-
-       <p>他看了我一眼。</p>
-
-       <p>沒有質問，沒有不耐煩，只是說：「我去。」</p>
-       <p>我還來不及回應，他已經從掩體後衝出去。</p>
-       <p>那畫面我到現在都記得。不是壯烈也不是戲劇性的慢動作，而是很普通的一個背影，快得像是早就準備好。</p>
-
-       <p>他完成了壓制，我們順利推進。</p>
-       <p>任務最終判定成功。</p>
-
-       <p>但他回來時，是被抬回來的。</p>
-
-       <p>爆裂彈的碎片打進他的腿部神經，醫療報告寫得很清楚——永久性損傷，行動能力無法完全恢復。</p>
-       <p>我坐在醫療區外面，看著手上的血還沒洗乾淨，突然不知道該怎麼面對他。</p>
-
-       <p>他醒來的時候還在笑，說沒事，至少任務完成了。</p>
-
-       <p>我喉嚨發緊，卻說不出一句完整的話。</p>
-       <p>沒事的是任務，不是他。</p>
-       <p>而那個位置本來是我的。</p>
-
-       <p>不是替代，不是交換，是我的。</p>
-
-       <p>後來很多人安慰我，說戰場瞬息萬變、說臨場判斷不可能完美、說恐懼是人性的一部分。</p>
-       <p>我都知道，我比誰都知道。可那些話沒有一個能讓我安心。</p>
-
-       <p>因為我很清楚那不是策略性的退讓，是恐懼。</p>
-       <p>我害怕那片空地、害怕那條暴露的路線、害怕那一瞬間會被擊中。於是我停下來，而他替我動了。</p>
-       <p>我不是故意要讓他上陣的，可結果就是那樣。</p>
-
-       <p>每次看到他走路時微微的拖步聲，我都會想起那幾秒鐘的遲疑。那種遲疑不會被記錄在報告裡，也不會寫進任務總結。它只會留在我心裡，一遍一遍重播。</p>
-
-       <p>我可以承認我會害怕，但我沒辦法原諒自己，讓別人替我的害怕付出代價。</p>
-      `;
-    }else{
-      content.innerHTML = `
-        <h3>……</h3>
-        <p>我沒說過這句。</p>
-      `;
+    function closeModal(){
+      const bg = document.getElementById("modalBg");
+      if(bg){
+        bg.style.display = "none";
+        bg.setAttribute("aria-hidden", "true");
+      }
     }
-  }
-</script>
 
+    // 點背景關閉
+    document.getElementById("modalBg")?.addEventListener("click", (e) => {
+      if(e.target.id === "modalBg") closeModal();
+    });
 
+    // ESC 關閉
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
+
+    function checkCode(){
+      const input = document.getElementById("codeInput");
+      const content = document.getElementById("modalContent");
+      if(!input || !content){
+        alert("找不到輸入框或內容區塊，請確認 id 是否正確");
+        return;
+      }
+
+      const code = input.value.trim();
+
+      // 做錯的選擇
+      if(code === "恐懼是人性的一部分"){
+        content.innerHTML = `
+          <h3>▸ 被覆蓋的記憶1 ◂</h3>
+
+          <p>我其實一直覺得自己不是最衝的，也不是最聰明的那種，但至少在需要的時候能站出來。</p>
+          <p>那天之前，我真的這麼相信。</p>
+
+          <p>任務地點在開闊地帶，掩體少、風向又亂。情報說敵方火力分布偏左，我們的推進路線相對安全。我聽著簡報點頭心裡卻有點不安，可那種不安太模糊，我也說不上來。</p>
+          <p>真正讓我亂掉的，是第一波交火。</p>
+
+          <p>子彈擦過掩體的聲音很尖銳，像是有人在耳邊撕裂空氣。我趴在地上，呼吸突然變得很重，胸口像壓著什麼。不是沒經歷過戰場，可那一次身體先背叛了我。</p>
+
+          <p>指令在耳機裡響起，要求我從側翼壓制火力。</p>
+          <p>我知道那是我的位置，可我沒有動。</p>
+
+          <p>那幾秒鐘其實很短，可對我來說像是被拉長到沒有盡頭。我腦子裡閃過很多念頭——風向不對、角度太開、掩體不足。全都是理由，全都是讓我再等一下的理由。</p>
+
+          <p>他看了我一眼。</p>
+
+          <p>沒有質問，沒有不耐煩，只是說：「我去。」</p>
+          <p>我還來不及回應，他已經從掩體後衝出去。</p>
+          <p>那畫面我到現在都記得。不是壯烈也不是戲劇性的慢動作，而是很普通的一個背影，快得像是早就準備好。</p>
+
+          <p>他完成了壓制，我們順利推進。</p>
+          <p>任務最終判定成功。</p>
+
+          <p>但他回來時，是被抬回來的。</p>
+
+          <p>爆裂彈的碎片打進他的腿部神經，醫療報告寫得很清楚——永久性損傷，行動能力無法完全恢復。</p>
+          <p>我坐在醫療區外面，看著手上的血還沒洗乾淨，突然不知道該怎麼面對他。</p>
+
+          <p>他醒來的時候還在笑，說沒事，至少任務完成了。</p>
+
+          <p>我喉嚨發緊，卻說不出一句完整的話。</p>
+          <p>沒事的是任務，不是他。</p>
+          <p>而那個位置本來是我的。</p>
+
+          <p>不是替代，不是交換，是我的。</p>
+
+          <p>後來很多人安慰我，說戰場瞬息萬變、說臨場判斷不可能完美、說恐懼是人性的一部分。</p>
+          <p>我都知道，我比誰都知道。可那些話沒有一個能讓我安心。</p>
+
+          <p>因為我很清楚那不是策略性的退讓，是恐懼。</p>
+          <p>我害怕那片空地、害怕那條暴露的路線、害怕那一瞬間會被擊中。於是我停下來，而他替我動了。</p>
+          <p>我不是故意要讓他上陣的，可結果就是那樣。</p>
+
+          <p>每次看到他走路時微微的拖步聲，我都會想起那幾秒鐘的遲疑。那種遲疑不會被記錄在報告裡，也不會寫進任務總結。它只會留在我心裡，一遍一遍重播。</p>
+
+          <p>我可以承認我會害怕，但我沒辦法原諒自己，讓別人替我的害怕付出代價。</p>
+        `;
+      }else{
+        content.innerHTML = `
+          <h3>……</h3>
+          <p>我沒說過這句。</p>
+        `;
+      }
+    }
+  </script>
 </body>
 </html>
