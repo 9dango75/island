@@ -1,0 +1,121 @@
+/* =========================
+   Profile page add-on styles
+   (依賴 style.css 的基礎色系/字體/btn/card/callout)
+========================= */
+
+/* 讓角色頁的內容層級正確蓋在霧上 */
+body{ position: relative; z-index: 1; }
+
+/* ✅ 圓形頭像 */
+.profile-avatar{
+  width:140px;
+  height:140px;
+  margin: 18px auto -56px auto;   /* 往下壓，疊在框框上 */
+  border-radius:50%;
+  overflow:hidden;
+  border:3px solid rgba(158,216,240,.4);
+  box-shadow:
+    0 0 20px rgba(158,216,240,.25),
+    0 0 40px rgba(70,160,185,.15);
+  position:relative;
+  z-index:5;
+}
+.profile-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform: scale(1.05);
+}
+
+/* ✅ 讓 callout 自動預留頭像空間（只影響角色頁） */
+.section .callout{
+  padding-top:76px;
+}
+
+/* ✅ 密語按鈕 */
+.memory-btn{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:12px;
+  background:rgba(158,216,240,.12);
+  border:1px solid rgba(158,216,240,.3);
+  color: var(--text);
+  cursor:pointer;
+}
+.memory-btn:hover{
+  background:rgba(158,216,240,.22);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   角色頁專用 Modal（你的 .modal-bg 這套）
+   ⚠️ 不要跟 index 的 .modal-backdrop 混用
+========================= */
+.modal-bg{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding: 16px;
+}
+
+/* 注意：這裡用 .modal-bg .modal 避免影響 index 的 .modal */
+.modal-bg .modal{
+  width: min(680px, 92vw);
+  max-height: 85vh;           /* ✅ 限高 */
+  background: rgba(11,27,33,.95);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  overflow: hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* 可滾動內容區 */
+#modalContent{
+  padding: 22px;
+  overflow-y: auto;           /* ✅ 內容可上下滾 */
+  -webkit-overflow-scrolling: touch;
+  color: var(--muted);
+}
+#modalContent h3{
+  margin: 0 0 12px;
+  color: var(--text);
+}
+#modalContent input{
+  width:100%;
+  padding:10px 12px;
+  margin-top:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.18);
+  background:#081317;
+  color: var(--text);
+  outline:none;
+}
+#modalContent button{
+  margin-top:12px;
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid rgba(158,216,240,.3);
+  background:rgba(158,216,240,.15);
+  color: var(--text);
+  cursor:pointer;
+}
+#modalContent button:hover{
+  background:rgba(158,216,240,.24);
+}
+
+/* 關閉列固定在底部 */
+.modal-bg .close{
+  padding: 14px 22px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: var(--accent);
+  cursor: pointer;
+  background: rgba(8,19,23,.85);
+}
+.modal-bg .close:hover{
+  filter: brightness(1.08);
+}
