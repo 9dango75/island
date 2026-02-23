@@ -1,157 +1,175 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>裴川｜汐島</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>裴川｜汐島</title>
+
+  <!-- 基礎樣式（共用） -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ✅ 角色頁追加樣式（剛剛那份 profile.css） -->
+  <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
+  <!-- 跟首頁一致的霧層（你想要角色頁也有同樣氛圍就保留） -->
+  <div class="bg-fog" aria-hidden="true"></div>
+  <div class="bg-noise" aria-hidden="true"></div>
 
-<section class="section">
-  <h2>裴川</h2>
-  <p>35歲 | 180公分 | 伐木廠主管</p>
+  <section class="section">
+    <h2>裴川</h2>
+    <p class="lead">35歲 | 180公分 | 伐木廠主管</p>
 
-  <!-- 圓形頭像 -->
-  <div class="profile-avatar">
-  <img src="images/裴川2.png" alt="裴川2" style="object-position: center 3%;">
-</div>
-
-  </div>
-
-  <div class="callout">
-
-  <p>裴川是汐島伐木廠的主管。
-  <p>每日清晨，他會在港口霧氣尚未散盡前出門，巡視林區與倉儲場的狀況。島中央保留大片原生林木，為了維持生態與資源平衡，伐採工作有固定配額與季節規範。</p>
-  <p>他負責安排工班、檢查木材品質，也會親自確認運送至港口的貨櫃是否固定妥當。</p>
-  <p>他的工作不算張揚，卻關係著島上建築修繕、碼頭維護與冬季備材。多數島民對他抱持信任——因為他做事穩、說話少，答應的事情幾乎不會出錯。</p>
-  <p>裴川在人群中並不主動，但會記得每個人的需求。診所修繕需要木料時，他會默默多留一批；酒吧門板鬆動，他總在夜裡悄悄更換。</p>
-  <p>與人相處時，他習慣站在旁邊聽，偶爾露出遲來的回應，像是慢半拍的笑。</p>
-  <p>若你與他並肩走在林間步道，他大概不會說太多話。</p>
-  <p>但當你停下來時，他會跟著停下來。</p>
-  <p><a class="btn ghost" href="index.html">← 回到汐島</a></p>
-</section>
-  
-<hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
-<button class="memory-btn" type="button" onclick="openMemory()">
-  查看▗▟蓋▞憶
-</button>
-
-<!-- 遺失的碎片：Modal -->
-<div class="modal-bg" id="modalBg" style="display:none; z-index:9999;">
-  <div class="modal">
-    <div id="modalContent">
-      <h3>他說</h3>
-      <input type="text" id="codeInput" placeholder="輸入密語">
-      <button type="button" onclick="checkCode()">確認</button>
+    <!-- 圓形頭像 -->
+    <div class="profile-avatar">
+      <img src="images/裴川2.png" alt="裴川" style="object-position:center 3%;">
     </div>
-    <div class="close" onclick="closeModal()">關閉</div>
+
+    <div class="callout">
+      <p>裴川是汐島伐木廠的主管。</p>
+      <p>每日清晨，他會在港口霧氣尚未散盡前出門，巡視林區與倉儲場的狀況。島中央保留大片原生林木，為了維持生態與資源平衡，伐採工作有固定配額與季節規範。</p>
+      <p>他負責安排工班、檢查木材品質，也會親自確認運送至港口的貨櫃是否固定妥當。</p>
+      <p>他的工作不算張揚，卻關係著島上建築修繕、碼頭維護與冬季備材。多數島民對他抱持信任——因為他做事穩、說話少，答應的事情幾乎不會出錯。</p>
+      <p>裴川在人群中並不主動，但會記得每個人的需求。診所修繕需要木料時，他會默默多留一批；酒吧門板鬆動，他總在夜裡悄悄更換。</p>
+      <p>與人相處時，他習慣站在旁邊聽，偶爾露出遲來的回應，像是慢半拍的笑。</p>
+      <p>若你與他並肩走在林間步道，他大概不會說太多話。</p>
+      <p>但當你停下來時，他會跟著停下來。</p>
+
+      <p style="margin-top:14px">
+        <a class="btn ghost" href="index.html">← 回到汐島</a>
+      </p>
+    </div>
+
+    <hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+
+    <button class="memory-btn" type="button" onclick="openMemory()">
+      查看▗▟蓋▞憶
+    </button>
+  </section>
+
+  <!-- 遺失的碎片：Modal -->
+  <div class="modal-bg" id="modalBg" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="memTitle">
+      <div id="modalContent">
+        <h3 id="memTitle">他說</h3>
+        <input type="text" id="codeInput" placeholder="輸入密語">
+        <button type="button" onclick="checkCode()">確認</button>
+      </div>
+      <div class="close" onclick="closeModal()">關閉</div>
+    </div>
   </div>
-</div>
 
-<script>
-  function openMemory(){
-    const bg = document.getElementById("modalBg");
-    if(!bg){
-      alert("找不到 modalBg，請確認已貼上 Modal 區塊");
-      return;
-    }
-    bg.style.display = "flex";
-  }
-
-  function closeModal(){
-    const bg = document.getElementById("modalBg");
-    if(bg) bg.style.display = "none";
-  }
-
-  function checkCode(){
-    const input = document.getElementById("codeInput");
-    const content = document.getElementById("modalContent");
-    if(!input || !content){
-      alert("找不到輸入框或內容區塊，請確認 id 是否正確");
-      return;
+  <script>
+    function openMemory(){
+      const bg = document.getElementById("modalBg");
+      if(!bg){
+        alert("找不到 modalBg，請確認已貼上 Modal 區塊");
+        return;
+      }
+      bg.style.display = "flex";
+      bg.setAttribute("aria-hidden", "false");
+      document.getElementById("codeInput")?.focus();
     }
 
-    const code = input.value.trim();
-
-    // 做錯的選擇
-    if(code === "來不及"){
-      content.innerHTML = `
-        <h3>▸ 被覆蓋的記憶1 ◂</h3>
-        <p>我其實不太願意想起那天。</p>
-        <p>但有些畫面不是你不想，它就會消失。</p>
-      
-        <p>他回頭看我的那一秒，反覆出現在腦子裡。</p>
-        <p>很短，很普通的一眼，像在說——準備好了嗎？</p>
-
-        <p>我點頭了。</p>
-
-        <p>我記得自己當時在想什麼。</p>
-        <p>我在想不能再拖、不能再被說判斷遲疑、不能讓人覺得我總是太保守。</p>
-        <p>我告訴自己，那只是一次合理的推進。數據沒問題，風向還在可控範圍，時間足夠。</p>
-
-        <p>我不是衝動。</p>
-        <p>我只是……不想被否定。</p>
-
-        <p>可他信我。</p>
-        <p>他總是信我。</p>
-
-        <p>推進之後發生的事情我其實不想……不想想起來。</p>
-        <p>能見度突然下降，支援延遲，路線被迫改變。對講機裡的聲音開始變得混亂，我還在說「穩住」「按原路撤」。</p>
-        <p>好像只要我語氣夠冷靜，事情就不會失控。</p>
-
-        <p>我真的以為我可以把局面拉回來。</p>
-
-        <p>但我沒有。</p>
-        <p>我看著他在我面前被無數子彈貫穿。</p>
-
-        <p>我找到他的時候，他還有意識。</p>
-        <p>他看著我，眼神渙散，我很慌……甚至忘了確認他的生命跡象，但他的眼神平和。</p>
-        <p>沒有怪我，沒有質問。</p>
-        <p>死了。</p>
-
-        <p>他為什麼不怪我？</p>
-        <p>如果他說一句「你他媽的害死我了」，我或許還能承受。</p>
-
-        <p>可他沒有。</p>
-
-        <p>他只是看著我。</p>
-
-        <p>後來的報告寫得很漂亮，漂亮得讓人作嘔。</p>
-        <p>「不可預測的環境變數」、「合理判斷下的意外」，沒有人追究，沒有人指責。</p>
-        <p>好像一切都只是任務風險的一部分。</p>
-       
-        <p>是我害死了他，害死了我最好的戰友。</p>
-
-        <p>如果那天我再等一會兒呢？</p>
-        <p>如果我承認自己不確定呢？</p>
-        <p>如果我不那麼急著證明自己呢？</p>
-
-        <p>我沒有辦法再試一次。</p>
-
-        <p>有時候我會想，是不是其實他在回頭那一秒，也在等我說停。</p>
-        <p>是不是他其實也覺得風不對。</p>
-        <p>是不是他把判斷交給我，是因為他以為我會更穩。</p>
-
-        <p>他死的那一刻，我沒有任何理由可以拿來替自己辯解，我只能站在那裡，知道這是我做出的決定。</p>
-
-        <p>我不是故意的，但那又怎樣？</p>
-
-        <p>人不會因為你不是故意的就活過來。</p>
-
-        <p>我害怕再一次有人回頭看我，要我給出決定。</p>
-        <p>有些選擇，沒有第二次機會。</p>
-        <p>我知道。</p>
-      `;
-    }else{
-      content.innerHTML = `
-        <h3>……</h3>
-        <p>我沒說過這句。</p>
-      `;
+    function closeModal(){
+      const bg = document.getElementById("modalBg");
+      if(bg){
+        bg.style.display = "none";
+        bg.setAttribute("aria-hidden", "true");
+      }
     }
-  }
-</script>
 
+    // 點背景關閉（更像 index 的互動）
+    document.getElementById("modalBg")?.addEventListener("click", (e) => {
+      if(e.target.id === "modalBg") closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
 
+    function checkCode(){
+      const input = document.getElementById("codeInput");
+      const content = document.getElementById("modalContent");
+      if(!input || !content){
+        alert("找不到輸入框或內容區塊，請確認 id 是否正確");
+        return;
+      }
+
+      const code = input.value.trim();
+
+      if(code === "來不及"){
+        content.innerHTML = `
+          <h3>▸ 被覆蓋的記憶1 ◂</h3>
+          <p>我其實不太願意想起那天。</p>
+          <p>但有些畫面不是你不想，它就會消失。</p>
+
+          <p>他回頭看我的那一秒，反覆出現在腦子裡。</p>
+          <p>很短，很普通的一眼，像在說——準備好了嗎？</p>
+
+          <p>我點頭了。</p>
+
+          <p>我記得自己當時在想什麼。</p>
+          <p>我在想不能再拖、不能再被說判斷遲疑、不能讓人覺得我總是太保守。</p>
+          <p>我告訴自己，那只是一次合理的推進。數據沒問題，風向還在可控範圍，時間足夠。</p>
+
+          <p>我不是衝動。</p>
+          <p>我只是……不想被否定。</p>
+
+          <p>可他信我。</p>
+          <p>他總是信我。</p>
+
+          <p>推進之後發生的事情我其實不想……不想想起來。</p>
+          <p>能見度突然下降，支援延遲，路線被迫改變。對講機裡的聲音開始變得混亂，我還在說「穩住」「按原路撤」。</p>
+          <p>好像只要我語氣夠冷靜，事情就不會失控。</p>
+
+          <p>我真的以為我可以把局面拉回來。</p>
+
+          <p>但我沒有。</p>
+          <p>我看著他在我面前被無數子彈貫穿。</p>
+
+          <p>我找到他的時候，他還有意識。</p>
+          <p>他看著我，眼神渙散，我很慌……甚至忘了確認他的生命跡象，但他的眼神平和。</p>
+          <p>沒有怪我，沒有質問。</p>
+          <p>死了。</p>
+
+          <p>他為什麼不怪我？</p>
+          <p>如果他說一句「你他媽的害死我了」，我或許還能承受。</p>
+
+          <p>可他沒有。</p>
+          <p>他只是看著我。</p>
+
+          <p>後來的報告寫得很漂亮，漂亮得讓人作嘔。</p>
+          <p>「不可預測的環境變數」、「合理判斷下的意外」，沒有人追究，沒有人指責。</p>
+
+          <p>是我害死了他，害死了我最好的戰友。</p>
+
+          <p>如果那天我再等一會兒呢？</p>
+          <p>如果我承認自己不確定呢？</p>
+          <p>如果我不那麼急著證明自己呢？</p>
+
+          <p>我沒有辦法再試一次。</p>
+
+          <p>有時候我會想，是不是其實他在回頭那一秒，也在等我說停。</p>
+          <p>是不是他其實也覺得風不對。</p>
+          <p>是不是他把判斷交給我，是因為他以為我會更穩。</p>
+
+          <p>他死的那一刻，我沒有任何理由可以拿來替自己辯解，我只能站在那裡，知道這是我做出的決定。</p>
+
+          <p>我不是故意的，但那又怎樣？</p>
+          <p>人不會因為你不是故意的就活過來。</p>
+
+          <p>我害怕再一次有人回頭看我，要我給出決定。</p>
+          <p>有些選擇，沒有第二次機會。</p>
+          <p>我知道。</p>
+        `;
+      }else{
+        content.innerHTML = `
+          <h3>……</h3>
+          <p>我沒說過這句。</p>
+        `;
+      }
+    }
+  </script>
 </body>
 </html>
