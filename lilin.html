@@ -1,117 +1,144 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>李璘｜汐島</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>李璘｜汐島</title>
+
+  <!-- 基礎樣式（共用） -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ✅ 角色頁追加樣式（profile-avatar / memory-btn / modal-bg） -->
+  <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
+  <!-- 跟首頁一致的霧層（角色頁想要同氛圍就保留） -->
+  <div class="bg-fog" aria-hidden="true"></div>
+  <div class="bg-noise" aria-hidden="true"></div>
 
-<section class="section">
-  <h2>李璘</h2>
-  <p>29歲 | 175公分 | 數據分析師</p>
-  
- <!-- 圓形頭像 -->
-  <div class="profile-avatar">
-  <img src="images/李璘2.png" alt="李璘2" style="object-position: center 3%;">
-</div>
-  
-  <div class="callout">
-  <p>李璘在汐島負責港口與商業區的數據管理與物資調度。</p>
-  <p>島上規模不大，但每日進出船班、貨品流向、補給品存量都需要有人精準掌握。</p>
-  <p>他習慣在電腦前整理報表，也會親自走到碼頭確認清單是否對得上。</p>
-  <p>他做事效率高、思路清晰，能在混亂中迅速抓到重點。當港口臨時缺料、商家進貨延誤，大家第一個想到的通常是找李璘。</p>
-  <p>他不會提高音量也不會慌張，只是平穩地把問題拆開，一項一項處理。</p>
-  <p>與島民相處時，他給人的感覺是溫和而理性。</p>
-  <p>而他看向你的時候，總像是在計算什麼——或許你能親自問問他。</p>
-  <p><a class="btn ghost" href="index.html">← 回到汐島</a></p>
-</section>
-  
-<hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+  <section class="section">
+    <h2>李璘</h2>
+    <p class="lead">29歲 | 175公分 | 數據分析師</p>
 
-<button class="memory-btn" type="button" onclick="openMemory()">
-  查看▗▟蓋▞憶
-</button>
-
-<!-- 遺失的碎片：Modal -->
-<div class="modal-bg" id="modalBg" style="display:none; z-index:9999;">
-  <div class="modal">
-    <div id="modalContent">
-      <h3>他說</h3>
-      <input type="text" id="codeInput" placeholder="輸入密語">
-      <button type="button" onclick="checkCode()">確認</button>
+    <!-- 圓形頭像 -->
+    <div class="profile-avatar">
+      <img src="images/李璘2.png" alt="李璘" style="object-position:center 3%;">
     </div>
-    <div class="close" onclick="closeModal()">關閉</div>
+
+    <div class="callout">
+      <p>李璘在汐島負責港口與商業區的數據管理與物資調度。</p>
+      <p>島上規模不大，但每日進出船班、貨品流向、補給品存量都需要有人精準掌握。</p>
+      <p>他習慣在電腦前整理報表，也會親自走到碼頭確認清單是否對得上。</p>
+      <p>他做事效率高、思路清晰，能在混亂中迅速抓到重點。當港口臨時缺料、商家進貨延誤，大家第一個想到的通常是找李璘。</p>
+      <p>他不會提高音量也不會慌張，只是平穩地把問題拆開，一項一項處理。</p>
+      <p>與島民相處時，他給人的感覺是溫和而理性。</p>
+      <p>而他看向你的時候，總像是在計算什麼——或許你能親自問問他。</p>
+
+      <p style="margin-top:14px">
+        <a class="btn ghost" href="index.html">← 回到汐島</a>
+      </p>
+    </div>
+
+    <hr style="margin:40px 0; border-color:rgba(255,255,255,.1);">
+
+    <button class="memory-btn" type="button" onclick="openMemory()">
+      查看▗▟蓋▞憶
+    </button>
+  </section>
+
+  <!-- 遺失的碎片：Modal -->
+  <div class="modal-bg" id="modalBg" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="memTitle">
+      <div id="modalContent">
+        <h3 id="memTitle">他說</h3>
+        <input type="text" id="codeInput" placeholder="輸入密語">
+        <button type="button" onclick="checkCode()">確認</button>
+      </div>
+      <div class="close" onclick="closeModal()">關閉</div>
+    </div>
   </div>
-</div>
 
-<script>
-  function openMemory(){
-    const bg = document.getElementById("modalBg");
-    if(!bg){
-      alert("找不到 modalBg，請確認已貼上 Modal 區塊");
-      return;
-    }
-    bg.style.display = "flex";
-  }
-
-  function closeModal(){
-    const bg = document.getElementById("modalBg");
-    if(bg) bg.style.display = "none";
-  }
-
-  function checkCode(){
-    const input = document.getElementById("codeInput");
-    const content = document.getElementById("modalContent");
-    if(!input || !content){
-      alert("找不到輸入框或內容區塊，請確認 id 是否正確");
-      return;
+  <script>
+    function openMemory(){
+      const bg = document.getElementById("modalBg");
+      if(!bg){
+        alert("找不到 modalBg，請確認已貼上 Modal 區塊");
+        return;
+      }
+      bg.style.display = "flex";
+      bg.setAttribute("aria-hidden", "false");
+      document.getElementById("codeInput")?.focus();
     }
 
-    const code = input.value.trim();
-
-    // 掩蓋錯誤的結果
-    if(code === "過度保守"){
-      content.innerHTML = `
-        <h3>▸ 被覆蓋的記憶1 ◂</h3>
-        <p>我一直以為自己是個理性的人。數據就是數據，曲線不會說謊，誤差也有範圍。
-        <p>直到那一天，我才明白，說謊的從來不是數字，是人。
-
-        <p>那份報表其實不算難看，只是核心能量曲線在臨界值附近出現不自然的震盪。我盯著螢幕很久，指尖在鍵盤上停住。
-        <p>理論上應該暫停實驗、重新校準，再做一次壓力測試，
-        <p>可他把報表推到我面前時只說了一句：「你知道怎麼處理吧？」語氣平穩、沒有命令也沒有威脅。那種帶著信任的語氣，比命令更重。
-
-        <p>我知道他想要什麼，也知道我想要什麼。我不想再被說過度保守，不想在團隊裡成為拖慢進度的人。
-        <p>於是我開始「修整」數據，把波動歸類為儀器誤差，把風險評級降到可接受範圍。
-        <p>我告訴自己這不是造假，只是更精確的判讀，是對模型的合理修正。那一刻，我甚至相信自己是在做正確的事。
-
-        <p>爆炸發生得很快，警報先響，然後螢幕整片變紅。我看著那些數值一路飆升，穿過我親手調整過的上限，像是在嘲笑我。那一瞬間我其實很清楚——
-        <p>不是意外，不是突發變數，是我。是我把那條本該讓人警覺的曲線壓平，是我簽下了那個「可繼續」的判定。
-
-        <p>衝擊波把實驗艙炸開時，我的耳鳴持續了很久。後來有人說實驗體死亡是瞬間的，幾乎沒有痛苦，像是在安慰我。
-        <p>我沒有受罰，會議紀錄寫得乾淨漂亮，「不可預測的能量突變」、「合理評估下的意外風險」。
-        <p>上司替我說話，甚至替我分擔責任。我坐在那間冰冷的會議室裡只覺得喉嚨發緊，因為那「合理」兩個字，是我親手偽造出來的。
-
-        <p>如果我那天說實話呢？如果我承認那條曲線讓我不安？如果我願意承受「過於謹慎」的評價？實驗體或許還活著。
-        <p>我常常回想那份報表的樣子，每一個被我調整過的小數點都清晰得刺眼。謊言不是大聲說出口的，它更常披著專業與冷靜的外衣，躲在格式完美的文件裡。
-
-        <p>有人說那不是我的責任，但我知道不是這樣，實驗體不會因為責任被分攤就活過來。
-        <p>從那之後，我開始厭惡任何模糊的說法，厭惡「差不多」、「應該沒事」這樣的字眼。我對數字變得苛刻，對報告近乎偏執。
-        <p>有人覺得我難相處我也懶得解釋。至少現在當我說「不行」時，我知道那不是為了討好誰，也不是為了保護自己。
-
-        <p>我不害怕被討厭，我害怕再一次看見那條曲線失控。謊言不會立刻爆炸，但它總會在某個時刻替你引爆一切。</p>
-        <p>我當初為什麼要擅自主張呢？</p>
-      `;
-    }else{
-      content.innerHTML = `
-        <h3>……</h3>
-        <p>我沒說過這句。</p>
-      `;
+    function closeModal(){
+      const bg = document.getElementById("modalBg");
+      if(bg){
+        bg.style.display = "none";
+        bg.setAttribute("aria-hidden", "true");
+      }
     }
-  }
-</script>
 
+    // 點背景關閉
+    document.getElementById("modalBg")?.addEventListener("click", (e) => {
+      if(e.target.id === "modalBg") closeModal();
+    });
 
+    // ESC 關閉
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
+
+    function checkCode(){
+      const input = document.getElementById("codeInput");
+      const content = document.getElementById("modalContent");
+      if(!input || !content){
+        alert("找不到輸入框或內容區塊，請確認 id 是否正確");
+        return;
+      }
+
+      const code = input.value.trim();
+
+      // 掩蓋錯誤的結果
+      if(code === "過度保守"){
+        content.innerHTML = `
+          <h3>▸ 被覆蓋的記憶1 ◂</h3>
+
+          <p>我一直以為自己是個理性的人。數據就是數據，曲線不會說謊，誤差也有範圍。</p>
+          <p>直到那一天，我才明白，說謊的從來不是數字，是人。</p>
+
+          <p>那份報表其實不算難看，只是核心能量曲線在臨界值附近出現不自然的震盪。我盯著螢幕很久，指尖在鍵盤上停住。</p>
+          <p>理論上應該暫停實驗、重新校準，再做一次壓力測試。</p>
+          <p>可他把報表推到我面前時只說了一句：「你知道怎麼處理吧？」語氣平穩、沒有命令也沒有威脅。那種帶著信任的語氣，比命令更重。</p>
+
+          <p>我知道他想要什麼，也知道我想要什麼。我不想再被說過度保守，不想在團隊裡成為拖慢進度的人。</p>
+          <p>於是我開始「修整」數據，把波動歸類為儀器誤差，把風險評級降到可接受範圍。</p>
+          <p>我告訴自己這不是造假，只是更精確的判讀，是對模型的合理修正。那一刻，我甚至相信自己是在做正確的事。</p>
+
+          <p>爆炸發生得很快，警報先響，然後螢幕整片變紅。我看著那些數值一路飆升，穿過我親手調整過的上限，像是在嘲笑我。那一瞬間我其實很清楚——</p>
+          <p>不是意外，不是突發變數，是我。是我把那條本該讓人警覺的曲線壓平，是我簽下了那個「可繼續」的判定。</p>
+
+          <p>衝擊波把實驗艙炸開時，我的耳鳴持續了很久。後來有人說實驗體死亡是瞬間的，幾乎沒有痛苦，像是在安慰我。</p>
+          <p>我沒有受罰，會議紀錄寫得乾淨漂亮，「不可預測的能量突變」、「合理評估下的意外風險」。</p>
+          <p>上司替我說話，甚至替我分擔責任。我坐在那間冰冷的會議室裡只覺得喉嚨發緊，因為那「合理」兩個字，是我親手偽造出來的。</p>
+
+          <p>如果我那天說實話呢？如果我承認那條曲線讓我不安？如果我願意承受「過於謹慎」的評價？實驗體或許還活著。</p>
+          <p>我常常回想那份報表的樣子，每一個被我調整過的小數點都清晰得刺眼。謊言不是大聲說出口的，它更常披著專業與冷靜的外衣，躲在格式完美的文件裡。</p>
+
+          <p>有人說那不是我的責任，但我知道不是這樣，實驗體不會因為責任被分攤就活過來。</p>
+          <p>從那之後，我開始厭惡任何模糊的說法，厭惡「差不多」、「應該沒事」這樣的字眼。我對數字變得苛刻，對報告近乎偏執。</p>
+          <p>有人覺得我難相處我也懶得解釋。至少現在當我說「不行」時，我知道那不是為了討好誰，也不是為了保護自己。</p>
+
+          <p>我不害怕被討厭，我害怕再一次看見那條曲線失控。謊言不會立刻爆炸，但它總會在某個時刻替你引爆一切。</p>
+          <p>我當初為什麼要擅自主張呢？</p>
+        `;
+      }else{
+        content.innerHTML = `
+          <h3>……</h3>
+          <p>我沒說過這句。</p>
+        `;
+      }
+    }
+  </script>
 </body>
 </html>
