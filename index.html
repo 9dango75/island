@@ -26,6 +26,7 @@
       <a href="#world">世界觀</a>
       <a href="#island">島嶼</a>
       <a href="#characters">角色</a>
+      <a href="#guide">島嶼手冊</a>
     </nav>
   </header>
 
@@ -38,6 +39,7 @@
       <div class="hero-actions">
         <button class="btn" type="button" onclick="location.hash='characters'">角色</button>
         <button class="btn ghost" type="button" onclick="location.hash='world'">世界觀</button>
+        <button class="btn ghost" type="button" onclick="location.hash='guide'">島嶼手冊</button>
       </div>
     </div>
   </section>
@@ -353,6 +355,58 @@
       setGuide("center");
     });
   </script>
+<script>
+/* === Scroll Spy: nav active highlight for each section === */
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
 
+  // 把 href="#world" 轉成 { world: <a> }
+  const linkById = new Map(
+    navLinks
+      .map(a => [a.getAttribute("href").slice(1), a])
+      .filter(([id]) => id)
+  );
+
+  // 你要套用高亮的 section id（必須和 nav href 對得上）
+  const sectionIds = ["world", "island", "characters", "guide"]
+    .filter(id => document.getElementById(id));
+
+  const sections = sectionIds.map(id => document.getElementById(id));
+
+  function setActive(id){
+    navLinks.forEach(a => a.classList.remove("is-active"));
+    const link = linkById.get(id);
+    if(link) link.classList.add("is-active");
+  }
+
+  // IntersectionObserver：看哪個 section 在畫面中占比最大
+  const io = new IntersectionObserver((entries) => {
+    // 找出目前最「可見」的那個 section
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if(visible && visible.target && visible.target.id){
+      setActive(visible.target.id);
+    }
+  }, {
+    root: null,
+    // 視窗中間偏上位置進入就算「當前區塊」
+    rootMargin: "-30% 0px -55% 0px",
+    threshold: [0.06, 0.12, 0.2, 0.35, 0.5, 0.7]
+  });
+
+  sections.forEach(sec => io.observe(sec));
+
+  // 頁面剛開或 hash 跳轉時，也要立即對齊高亮
+  const initial = location.hash ? location.hash.slice(1) : sections[0]?.id;
+  if(initial) setActive(initial);
+
+  window.addEventListener("hashchange", () => {
+    const id = location.hash ? location.hash.slice(1) : "";
+    if(id) setActive(id);
+  });
+});
+</script>
 </body>
 </html>
