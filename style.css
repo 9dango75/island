@@ -629,3 +629,19 @@ body{
   background-image: var(--back);
   transform: rotateY(180deg) translateZ(0);
 }
+/* =========================
+   角色卡翻轉光暈強化（優化3）
+========================= */
+
+/* 基本細邊框光感 */
+.thumb.flip{
+  box-shadow: 0 0 0 1px rgba(158,216,240,.08);
+  transition: box-shadow .25s ease;
+}
+
+/* 滑鼠移到整張角色卡時 */
+.card.character:hover .thumb.flip{
+  box-shadow:
+    0 0 0 1px rgba(158,216,240,.28),
+    0 10px 30px rgba(0,0,0,.35);
+}
