@@ -186,7 +186,7 @@
     <div class="map-card">
       <div class="map-title">汐島地圖</div>
 
-      <div class="island-map" role="application" aria-label="汐島地圖">
+      <div id="islandMap" class="island-map" role="application" aria-label="汐島地圖">
         <!-- 區塊（用 data-area 綁定） -->
         <button class="area a-center"  type="button" data-area="center">
           <span>市中心</span>
@@ -369,10 +369,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const mapEl = document.querySelector(".island-map");
+  // ✅ 這三個 id 一定要存在（右側面板）
   const nameEl = document.getElementById("infoName");
   const subEl  = document.getElementById("infoSub");
   const bodyEl = document.getElementById("infoBody");
+
+  // ✅ 地圖容器：若抓不到就直接停止，避免整段 JS 壞掉
+  const mapEl = document.querySelector(".island-map");
+  if (!mapEl || !nameEl || !subEl || !bodyEl) return;
 
   function setGuide(key){
     const data = GUIDE[key];
@@ -382,19 +386,19 @@ document.addEventListener("DOMContentLoaded", () => {
     subEl.textContent  = data.sub;
     bodyEl.innerHTML   = data.body;
 
-    document.querySelectorAll(".island-map .area").forEach(b => b.classList.remove("is-active"));
-    const btn = document.querySelector(`.island-map .area[data-area="${key}"]`);
+    mapEl.querySelectorAll(".area").forEach(b => b.classList.remove("is-active"));
+    const btn = mapEl.querySelector(`.area[data-area="${key}"]`);
     if(btn) btn.classList.add("is-active");
   }
 
-  // ✅ 事件委派：不管按鈕何時出現都能點
+  // ✅ 事件委派：點按鈕或按鈕內文字都抓得到
   mapEl.addEventListener("click", (e) => {
     const btn = e.target.closest(".area");
-    if(!btn) return;
+    if(!btn || !mapEl.contains(btn)) return;
     setGuide(btn.dataset.area);
   });
 
-  // 預設
+  // ✅ 預設顯示
   setGuide("center");
 });
 </script>
