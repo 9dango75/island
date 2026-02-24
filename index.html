@@ -158,6 +158,7 @@
     <h2>✦ 島嶼手冊</h2>
 
     <div class="map-layout">
+      <!-- 左：地圖 -->
       <div class="map-card">
         <div class="map-title">汐島地圖</div>
 
@@ -167,7 +168,7 @@
           <button class="area a-market" type="button" data-area="market"><span>商業區</span></button>
           <button class="area a-harbor" type="button" data-area="harbor"><span>港口</span></button>
           <button class="area a-forest" type="button" data-area="forest"><span>林區步道</span></button>
-          <button class="area a-clinic" type="button" data-area="clinic"><span>診所與學校</span></button>
+          <button class="area a-clinic" type="button" data-area="clinic"><span>生活區</span></button>
 
           <div class="coast" aria-hidden="true"></div>
           <div class="mist-line m1" aria-hidden="true"></div>
@@ -175,17 +176,29 @@
         </div>
       </div>
 
+      <!-- 右：主要介紹 -->
       <aside class="info-card" aria-live="polite">
         <div class="info-head">
           <div class="info-name" id="infoName">市中心</div>
           <div class="info-sub" id="infoSub">商店、郵局、生活雜貨</div>
         </div>
+
         <div class="info-body" id="infoBody">
           <ul>
             <li>熱鬧的街區，島上的重要樞紐。</li>
             <li>觀光景點特色之一，藝術人文聚集地。</li>
-            <li>部分商品標籤沒有產地或日期；鐘樓報時偶爾慢半拍。</li>
           </ul>
+        </div>
+
+        <!-- ✅ 新增：第二欄（在右側卡片的下方） -->
+        <div class="extra-card" aria-live="polite">
+          <div class="extra-title" id="extraTitle">島民留言</div>
+          <div class="extra-body" id="extraBody">
+            <ul>
+              <li>點選左側區塊後，這裡會跟著切換。</li>
+              <li>你可以放「注意事項 / 小傳聞 / 隱藏規則」等。</li>
+            </ul>
+          </div>
         </div>
       </aside>
     </div>
@@ -220,7 +233,7 @@
     </ul>
   </template>
 
-  <!-- ✅ Script 1：Modal（正確結束） -->
+  <!-- ✅ Script 1：Modal -->
   <script>
     const backdrop = document.getElementById("modalBackdrop");
     const modalTitle = document.getElementById("modalTitle");
@@ -263,7 +276,7 @@
     });
   </script>
 
-  <!-- ✅ Script 2：島嶼手冊切換（用 id 抓，保證能切） -->
+  <!-- ✅ Script 2：島嶼手冊切換（info + extra 都會換） -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const GUIDE = {
@@ -274,6 +287,13 @@
             <ul>
               <li>熱鬧的街區，島上的重要樞紐。</li>
               <li>觀光景點特色之一，藝術人文聚集地。</li>
+            </ul>`,
+          extraTitle: "島民留言",
+          extra: `
+            <ul>
+              <li>▸ 雜貨店的店員真的很帥，難怪總有遊客光臨（我沒有忌妒）</li>
+              <li>▸ 美術館最近有新展品，請務必去參觀！</li>
+              <li>▸ 最近遊客變多了，希望大家都能感受到汐島的美麗之處～</li>
             </ul>`
         },
         food: {
@@ -283,6 +303,13 @@
             <ul>
               <li>在地小吃及當地特產，千萬別錯過。</li>
               <li>深夜食堂與酒吧，半夜無聊的好去處。</li>
+            </ul>`,
+          extraTitle: "島民留言",
+          extra: `
+            <ul>
+              <li>▸ 絕對要去酒吧！那是下班後放鬆的好地方！</li>
+              <li>▸ 包子鋪的奶皇包和肉包是人間美味，吃過一次便難以忘懷。</li>
+              <li>▸ 這裡食物太好吃了根本就不想走，所以我也成為島民啦！。</li>
             </ul>`
         },
         market: {
@@ -293,6 +320,13 @@
               <li>服務處備有免費公共電腦。</li>
               <li>島上唯一一間銀行。</li>
               <li>人們對外地新聞反應平淡。</li>
+            </ul>`,
+          extraTitle: "島民留言",
+          extra: `
+            <ul>
+              <li>▸ 公共電腦是德政！這樣隨時都能使用太方便了！</li>
+              <li>▸ 上個月的物流小哥人很禮貌但似乎調到別區了，希望能再次見到他。</li>
+              <li>▸ 繁華！與世界接軌！根本不像是一座島嶼，這是上天賜予的寶地！</li>
             </ul>`
         },
         harbor: {
@@ -303,6 +337,13 @@
               <li>船班固定，船費平價。</li>
               <li>本島最美潮汐觀賞點。</li>
               <li>清晨漁市可供零售。</li>
+            </ul>`,
+          extraTitle: "島民留言",
+          extra: `
+            <ul>
+              <li>▸ 一生一定要見過的潮汐，請務必來觀賞。</li>
+              <li>▸ 漁船每次都滿載而歸，感謝海洋給予的糧食。</li>
+              <li>▸ 晚上的海景非常漂亮！</li>
             </ul>`
         },
         forest: {
@@ -310,9 +351,16 @@
           sub: "原生林、觀景點、山林",
           body: `
             <ul>
-              <li>霧起時方向感會被吃掉，路標不一定可信請注意。</li>
-              <li>某些區域長期封鎖請勿任意進出。</li>
-              <li>清晨觀景台雲霧繚繞，打卡景點之一。</li>
+              <li>▸ 霧起時方向感會被吃掉，路標不一定可信請注意。</li>
+              <li>▸ 某些區域長期封鎖請勿任意進出。</li>
+              <li>▸ 清晨觀景台雲霧繚繞，打卡景點之一。</li>
+            </ul>`,
+          extraTitle: "島民留言",
+          extra: `
+            <ul>
+              <li>▸ 每個人都該去景觀台！！美得要死！！！。</li>
+              <li>▸ 有點好奇封鎖區後是什麼，有人去過嗎？</li>
+              <li>▸ 樹木太茂密了有時登山會找不到路，啊！起霧時要趕緊下山喔！。</li>
             </ul>`
         },
         clinic: {
@@ -322,7 +370,14 @@
             <ul>
               <li>診所設備齊全，醫療福祉完善。</li>
               <li>公立學校減免學費，孩子們的優質學區。</li>
-              <li>設有里民活動中心,長輩的最佳好去處。</li>
+              <li>設有里民活動中心，長輩的最佳好去處。</li>
+            </ul>`,
+          extraTitle: "島民留言",
+          extra: `
+            <ul>
+              <li>▸ 聽說醫院的醫生很帥，還是我也來生場病？。</li>
+              <li>▸ 里民活動中心前的花圃超級漂亮！</li>
+              <li>▸ 學費減免後壓力沒了，好像可以再生...</li>
             </ul>`
         }
       };
@@ -331,6 +386,9 @@
       const nameEl = document.getElementById("infoName");
       const subEl  = document.getElementById("infoSub");
       const bodyEl = document.getElementById("infoBody");
+      const extraTitleEl = document.getElementById("extraTitle");
+      const extraBodyEl  = document.getElementById("extraBody");
+
       if (!mapEl || !nameEl || !subEl || !bodyEl) return;
 
       function setGuide(key) {
@@ -340,6 +398,9 @@
         nameEl.textContent = data.name;
         subEl.textContent  = data.sub;
         bodyEl.innerHTML   = data.body;
+
+        if (extraTitleEl) extraTitleEl.textContent = data.extraTitle || "補充";
+        if (extraBodyEl)  extraBodyEl.innerHTML    = data.extra || "";
 
         mapEl.querySelectorAll(".area").forEach(b => b.classList.remove("is-active"));
         const btn = mapEl.querySelector(`.area[data-area="${key}"]`);
@@ -355,58 +416,53 @@
       setGuide("center");
     });
   </script>
-<script>
-/* === Scroll Spy: nav active highlight for each section === */
-document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
 
-  // 把 href="#world" 轉成 { world: <a> }
-  const linkById = new Map(
-    navLinks
-      .map(a => [a.getAttribute("href").slice(1), a])
-      .filter(([id]) => id)
-  );
+  <!-- ✅ Script 3：Scroll Spy（右上角按鈕 active 高亮） -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
+      const linkById = new Map(
+        navLinks
+          .map(a => [a.getAttribute("href").slice(1), a])
+          .filter(([id]) => id)
+      );
 
-  // 你要套用高亮的 section id（必須和 nav href 對得上）
-  const sectionIds = ["world", "island", "characters", "guide"]
-    .filter(id => document.getElementById(id));
+      const sectionIds = ["world", "island", "characters", "guide"]
+        .filter(id => document.getElementById(id));
 
-  const sections = sectionIds.map(id => document.getElementById(id));
+      const sections = sectionIds.map(id => document.getElementById(id));
 
-  function setActive(id){
-    navLinks.forEach(a => a.classList.remove("is-active"));
-    const link = linkById.get(id);
-    if(link) link.classList.add("is-active");
-  }
+      function setActive(id){
+        navLinks.forEach(a => a.classList.remove("is-active"));
+        const link = linkById.get(id);
+        if(link) link.classList.add("is-active");
+      }
 
-  // IntersectionObserver：看哪個 section 在畫面中占比最大
-  const io = new IntersectionObserver((entries) => {
-    // 找出目前最「可見」的那個 section
-    const visible = entries
-      .filter(e => e.isIntersecting)
-      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      const io = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-    if(visible && visible.target && visible.target.id){
-      setActive(visible.target.id);
-    }
-  }, {
-    root: null,
-    // 視窗中間偏上位置進入就算「當前區塊」
-    rootMargin: "-30% 0px -55% 0px",
-    threshold: [0.06, 0.12, 0.2, 0.35, 0.5, 0.7]
-  });
+        if(visible && visible.target && visible.target.id){
+          setActive(visible.target.id);
+        }
+      }, {
+        root: null,
+        rootMargin: "-30% 0px -55% 0px",
+        threshold: [0.06, 0.12, 0.2, 0.35, 0.5, 0.7]
+      });
 
-  sections.forEach(sec => io.observe(sec));
+      sections.forEach(sec => io.observe(sec));
 
-  // 頁面剛開或 hash 跳轉時，也要立即對齊高亮
-  const initial = location.hash ? location.hash.slice(1) : sections[0]?.id;
-  if(initial) setActive(initial);
+      const initial = location.hash ? location.hash.slice(1) : sections[0]?.id;
+      if(initial) setActive(initial);
 
-  window.addEventListener("hashchange", () => {
-    const id = location.hash ? location.hash.slice(1) : "";
-    if(id) setActive(id);
-  });
-});
-</script>
+      window.addEventListener("hashchange", () => {
+        const id = location.hash ? location.hash.slice(1) : "";
+        if(id) setActive(id);
+      });
+    });
+  </script>
+
 </body>
 </html>
