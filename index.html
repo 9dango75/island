@@ -306,6 +306,99 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
+    <script>
+  // ====== Island Guide Map Data ======
+  const GUIDE = {
+    center: {
+      name: "市中心",
+      sub: "商店、藝術、生活雜貨",
+      body: `
+        <ul>
+          <li>熱鬧的街區，島上的重要樞紐。</li>
+          <li>觀光景點特色之一，藝術人文聚集地。</li>
+          <li>部分商品標籤沒有產地或日期；鐘樓報時偶爾慢半拍。</li>
+        </ul>
+      `
+    },
+    food: {
+      name: "美食區",
+      sub: "小吃、酒吧、深夜食堂",
+      body: `
+        <ul>
+          <li>在地小吃及當地特產，千萬別錯過。</li>
+          <li>深夜食堂與酒吧，半夜無聊的好去處。</li>
+        </ul>
+      `
+    },
+    market: {
+      name: "商業區",
+      sub: "金融、物流、政府服務窗口",
+      body: `
+        <ul>
+          <li>服務處備有免費公共電腦。</li>
+          <li>島上唯一一間銀行。</li>
+          <li>人們對外地新聞反應平淡。</li>
+        </ul>
+      `
+    },
+    harbor: {
+      name: "港口",
+      sub: "船班、碼頭、夜景",
+      body: `
+        <ul>
+          <li>船班固定，船費平價。</li>
+          <li>本島最美潮汐觀賞點。</li>
+          <li>清晨漁市可供零售。</li>
+        </ul>
+      `
+    },
+    forest: {
+      name: "林區步道",
+      sub: "原生林、觀景點、山林",
+      body: `
+        <ul>
+          <li>霧起時方向感會被吃掉，路標不一定可信請注意。</li>
+          <li>某些區域長期封鎖請勿任意進出。</li>
+          <li>清晨觀景台雲霧繚繞，打卡景點之一。</li>
+        </ul>
+      `
+    },
+    clinic: {
+      name: "生活區",
+      sub: "醫院、學校、住宅",
+      body: `
+        <ul>
+          <li>診所設備齊全，醫療福祉完善。</li>
+          <li>公立學校減免學費，孩子們的優質學區。</li>
+          <li>設有里民活動中心,長輩的最佳好去處。</li>
+        </ul>
+      `
+    }
+  };
+
+  function setGuide(areaKey){
+    const data = GUIDE[areaKey];
+    if(!data) return;
+
+    // UI
+    document.getElementById("infoName").textContent = data.name;
+    document.getElementById("infoSub").textContent = data.sub;
+    document.getElementById("infoBody").innerHTML = data.body;
+
+    // active class
+    document.querySelectorAll(".island-map .area").forEach(b => b.classList.remove("is-active"));
+    const btn = document.querySelector(`.island-map .area[data-area="${areaKey}"]`);
+    if(btn) btn.classList.add("is-active");
+  }
+
+  // 綁定點擊
+  document.querySelectorAll(".island-map .area").forEach(btn=>{
+    btn.addEventListener("click", ()=> setGuide(btn.dataset.area));
+  });
+
+  // 預設選一個（市中心）
+  setGuide("center");
+</script>
   </script>
 </body>
 </html>
