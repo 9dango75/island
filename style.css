@@ -663,3 +663,147 @@ button.btn{
   outline-offset: 2px;
   border-radius: 16px;
 }
+/* =========================
+   島嶼手冊：可點區塊地圖（無圖片版）
+========================= */
+
+.map-layout{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 14px;
+  align-items: start;
+}
+@media (max-width: 900px){
+  .map-layout{ grid-template-columns: 1fr; }
+}
+
+.map-card, .info-card{
+  background: rgba(11,27,33,.75);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.map-title{
+  font-weight: 700;
+  letter-spacing: .08em;
+  margin-bottom: 12px;
+  color: rgba(232,246,249,.92);
+}
+
+.map-hint{
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(232,246,249,.55);
+}
+
+/* 地圖本體：用一個大區域當「島」 */
+.island-map{
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 360px;
+  border: 1px solid rgba(255,255,255,.08);
+
+  /* 背景：陰冷海面 + 內部霧 */
+  background:
+    radial-gradient(900px 360px at 30% 20%, rgba(120,210,220,.10), transparent 60%),
+    radial-gradient(700px 300px at 70% 70%, rgba(70,160,185,.10), transparent 60%),
+    linear-gradient(180deg, rgba(5,12,14,.75), rgba(5,12,14,.92));
+}
+
+/* 海岸陰影 */
+.coast{
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(closest-side at 50% 55%, rgba(0,0,0,.0), rgba(0,0,0,.55));
+  pointer-events:none;
+}
+
+/* 兩條飄霧線（非常淡，不會像海帶） */
+.mist-line{
+  position:absolute;
+  left:-30%;
+  width:160%;
+  height:26%;
+  border-radius: 999px;
+  background: radial-gradient(closest-side,
+    rgba(215,255,245,.10) 0%,
+    rgba(160,235,225,.08) 35%,
+    rgba(0,0,0,0) 70%);
+  filter: blur(18px);
+  opacity:.35;
+  pointer-events:none;
+  animation: mistFloat 10s ease-in-out infinite alternate;
+}
+.mist-line.m1{ top: 14%; animation-duration: 13s; }
+.mist-line.m2{ top: 62%; animation-duration: 17s; opacity:.28; }
+
+@keyframes mistFloat{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(6%); }
+}
+
+/* 區塊按鈕：像地圖區域，可點 */
+.area{
+  position:absolute;
+  border: 1px solid rgba(158,216,240,.16);
+  background: rgba(158,216,240,.06);
+  color: rgba(232,246,249,.88);
+  border-radius: 14px;
+  padding: 10px 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+  backdrop-filter: blur(8px);
+}
+.area span{
+  font-size: 13px;
+  letter-spacing: .06em;
+}
+
+/* hover 只是微浮起 */
+.area:hover{
+  transform: translateY(-2px);
+  border-color: rgba(158,216,240,.30);
+}
+
+/* 被選取（active）狀態：高亮 */
+.area.is-active{
+  background: rgba(158,216,240,.16);
+  border-color: rgba(158,216,240,.42);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.35),
+    0 0 0 1px rgba(158,216,240,.12);
+}
+
+/* 位置配置：你可以想像成區塊型地圖 */
+.a-center{ left: 14%; top: 18%; width: 40%; height: 22%; }
+.a-food{   left: 58%; top: 22%; width: 28%; height: 18%; }
+.a-market{ left: 58%; top: 44%; width: 28%; height: 20%; }
+.a-harbor{ left: 18%; top: 56%; width: 34%; height: 22%; }
+.a-forest{ left: 10%; top: 38%; width: 44%; height: 16%; }
+.a-clinic{ left: 56%; top: 68%; width: 32%; height: 18%; }
+
+/* 右側面板 */
+.info-head{
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 12px;
+}
+.info-name{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.info-sub{
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(232,246,249,.65);
+}
+.info-card ul{
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(232,246,249,.70);
+}
