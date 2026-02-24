@@ -5,22 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>汐島</title>
 
-  <!-- 你的原本外部 CSS 先保留 -->
+  <!-- 外部 CSS -->
   <link rel="stylesheet" href="style.css?v=2">
-
-</style>
 </head>
 
 <body>
 
-<!-- ✅ Ribbon Fog Layer（絲帶霧） -->
-<div class="fog-wrap" aria-hidden="true">
-  <span class="fog-ribbon r1"></span>
-  <span class="fog-ribbon r2"></span>
-  <span class="fog-ribbon r3"></span>
-  <span class="fog-ribbon r4"></span>
-  <span class="fog-ribbon r5"></span>
-</div>
+  <!-- ✅ Ribbon Fog Layer（絲帶霧） -->
+  <div class="fog-wrap" aria-hidden="true">
+    <span class="fog-ribbon r1"></span>
+    <span class="fog-ribbon r2"></span>
+    <span class="fog-ribbon r3"></span>
+    <span class="fog-ribbon r4"></span>
+    <span class="fog-ribbon r5"></span>
+  </div>
+
   <header class="topbar">
     <div class="brand">汐島</div>
     <nav class="nav">
@@ -30,23 +29,22 @@
     </nav>
   </header>
 
-  <!-- HERO：文字壓在背景圖上（背景圖在 style.css 內設定 images/background.jpg） -->
+  <!-- HERO -->
   <section class="hero hero-cinematic">
     <div class="hero-foreground">
       <h1 class="game-title">汐島</h1>
       <p class="hero-sub">汐島沒有既定結局</p>
       <p>你的選擇，就是方向。</p>
       <div class="hero-actions">
-  <button class="btn" type="button" onclick="location.hash='characters'">角色</button>
-  <button class="btn ghost" type="button" onclick="location.hash='world'">世界觀</button>
-</div>
+        <button class="btn" type="button" onclick="location.hash='characters'">角色</button>
+        <button class="btn ghost" type="button" onclick="location.hash='world'">世界觀</button>
+      </div>
     </div>
   </section>
 
   <section id="world" class="section">
     <h2>———✦ 世界觀 ✦———</h2>
     <p class="lead">汐島位於外海，與本島交通往返穩定。四面環海，地勢由山林延伸至港口與市街。</p>
-
     <p>島上人口不多，但生活機能完善。港口、酒吧、診所、伐木廠與小型商業區構成日常秩序。</p>
     <p>多數島民在此長期居住，彼此熟識，節奏緩慢而平靜。</p>
     <p>這裡沒有過度的觀光開發，也沒有過多外來干擾。</p>
@@ -87,154 +85,113 @@
 
     <div class="cards">
       <div class="card character" role="link" tabindex="0"
-     onclick="location.href='peichuan.html'"
-     onkeydown="if(event.key==='Enter') location.href='peichuan.html'">
-
-  <div class="thumb flip" style="--front:url('images/裴川.jpg'); --back:url('images/裴川2.png');">
-    <div class="flip-inner"></div>
-  </div>
-
-  <div class="meta">
-    <div class="name">裴川</div>
-    <div class="tags"><span>傾聽</span><span>走神</span><span>話少</span></div>
-    <p class="desc">我才35歲，不能算中年吧？</p>
-  </div>
-</div>
+           onclick="location.href='peichuan.html'"
+           onkeydown="if(event.key==='Enter') location.href='peichuan.html'">
+        <div class="thumb flip" style="--front:url('images/裴川.jpg'); --back:url('images/裴川2.png');">
+          <div class="flip-inner"></div>
+        </div>
+        <div class="meta">
+          <div class="name">裴川</div>
+          <div class="tags"><span>傾聽</span><span>走神</span><span>話少</span></div>
+          <p class="desc">我才35歲，不能算中年吧？</p>
+        </div>
+      </div>
 
       <div class="card character" role="link" tabindex="0"
-     onclick="location.href='lilin.html'"
-     onkeydown="if(event.key==='Enter') location.href='lilin.html'">
-
-  <div class="thumb flip"
-       style="--front:url('images/李璘.jpg'); --back:url('images/李璘2.png');">
-    <div class="flip-inner"></div>
-  </div>
-
-  <div class="meta">
-    <div class="name">李璘</div>
-    <div class="tags">
-      <span>冷笑話</span><span>聰明</span><span>溫柔</span>
-    </div>
-    <p class="desc">記憶力開始變差了，這是初老嗎？</p>
-  </div>
-
-</div>
+           onclick="location.href='lilin.html'"
+           onkeydown="if(event.key==='Enter') location.href='lilin.html'">
+        <div class="thumb flip" style="--front:url('images/李璘.jpg'); --back:url('images/李璘2.png');">
+          <div class="flip-inner"></div>
+        </div>
+        <div class="meta">
+          <div class="name">李璘</div>
+          <div class="tags"><span>冷笑話</span><span>聰明</span><span>溫柔</span></div>
+          <p class="desc">記憶力開始變差了，這是初老嗎？</p>
+        </div>
+      </div>
 
       <div class="card character" role="link" tabindex="0"
-     onclick="location.href='lanyu.html'"
-     onkeydown="if(event.key==='Enter') location.href='lanyu.html'">
-
-  <div class="thumb flip"
-       style="--front:url('images/藍昱.jpg'); --back:url('images/藍昱2.png');">
-    <div class="flip-inner"></div>
-  </div>
-
-  <div class="meta">
-    <div class="name">藍昱</div>
-    <div class="tags">
-      <span>惡作劇</span><span>心口直快</span><span>享樂主義</span>
-    </div>
-    <p class="desc">只管從心，不管對錯。</p>
-  </div>
-
-</div>
+           onclick="location.href='lanyu.html'"
+           onkeydown="if(event.key==='Enter') location.href='lanyu.html'">
+        <div class="thumb flip" style="--front:url('images/藍昱.jpg'); --back:url('images/藍昱2.png');">
+          <div class="flip-inner"></div>
+        </div>
+        <div class="meta">
+          <div class="name">藍昱</div>
+          <div class="tags"><span>惡作劇</span><span>心口直快</span><span>享樂主義</span></div>
+          <p class="desc">只管從心，不管對錯。</p>
+        </div>
+      </div>
 
       <div class="card character" role="link" tabindex="0"
-     onclick="location.href='zioen.html'"
-     onkeydown="if(event.key==='Enter') location.href='zioen.html'">
-
-  <div class="thumb flip"
-       style="--front:url('images/劉子恩.jpg'); --back:url('images/劉子恩2.png');">
-    <div class="flip-inner"></div>
-  </div>
-
-  <div class="meta">
-    <div class="name">劉子恩</div>
-    <div class="tags">
-      <span>隨和</span><span>力氣大</span><span>直率</span>
-    </div>
-    <p class="desc">身高高力氣大，也許我跟大狗很像？</p>
-  </div>
-
-</div>
+           onclick="location.href='zioen.html'"
+           onkeydown="if(event.key==='Enter') location.href='zioen.html'">
+        <div class="thumb flip" style="--front:url('images/劉子恩.jpg'); --back:url('images/劉子恩2.png');">
+          <div class="flip-inner"></div>
+        </div>
+        <div class="meta">
+          <div class="name">劉子恩</div>
+          <div class="tags"><span>隨和</span><span>力氣大</span><span>直率</span></div>
+          <p class="desc">身高高力氣大，也許我跟大狗很像？</p>
+        </div>
+      </div>
 
       <div class="card character" role="link" tabindex="0"
-     onclick="location.href='yufeng.html'"
-     onkeydown="if(event.key==='Enter') location.href='yufeng.html'">
-
-  <div class="thumb flip"
-       style="--front:url('images/於楓.jpg'); --back:url('images/於楓2.png');">
-    <div class="flip-inner"></div>
-  </div>
-
-  <div class="meta">
-    <div class="name">於楓</div>
-    <div class="tags">
-      <span>毒舌</span><span>幽默</span><span>細心</span>
-    </div>
-    <p class="desc">孩子沒受傷，但媽媽還是會把小孩帶來。</p>
-  </div>
-
-</div>
+           onclick="location.href='yufeng.html'"
+           onkeydown="if(event.key==='Enter') location.href='yufeng.html'">
+        <div class="thumb flip" style="--front:url('images/於楓.jpg'); --back:url('images/於楓2.png');">
+          <div class="flip-inner"></div>
+        </div>
+        <div class="meta">
+          <div class="name">於楓</div>
+          <div class="tags"><span>毒舌</span><span>幽默</span><span>細心</span></div>
+          <p class="desc">孩子沒受傷，但媽媽還是會把小孩帶來。</p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- ===== 島嶼手冊 ===== -->
   <section id="guide" class="section">
-  <h2>✦ 島嶼手冊</h2>
+    <h2>✦ 島嶼手冊</h2>
 
-  <div class="map-layout">
-    <!-- 左：可點地圖 -->
-    <div class="map-card">
-      <div class="map-title">汐島地圖</div>
+    <div class="map-layout">
+      <div class="map-card">
+        <div class="map-title">汐島地圖</div>
 
-      <div id="islandMap" class="island-map" role="application" aria-label="汐島地圖">
-        <!-- 區塊（用 data-area 綁定） -->
-        <button class="area a-center"  type="button" data-area="center">
-          <span>市中心</span>
-        </button>
-        <button class="area a-food"    type="button" data-area="food">
-          <span>美食區</span>
-        </button>
-        <button class="area a-market"  type="button" data-area="market">
-          <span>商業區</span>
-        </button>
-        <button class="area a-harbor"  type="button" data-area="harbor">
-          <span>港口</span>
-        </button>
-        <button class="area a-forest"  type="button" data-area="forest">
-          <span>林區步道</span>
-        </button>
-        <button class="area a-clinic"  type="button" data-area="clinic">
-          <span>診所與學校</span>
-        </button>
+        <div id="islandMap" class="island-map" role="application" aria-label="汐島地圖">
+          <button class="area a-center" type="button" data-area="center"><span>市中心</span></button>
+          <button class="area a-food"   type="button" data-area="food"><span>美食區</span></button>
+          <button class="area a-market" type="button" data-area="market"><span>商業區</span></button>
+          <button class="area a-harbor" type="button" data-area="harbor"><span>港口</span></button>
+          <button class="area a-forest" type="button" data-area="forest"><span>林區步道</span></button>
+          <button class="area a-clinic" type="button" data-area="clinic"><span>診所與學校</span></button>
 
-        <!-- 裝飾：霧線/海岸陰影（純裝飾） -->
-        <div class="coast" aria-hidden="true"></div>
-        <div class="mist-line m1" aria-hidden="true"></div>
-        <div class="mist-line m2" aria-hidden="true"></div>
+          <div class="coast" aria-hidden="true"></div>
+          <div class="mist-line m1" aria-hidden="true"></div>
+          <div class="mist-line m2" aria-hidden="true"></div>
+        </div>
       </div>
 
+      <aside class="info-card" aria-live="polite">
+        <div class="info-head">
+          <div class="info-name" id="infoName">市中心</div>
+          <div class="info-sub" id="infoSub">商店、郵局、生活雜貨</div>
+        </div>
+        <div class="info-body" id="infoBody">
+          <ul>
+            <li>熱鬧的街區，島上的重要樞紐。</li>
+            <li>觀光景點特色之一，藝術人文聚集地。</li>
+            <li>部分商品標籤沒有產地或日期；鐘樓報時偶爾慢半拍。</li>
+          </ul>
+        </div>
+      </aside>
     </div>
-
-    <!-- 右：資訊面板 -->
-    <aside class="info-card" aria-live="polite">
-      <div class="info-head">
-        <div class="info-name" id="infoName">市中心</div>
-        <div class="info-sub" id="infoSub">商店、郵局、生活雜貨</div>
-      </div>
-
-      <div class="info-body" id="infoBody">
-        <ul>
-          <li>熱鬧的街區，島上的重要樞紐。</li>
-          <li>郵局、雜貨店、修理鋪都在同一條路上。</li>
-        </ul>
-      </div>
-    </aside>
-  </div>
-</section>
+  </section>
 
   <footer class="footer">© 2026 by 9dando_75 powered and secured by Lovey-Dovey:汐島</footer>
 
-  <!-- Modal (index 用這套) -->
+  <!-- ===== Modal ===== -->
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-head">
@@ -261,6 +218,7 @@
     </ul>
   </template>
 
+  <!-- ✅ Script 1：Modal（正確結束） -->
   <script>
     const backdrop = document.getElementById("modalBackdrop");
     const modalTitle = document.getElementById("modalTitle");
@@ -272,9 +230,6 @@
       if (!tpl) return;
 
       const tmp = tpl.content.cloneNode(true);
-
-      // ✅ 修正：原本你有抓 h3/h4，但 template 裡沒有標題
-      // 這裡改成抓「觸發按鈕」上的 h3 作為標題
       const btn = document.querySelector(`[data-modal="${templateId}"]`);
       const h = btn ? btn.querySelector("h3,h4") : null;
       modalTitle.textContent = h ? h.textContent : "介紹";
@@ -304,104 +259,100 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
-  
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const GUIDE = {
-    center: {
-      name: "市中心",
-      sub: "商店、郵局、生活雜貨",
-      body: `
-        <ul>
-          <li>熱鬧的街區，島上的重要樞紐。</li>
-          <li>觀光景點特色之一，藝術人文聚集地。</li>
-          <li>部分商品標籤沒有產地或日期；鐘樓報時偶爾慢半拍。</li>
-        </ul>`
-    },
-    food: {
-      name: "美食區",
-      sub: "小吃、酒吧、深夜食堂",
-      body: `
-        <ul>
-          <li>在地小吃及當地特產，千萬別錯過。</li>
-          <li>深夜食堂與酒吧，半夜無聊的好去處。</li>
-        </ul>`
-    },
-    market: {
-      name: "商業區",
-      sub: "金融、物流、政府服務窗口",
-      body: `
-        <ul>
-          <li>服務處備有免費公共電腦。</li>
-          <li>島上唯一一間銀行。</li>
-          <li>人們對外地新聞反應平淡。</li>
-        </ul>`
-    },
-    harbor: {
-      name: "港口",
-      sub: "船班、碼頭、夜景",
-      body: `
-        <ul>
-          <li>船班固定，船費平價。</li>
-          <li>本島最美潮汐觀賞點。</li>
-          <li>清晨漁市可供零售。</li>
-        </ul>`
-    },
-    forest: {
-      name: "林區步道",
-      sub: "原生林、觀景點、山林",
-      body: `
-        <ul>
-          <li>霧起時方向感會被吃掉，路標不一定可信請注意。</li>
-          <li>某些區域長期封鎖請勿任意進出。</li>
-          <li>清晨觀景台雲霧繚繞，打卡景點之一。</li>
-        </ul>`
-    },
-    clinic: {
-      name: "生活區",
-      sub: "醫院、學校、住宅",
-      body: `
-        <ul>
-          <li>診所設備齊全，醫療福祉完善。</li>
-          <li>公立學校減免學費，孩子們的優質學區。</li>
-          <li>設有里民活動中心,長輩的最佳好去處。</li>
-        </ul>`
-    }
-  };
-
-  // ✅ 這三個 id 一定要存在（右側面板）
-  const nameEl = document.getElementById("infoName");
-  const subEl  = document.getElementById("infoSub");
-  const bodyEl = document.getElementById("infoBody");
-
-  // ✅ 地圖容器：若抓不到就直接停止，避免整段 JS 壞掉
-  const mapEl = document.querySelector(".island-map");
-  if (!mapEl || !nameEl || !subEl || !bodyEl) return;
-
-  function setGuide(key){
-    const data = GUIDE[key];
-    if(!data) return;
-
-    nameEl.textContent = data.name;
-    subEl.textContent  = data.sub;
-    bodyEl.innerHTML   = data.body;
-
-    mapEl.querySelectorAll(".area").forEach(b => b.classList.remove("is-active"));
-    const btn = mapEl.querySelector(`.area[data-area="${key}"]`);
-    if(btn) btn.classList.add("is-active");
-  }
-
-  // ✅ 事件委派：點按鈕或按鈕內文字都抓得到
-  mapEl.addEventListener("click", (e) => {
-    const btn = e.target.closest(".area");
-    if(!btn || !mapEl.contains(btn)) return;
-    setGuide(btn.dataset.area);
-  });
-
-  // ✅ 預設顯示
-  setGuide("center");
-});
-</script>
   </script>
+
+  <!-- ✅ Script 2：島嶼手冊切換（用 id 抓，保證能切） -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const GUIDE = {
+        center: {
+          name: "市中心",
+          sub: "商店、郵局、生活雜貨",
+          body: `
+            <ul>
+              <li>熱鬧的街區，島上的重要樞紐。</li>
+              <li>觀光景點特色之一，藝術人文聚集地。</li>
+            </ul>`
+        },
+        food: {
+          name: "美食區",
+          sub: "小吃、酒吧、深夜食堂",
+          body: `
+            <ul>
+              <li>在地小吃及當地特產，千萬別錯過。</li>
+              <li>深夜食堂與酒吧，半夜無聊的好去處。</li>
+            </ul>`
+        },
+        market: {
+          name: "商業區",
+          sub: "金融、物流、政府服務窗口",
+          body: `
+            <ul>
+              <li>服務處備有免費公共電腦。</li>
+              <li>島上唯一一間銀行。</li>
+              <li>人們對外地新聞反應平淡。</li>
+            </ul>`
+        },
+        harbor: {
+          name: "港口",
+          sub: "船班、碼頭、夜景",
+          body: `
+            <ul>
+              <li>船班固定，船費平價。</li>
+              <li>本島最美潮汐觀賞點。</li>
+              <li>清晨漁市可供零售。</li>
+            </ul>`
+        },
+        forest: {
+          name: "林區步道",
+          sub: "原生林、觀景點、山林",
+          body: `
+            <ul>
+              <li>霧起時方向感會被吃掉，路標不一定可信請注意。</li>
+              <li>某些區域長期封鎖請勿任意進出。</li>
+              <li>清晨觀景台雲霧繚繞，打卡景點之一。</li>
+            </ul>`
+        },
+        clinic: {
+          name: "生活區",
+          sub: "醫院、學校、住宅",
+          body: `
+            <ul>
+              <li>診所設備齊全，醫療福祉完善。</li>
+              <li>公立學校減免學費，孩子們的優質學區。</li>
+              <li>設有里民活動中心,長輩的最佳好去處。</li>
+            </ul>`
+        }
+      };
+
+      const mapEl  = document.getElementById("islandMap");
+      const nameEl = document.getElementById("infoName");
+      const subEl  = document.getElementById("infoSub");
+      const bodyEl = document.getElementById("infoBody");
+      if (!mapEl || !nameEl || !subEl || !bodyEl) return;
+
+      function setGuide(key) {
+        const data = GUIDE[key];
+        if (!data) return;
+
+        nameEl.textContent = data.name;
+        subEl.textContent  = data.sub;
+        bodyEl.innerHTML   = data.body;
+
+        mapEl.querySelectorAll(".area").forEach(b => b.classList.remove("is-active"));
+        const btn = mapEl.querySelector(`.area[data-area="${key}"]`);
+        if (btn) btn.classList.add("is-active");
+      }
+
+      mapEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".area");
+        if (!btn) return;
+        setGuide(btn.dataset.area);
+      });
+
+      setGuide("center");
+    });
+  </script>
+
 </body>
 </html>
