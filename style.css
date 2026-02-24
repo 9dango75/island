@@ -807,3 +807,30 @@ button.btn{
   padding-left: 18px;
   color: rgba(232,246,249,.70);
 }
+/* ====== 覆蓋：地圖按鈕整齊版（2欄x3列） ====== */
+.island-map{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 14px;
+  padding: 22px;
+  height: 360px;
+}
+
+/* 取消你原本 absolute 佈局影響 */
+.island-map .area{
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* 這些定位 class 不再需要（保留也沒差，但讓它不影響） */
+.a-center,.a-food,.a-market,.a-harbor,.a-forest,.a-clinic{
+  left:auto; top:auto; width:auto; height:auto;
+}
