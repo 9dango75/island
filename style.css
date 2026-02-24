@@ -645,3 +645,21 @@ body{
     0 0 0 1px rgba(158,216,240,.28),
     0 10px 30px rgba(0,0,0,.35);
 }
+/* 讓 button 長得跟你原本的 .btn 一樣 */
+.btn{
+  cursor: pointer;
+}
+button.btn{
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* 角色卡現在是 div，補上滑鼠手勢 */
+.card.character[role="link"]{
+  cursor: pointer;
+}
+.card.character[role="link"]:focus{
+  outline: 2px solid rgba(158,216,240,.35);
+  outline-offset: 2px;
+  border-radius: 16px;
+}
